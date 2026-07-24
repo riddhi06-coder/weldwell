@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\MasterBrandController;
-use App\Http\Controllers\SubCategoryController;
-
+use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\ActivityLogController;
+use App\Http\Controllers\Backend\MasterBrandController;
+use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\HomeBannerController; 
 
 
 
@@ -73,4 +73,7 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
         // ===== Brands — Sub Category =====
         Route::resource('manage-brand-subcategory', SubCategoryController::class)->except('show');
+
+        // ===== Home Page Section ===== 
+        Route::resource('manage-home-banner', HomeBannerController::class)->except('show');
 });

@@ -86,6 +86,24 @@
                 </li>
                 @endif
 
+                @if($u && $u->hasPermission('home-banners.view'))
+                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-landing-page') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-landing-page') }}"></use>
+                    </svg>
+                    <span>Home</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                      <li><a href="{{ route('manage-home-banner.index') }}" class="{{ request()->routeIs('manage-home-banner.*') ? 'active' : '' }}">Banner</a></li>
+                  </ul>
+                </li>
+                @endif
+
                 @if($u && $u->hasPermission('activity-logs.view'))
                 <li class="sidebar-list {{ request()->routeIs('admin.activity-logs.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>

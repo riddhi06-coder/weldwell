@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\User::class,
         \App\Models\MainCategory::class,
         \App\Models\SubCategory::class,
+        \App\Models\HomeBanner::class,
     ];
 
     public function register(): void

@@ -43,6 +43,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create Sub Categories', 'slug' => 'brand-subcategories.create', 'module' => 'Brands'],
                 ['name' => 'Edit Sub Categories',   'slug' => 'brand-subcategories.edit',   'module' => 'Brands'],
                 ['name' => 'Delete Sub Categories', 'slug' => 'brand-subcategories.delete', 'module' => 'Brands'],
+                // Home — Banner
+                ['name' => 'View Banners',   'slug' => 'home-banners.view',   'module' => 'Home Page'],
+                ['name' => 'Create Banners', 'slug' => 'home-banners.create', 'module' => 'Home Page'],
+                ['name' => 'Edit Banners',   'slug' => 'home-banners.edit',   'module' => 'Home Page'],
+                ['name' => 'Delete Banners', 'slug' => 'home-banners.delete', 'module' => 'Home Page'],
             ];
 
             foreach ($permissionData as $perm) {
