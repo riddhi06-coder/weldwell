@@ -30,6 +30,9 @@ class RolePermissionSeeder extends Seeder
                 // Permissions
                 ['name' => 'View Permissions',    'slug' => 'permissions.view',   'module' => 'Permissions'],
                 ['name' => 'Assign Permissions',  'slug' => 'permissions.assign', 'module' => 'Permissions'],
+                // Activity Log
+                ['name' => 'View Activity Log',   'slug' => 'activity-logs.view',   'module' => 'Activity Log'],
+                ['name' => 'Manage Log Archives', 'slug' => 'activity-logs.manage', 'module' => 'Activity Log'],
             ];
 
             foreach ($permissionData as $perm) {
@@ -61,6 +64,7 @@ class RolePermissionSeeder extends Seeder
                 'roles.view',
                 'users.view', 'users.create', 'users.edit',
                 'permissions.view',
+                'activity-logs.view',
             ])->pluck('id'));
 
             // Standard user: dashboard only by default.

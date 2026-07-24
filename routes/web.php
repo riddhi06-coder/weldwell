@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ActivityLogController;
 
 
 
@@ -57,4 +58,12 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::get('permissions-catalog/{permission}/edit', [PermissionController::class, 'editPermission'])->middleware('permission:permissions.assign')->name('admin.permissions.manage.edit');
         Route::put('permissions-catalog/{permission}',      [PermissionController::class, 'updatePermission'])->middleware('permission:permissions.assign')->name('admin.permissions.manage.update');
         Route::delete('permissions-catalog/{permission}',   [PermissionController::class, 'destroyPermission'])->middleware('permission:permissions.assign')->name('admin.permissions.manage.destroy');
+
+        // ===== Activity Log (audit trail) =====
+        Route::get('activity-logs',                 [ActivityLogController::class, 'index'])->middleware('permission:activity-logs.view')->name('admin.activity-logs.index');
+        Route::get('activity-logs/archives',        [ActivityLogController::class, 'archives'])->middleware('permission:activity-logs.manage')->name('admin.activity-logs.archives');
+        Route::get('activity-logs/archives/{file}', [ActivityLogController::class, 'downloadArchive'])->middleware('permission:activity-logs.manage')->name('admin.activity-logs.archive.download');
+        Route::post('activity-logs/archive/run',    [ActivityLogController::class, 'runArchive'])->middleware('permission:activity-logs.manage')->name('admin.activity-logs.archive.run');
+        Route::post('activity-logs/archive/restore', [ActivityLogController::class, 'restoreArchive'])->middleware('permission:activity-logs.manage')->name('admin.activity-logs.archive.restore');
+        Route::get('activity-logs/{id}',            [ActivityLogController::class, 'show'])->whereNumber('id')->middleware('permission:activity-logs.view')->name('admin.activity-logs.show');
 });
