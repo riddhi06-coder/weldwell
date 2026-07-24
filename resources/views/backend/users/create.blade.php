@@ -11,7 +11,6 @@
     <div class="container-fluid">
         <div class="page-title"><div class="row"><div class="col-12"><h3>Create User</h3></div></div></div>
 
-        @includeIf('components.backend.flash')
 
         <div class="row">
             <div class="col-12">

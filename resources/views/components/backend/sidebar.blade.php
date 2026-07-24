@@ -36,6 +36,7 @@
 
 
                 @php $u = auth()->user(); @endphp
+
                 @if($u && ($u->hasPermission('users.view') || $u->hasPermission('roles.view') || $u->hasPermission('permissions.view')))
                 <li class="sidebar-list {{ request()->routeIs('admin.users.*', 'admin.roles.*', 'admin.permissions.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
@@ -57,6 +58,29 @@
                       @endif
                       @if($u->hasPermission('permissions.view'))
                           <li><a href="{{ route('admin.permissions.index') }}" class="{{ request()->routeIs('admin.permissions.*') ? 'active' : '' }}">Permissions</a></li>
+                      @endif
+                  </ul>
+                </li>
+                @endif
+
+                @if($u && ($u->hasPermission('brand-categories.view') || $u->hasPermission('brand-subcategories.view')))
+                <li class="sidebar-list {{ request()->routeIs('manage-brand-catgeory.*', 'manage-brand-subcategory.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-ecommerce') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-ecommerce') }}"></use>
+                    </svg>
+                    <span>Brands</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                      @if($u->hasPermission('brand-categories.view'))
+                          <li><a href="{{ route('manage-brand-catgeory.index') }}" class="{{ request()->routeIs('manage-brand-catgeory.*') ? 'active' : '' }}">Category</a></li>
+                      @endif
+                      @if($u->hasPermission('brand-subcategories.view'))
+                          <li><a href="{{ route('manage-brand-subcategory.index') }}" class="{{ request()->routeIs('manage-brand-subcategory.*') ? 'active' : '' }}">Sub Category</a></li>
                       @endif
                   </ul>
                 </li>

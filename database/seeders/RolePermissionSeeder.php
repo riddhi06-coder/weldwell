@@ -33,6 +33,16 @@ class RolePermissionSeeder extends Seeder
                 // Activity Log
                 ['name' => 'View Activity Log',   'slug' => 'activity-logs.view',   'module' => 'Activity Log'],
                 ['name' => 'Manage Log Archives', 'slug' => 'activity-logs.manage', 'module' => 'Activity Log'],
+                // Brands — Category
+                ['name' => 'View Categories',     'slug' => 'brand-categories.view',   'module' => 'Brands'],
+                ['name' => 'Create Categories',   'slug' => 'brand-categories.create', 'module' => 'Brands'],
+                ['name' => 'Edit Categories',     'slug' => 'brand-categories.edit',   'module' => 'Brands'],
+                ['name' => 'Delete Categories',   'slug' => 'brand-categories.delete', 'module' => 'Brands'],
+                // Brands — Sub Category
+                ['name' => 'View Sub Categories',   'slug' => 'brand-subcategories.view',   'module' => 'Brands'],
+                ['name' => 'Create Sub Categories', 'slug' => 'brand-subcategories.create', 'module' => 'Brands'],
+                ['name' => 'Edit Sub Categories',   'slug' => 'brand-subcategories.edit',   'module' => 'Brands'],
+                ['name' => 'Delete Sub Categories', 'slug' => 'brand-subcategories.delete', 'module' => 'Brands'],
             ];
 
             foreach ($permissionData as $perm) {

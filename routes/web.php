@@ -6,7 +6,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityLogController;
-
+use App\Http\Controllers\MasterBrandController;
+use App\Http\Controllers\SubCategoryController;
 
 
 
@@ -66,4 +67,20 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::post('activity-logs/archive/run',    [ActivityLogController::class, 'runArchive'])->middleware('permission:activity-logs.manage')->name('admin.activity-logs.archive.run');
         Route::post('activity-logs/archive/restore', [ActivityLogController::class, 'restoreArchive'])->middleware('permission:activity-logs.manage')->name('admin.activity-logs.archive.restore');
         Route::get('activity-logs/{id}',            [ActivityLogController::class, 'show'])->whereNumber('id')->middleware('permission:activity-logs.view')->name('admin.activity-logs.show');
+
+        // ===== Brands — Main Category =====
+        Route::get('manage-brand-catgeory',            [MasterBrandController::class, 'index'])->middleware('permission:brand-categories.view')->name('manage-brand-catgeory.index');
+        Route::get('manage-brand-catgeory/create',     [MasterBrandController::class, 'create'])->middleware('permission:brand-categories.create')->name('manage-brand-catgeory.create');
+        Route::post('manage-brand-catgeory',           [MasterBrandController::class, 'store'])->middleware('permission:brand-categories.create')->name('manage-brand-catgeory.store');
+        Route::get('manage-brand-catgeory/{id}/edit',  [MasterBrandController::class, 'edit'])->whereNumber('id')->middleware('permission:brand-categories.edit')->name('manage-brand-catgeory.edit');
+        Route::put('manage-brand-catgeory/{id}',       [MasterBrandController::class, 'update'])->whereNumber('id')->middleware('permission:brand-categories.edit')->name('manage-brand-catgeory.update');
+        Route::delete('manage-brand-catgeory/{id}',    [MasterBrandController::class, 'destroy'])->whereNumber('id')->middleware('permission:brand-categories.delete')->name('manage-brand-catgeory.destroy');
+
+        // ===== Brands — Sub Category =====
+        Route::get('manage-brand-subcategory',           [SubCategoryController::class, 'index'])->middleware('permission:brand-subcategories.view')->name('manage-brand-subcategory.index');
+        Route::get('manage-brand-subcategory/create',    [SubCategoryController::class, 'create'])->middleware('permission:brand-subcategories.create')->name('manage-brand-subcategory.create');
+        Route::post('manage-brand-subcategory',          [SubCategoryController::class, 'store'])->middleware('permission:brand-subcategories.create')->name('manage-brand-subcategory.store');
+        Route::get('manage-brand-subcategory/{id}/edit', [SubCategoryController::class, 'edit'])->whereNumber('id')->middleware('permission:brand-subcategories.edit')->name('manage-brand-subcategory.edit');
+        Route::put('manage-brand-subcategory/{id}',      [SubCategoryController::class, 'update'])->whereNumber('id')->middleware('permission:brand-subcategories.edit')->name('manage-brand-subcategory.update');
+        Route::delete('manage-brand-subcategory/{id}',   [SubCategoryController::class, 'destroy'])->whereNumber('id')->middleware('permission:brand-subcategories.delete')->name('manage-brand-subcategory.destroy');
 });

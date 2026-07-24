@@ -84,7 +84,7 @@ class ActivityLogController extends Controller
         try {
             $restored = $archiver->restore($file);
         } catch (\Throwable $e) {
-            return back()->with('error', $e->getMessage());
+            return back()->with('message', $e->getMessage());
         }
 
         return back()->with('message', "Restored {$restored} log(s) from {$file} back into the live table.");

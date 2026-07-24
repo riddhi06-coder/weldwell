@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Role::class,
         \App\Models\Permission::class,
         \App\Models\User::class,
+        \App\Models\MainCategory::class,
+        \App\Models\SubCategory::class,
     ];
 
     public function register(): void

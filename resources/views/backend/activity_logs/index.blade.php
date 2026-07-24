@@ -18,7 +18,6 @@
             </div>
         </div>
 
-        @includeIf('components.backend.flash')
 
         <div class="row">
             <div class="col-sm-12">
