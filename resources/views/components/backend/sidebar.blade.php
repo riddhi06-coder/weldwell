@@ -35,11 +35,36 @@
                 </li>
 
 
+                @php $u = auth()->user(); @endphp
+                @if($u && ($u->hasPermission('users.view') || $u->hasPermission('roles.view') || $u->hasPermission('permissions.view')))
+                <li class="sidebar-list {{ request()->routeIs('admin.users.*', 'admin.roles.*', 'admin.permissions.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-user') }}"></use>
+                    </svg>
+                    <span>User Management</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                      @if($u->hasPermission('users.view'))
+                          <li><a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Users</a></li>
+                      @endif
+                      @if($u->hasPermission('roles.view'))
+                          <li><a href="{{ route('admin.roles.index') }}" class="{{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">Roles</a></li>
+                      @endif
+                      @if($u->hasPermission('permissions.view'))
+                          <li><a href="{{ route('admin.permissions.index') }}" class="{{ request()->routeIs('admin.permissions.*') ? 'active' : '' }}">Permissions</a></li>
+                      @endif
+                  </ul>
+                </li>
+                @endif
+
+
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
             </div>
           </nav>
         </div>
-
-
-        

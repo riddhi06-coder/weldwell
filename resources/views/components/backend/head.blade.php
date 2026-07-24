@@ -42,4 +42,28 @@
     <style>
         * { scrollbar-width: none; -ms-overflow-style: none; }
         *::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+        /* ===== Permission matrix (role → permissions) — matches Tata theme (#4A55A2) ===== */
+        .perm-matrix { table-layout: fixed; width: 100%; }
+        .perm-matrix th,
+        .perm-matrix td { padding: .45rem .25rem; font-size: 12px; vertical-align: middle; }
+        .perm-matrix thead th {
+            font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .3px;
+            background-color: #f4f5fa; color: #4A55A2; border-bottom: 2px solid #e4e7f2; border-top: none;
+        }
+        .perm-matrix .sec-col { width: auto; word-break: break-word; }
+        .perm-matrix .act-col { width: 16%; }
+        .perm-card-header { background-color: #f4f5fa; }
+        .perm-matrix .form-check-input,
+        .perm-card-header .form-check-input {
+            width: 17px; height: 17px; margin: 0; float: none;
+            border: 1.5px solid #b7bcd1; border-radius: 4px; cursor: pointer;
+            transition: border-color .15s ease, background-color .15s ease;
+        }
+        .perm-matrix .form-check-input:hover,
+        .perm-card-header .form-check-input:hover { border-color: #4A55A2; }
+        .perm-matrix .form-check-input:checked,
+        .perm-card-header .form-check-input:checked { background-color: #4A55A2; border-color: #4A55A2; }
+        .perm-matrix .form-check-input:focus,
+        .perm-card-header .form-check-input:focus { border-color: #4A55A2; box-shadow: 0 0 0 .18rem rgba(74,85,162,.18); }
     </style>
