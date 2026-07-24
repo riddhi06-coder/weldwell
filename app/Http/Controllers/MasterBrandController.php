@@ -4,10 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Str;
 
-class MasterBrandController extends Controller
+class MasterBrandController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:brand-categories.view', only: ['index']),
+            new Middleware('permission:brand-categories.create', only: ['create', 'store']),
+            new Middleware('permission:brand-categories.edit', only: ['edit', 'update']),
+            new Middleware('permission:brand-categories.delete', only: ['destroy']),
+        ];
+    }
+
     public function index()
     {
         $categories = MainCategory::orderByDesc('id')->get();

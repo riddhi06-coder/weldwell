@@ -26,14 +26,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="display table table-hover">
+                            <table class="display table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Sub Category Name</th>
                                         <th>Parent Category</th>
-                                        <th>Slug</th>
-                                        <th>Created</th>
                                         <th class="text-end" style="min-width:170px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -49,8 +47,6 @@
                                                     <span class="text-muted">—</span>
                                                 @endif
                                             </td>
-                                            <td><code>{{ $sub->slug }}</code></td>
-                                            <td>{{ optional($sub->created_at)->format('d M Y') }}</td>
                                             <td class="text-end">
                                                 <div class="d-flex gap-1 justify-content-end">
                                                     @if(auth()->user()->hasPermission('brand-subcategories.edit'))

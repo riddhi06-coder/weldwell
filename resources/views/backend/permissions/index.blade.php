@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <p class="text-muted mb-3">Choose a role to assign which sections/actions it can access. Super Admin always has full access.</p>
                         <div class="table-responsive">
-                            <table class="display table table-hover">
+                            <table class="display table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Role</th>

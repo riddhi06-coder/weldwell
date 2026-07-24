@@ -73,7 +73,7 @@
                         </form>
 
                         <div class="table-responsive">
-                            <table class="table table-hover align-middle">
+                            <table class="table table-bordered table-hover align-middle">
                                 <thead>
                                     <tr>
                                         <th style="min-width:150px;">Date &amp; Time</th>
