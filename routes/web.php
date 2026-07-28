@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\HomeProductIntroController;
 use App\Http\Controllers\Backend\HomeCompanyStatsController;
-
+use App\Http\Controllers\Backend\HomeAboutController;
 
 
 
@@ -81,4 +81,5 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::resource('manage-home-banner', HomeBannerController::class)->except('show');
         Route::resource('manage-product-intro', HomeProductIntroController::class)->except('show');
         Route::resource('manage-company-stats', HomeCompanyStatsController::class)->except('show');
+        Route::resource('manage-home-about', HomeAboutController::class)->except('show');
 });
