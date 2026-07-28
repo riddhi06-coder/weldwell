@@ -37,14 +37,18 @@ class MasterBrandController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'                   => 'required|string|max:255',
+            'show_in_brand_header'   => 'nullable|boolean',
+            'show_in_product_header' => 'nullable|boolean',
         ], [
             'name.required' => 'Please enter a category name.',
         ]);
 
         MainCategory::create([
-            'name' => $request->name,
-            'slug' => $this->uniqueSlug($request->name),
+            'name'                   => $request->name,
+            'slug'                   => $this->uniqueSlug($request->name),
+            'show_in_brand_header'   => $request->boolean('show_in_brand_header'),
+            'show_in_product_header' => $request->boolean('show_in_product_header'),
         ]);
 
         return redirect()->route('manage-brand-catgeory.index')->with('message', 'Brand category added successfully.');
@@ -62,7 +66,9 @@ class MasterBrandController extends Controller implements HasMiddleware
         $category = MainCategory::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'                   => 'required|string|max:255',
+            'show_in_brand_header'   => 'nullable|boolean',
+            'show_in_product_header' => 'nullable|boolean',
         ], [
             'name.required' => 'Please enter a category name.',
         ]);
@@ -74,8 +80,10 @@ class MasterBrandController extends Controller implements HasMiddleware
         }
 
         $category->update([
-            'name' => $request->name,
-            'slug' => $slug,
+            'name'                   => $request->name,
+            'slug'                   => $slug,
+            'show_in_brand_header'   => $request->boolean('show_in_brand_header'),
+            'show_in_product_header' => $request->boolean('show_in_product_header'),
         ]);
 
         return redirect()->route('manage-brand-catgeory.index')->with('message', 'Brand category updated successfully.');

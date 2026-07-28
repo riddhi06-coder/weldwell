@@ -31,6 +31,8 @@
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Category Name</th>
+                                        <th class="text-center">Brand Header</th>
+                                        <th class="text-center">Product Header</th>
                                         <th class="text-end" style="min-width:170px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -39,6 +41,20 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $category->name }}</td>
+                                            <td class="text-center">
+                                                @if($category->show_in_brand_header)
+                                                    <span class="badge bg-success">Shown</span>
+                                                @else
+                                                    <span class="badge bg-secondary">Hidden</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if($category->show_in_product_header)
+                                                    <span class="badge bg-success">Shown</span>
+                                                @else
+                                                    <span class="badge bg-secondary">Hidden</span>
+                                                @endif
+                                            </td>
                                             <td class="text-end">
                                                 <div class="d-flex gap-1 justify-content-end">
                                                     @if(auth()->user()->hasPermission('brand-categories.edit'))

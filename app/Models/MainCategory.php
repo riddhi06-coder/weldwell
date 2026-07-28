@@ -16,10 +16,14 @@ class MainCategory extends Model
         'name',
         'slug',
         'is_active',
+        'show_in_brand_header',
+        'show_in_product_header',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'show_in_brand_header' => 'boolean',
+        'show_in_product_header' => 'boolean',
     ];
 
     public function subCategories(): HasMany
