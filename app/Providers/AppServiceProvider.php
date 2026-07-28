@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\HomeAbout::class,
         \App\Models\HomeClient::class,
         \App\Models\TestimonyIntro::class,
+        \App\Models\HomeKnowledgeSpectrum::class,
     ];
 
     public function register(): void
