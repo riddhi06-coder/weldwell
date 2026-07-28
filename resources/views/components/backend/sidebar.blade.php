@@ -86,8 +86,8 @@
                 </li>
                 @endif
 
-                @if($u && $u->hasPermission('home-banners.view'))
-                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*') ? 'active' : '' }}">
+                @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view')))
+                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -99,7 +99,12 @@
                     <span>Home</span>
                   </a>
                   <ul class="sidebar-submenu">
+                      @if($u->hasPermission('home-banners.view'))
                       <li><a href="{{ route('manage-home-banner.index') }}" class="{{ request()->routeIs('manage-home-banner.*') ? 'active' : '' }}">Banner</a></li>
+                      @endif
+                      @if($u->hasPermission('product-intros.view'))
+                      <li><a href="{{ route('manage-product-intro.index') }}" class="{{ request()->routeIs('manage-product-intro.*') ? 'active' : '' }}">Product Intro</a></li>
+                      @endif
                   </ul>
                 </li>
                 @endif
