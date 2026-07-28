@@ -43,7 +43,7 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-brand-catgeory.update', $category->id) }}" method="POST">
+                            <form class="row g-3 custom-input" action="{{ route('manage-brand-catgeory.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -51,6 +51,23 @@
                                     <label class="form-label" for="name">Category Name <span class="txt-danger">*</span></label>
                                     <input class="form-control" id="name" type="text" name="name"
                                         value="{{ old('name', $category->name) }}" placeholder="e.g. Welding Consumables, Equipment & Accessories, Thermal Spray Products">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="title">Title</label>
+                                    <input class="form-control" id="title" type="text" name="title"
+                                        value="{{ old('title', $category->title) }}" placeholder="Title shown on the home page">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="image">Image</label>
+                                    <input class="form-control" id="image" type="file" name="image" accept="image/*" onchange="previewImage(this)">
+                                    <small class="text-muted">JPG, PNG or WebP. Max 2 MB. Leave empty to keep the current image.</small>
+                                    <div class="mt-2">
+                                        <img id="imagePreview" src="{{ $category->image ? asset('brand/category/' . $category->image) : '#' }}"
+                                            alt="{{ $category->name }}"
+                                            style="height:60px;width:auto;border-radius:6px;border:1px solid #eee;{{ $category->image ? '' : 'display:none;' }}">
+                                    </div>
                                 </div>
 
                                 <div class="col-md-3">
@@ -88,6 +105,17 @@
 
     @include('components.backend.footer')
     @include('components.backend.main-js')
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => { preview.src = e.target.result; preview.style.display = 'inline-block'; };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 </body>
 

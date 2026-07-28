@@ -14,6 +14,8 @@ class MainCategory extends Model
 
     protected $fillable = [
         'name',
+        'title',
+        'image',
         'slug',
         'is_active',
         'show_in_brand_header',

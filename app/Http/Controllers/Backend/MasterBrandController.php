@@ -12,6 +12,18 @@ use Illuminate\Support\Str;
 
 class MasterBrandController extends Controller implements HasMiddleware
 {
+    /** Allowed image formats + size (2 MB). */
+    private const IMAGE_RULES = 'image|mimes:jpg,jpeg,png,webp|max:2048';
+
+    private const IMAGE_MESSAGES = [
+        'image.image' => 'The uploaded file must be an image.',
+        'image.mimes' => 'Only JPG, PNG or WebP images are allowed.',
+        'image.max'   => 'The image must not be larger than 2 MB.',
+    ];
+
+    /** Files are stored here (served directly from /public, no storage:link needed). */
+    private const UPLOAD_DIR = 'brand/category';
+
     public static function middleware(): array
     {
         return [
@@ -38,14 +50,18 @@ class MasterBrandController extends Controller implements HasMiddleware
     {
         $request->validate([
             'name'                   => 'required|string|max:255',
+            'title'                  => 'nullable|string|max:255',
+            'image'                  => 'nullable|' . self::IMAGE_RULES,
             'show_in_brand_header'   => 'nullable|boolean',
             'show_in_product_header' => 'nullable|boolean',
-        ], [
+        ], self::IMAGE_MESSAGES + [
             'name.required' => 'Please enter a category name.',
         ]);
 
         MainCategory::create([
             'name'                   => $request->name,
+            'title'                  => $request->title,
+            'image'                  => $this->storeImage($request),
             'slug'                   => $this->uniqueSlug($request->name),
             'show_in_brand_header'   => $request->boolean('show_in_brand_header'),
             'show_in_product_header' => $request->boolean('show_in_product_header'),
@@ -67,9 +83,11 @@ class MasterBrandController extends Controller implements HasMiddleware
 
         $request->validate([
             'name'                   => 'required|string|max:255',
+            'title'                  => 'nullable|string|max:255',
+            'image'                  => 'nullable|' . self::IMAGE_RULES,
             'show_in_brand_header'   => 'nullable|boolean',
             'show_in_product_header' => 'nullable|boolean',
-        ], [
+        ], self::IMAGE_MESSAGES + [
             'name.required' => 'Please enter a category name.',
         ]);
 
@@ -79,8 +97,17 @@ class MasterBrandController extends Controller implements HasMiddleware
             $slug = $this->uniqueSlug($request->name, $category->id);
         }
 
+        // Replace the image only when a new one is uploaded.
+        $image = $category->image;
+        if ($request->hasFile('image')) {
+            $this->deleteImage($category->image);
+            $image = $this->storeImage($request);
+        }
+
         $category->update([
             'name'                   => $request->name,
+            'title'                  => $request->title,
+            'image'                  => $image,
             'slug'                   => $slug,
             'show_in_brand_header'   => $request->boolean('show_in_brand_header'),
             'show_in_product_header' => $request->boolean('show_in_product_header'),
@@ -92,9 +119,37 @@ class MasterBrandController extends Controller implements HasMiddleware
     public function destroy($id)
     {
         $category = MainCategory::findOrFail($id);
+        $this->deleteImage($category->image);
         $category->delete();
 
         return redirect()->route('manage-brand-catgeory.index')->with('message', 'Brand category deleted successfully.');
+    }
+
+    /** Move the uploaded image into /public/brand/category and return its filename. */
+    private function storeImage(Request $request): ?string
+    {
+        if (! $request->hasFile('image')) {
+            return null;
+        }
+
+        $file   = $request->file('image');
+        $folder = public_path(self::UPLOAD_DIR);
+
+        if (! file_exists($folder)) {
+            mkdir($folder, 0755, true);
+        }
+
+        $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move($folder, $fileName);
+
+        return $fileName;
+    }
+
+    private function deleteImage(?string $fileName): void
+    {
+        if ($fileName && file_exists(public_path(self::UPLOAD_DIR . '/' . $fileName))) {
+            @unlink(public_path(self::UPLOAD_DIR . '/' . $fileName));
+        }
     }
 
     /**

@@ -43,13 +43,29 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-brand-catgeory.store') }}" method="POST">
+                            <form class="row g-3 custom-input" action="{{ route('manage-brand-catgeory.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="col-md-6">
                                     <label class="form-label" for="name">Category Name <span class="txt-danger">*</span></label>
                                     <input class="form-control" id="name" type="text" name="name"
                                         value="{{ old('name') }}" placeholder="e.g. Welding Consumables, Equipment & Accessories, Thermal Spray Products">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="title">Title</label>
+                                    <input class="form-control" id="title" type="text" name="title"
+                                        value="{{ old('title') }}" placeholder="Title shown on the home page">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="image">Image</label>
+                                    <input class="form-control" id="image" type="file" name="image" accept="image/*" onchange="previewImage(this)">
+                                    <small class="text-muted">JPG, PNG or WebP. Max 2 MB. Shown on the home page.</small>
+                                    <div class="mt-2">
+                                        <img id="imagePreview" src="#" alt="Preview"
+                                            style="height:60px;width:auto;border-radius:6px;border:1px solid #eee;display:none;">
+                                    </div>
                                 </div>
 
                                 <div class="col-md-3">
@@ -87,6 +103,20 @@
 
     @include('components.backend.footer')
     @include('components.backend.main-js')
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => { preview.src = e.target.result; preview.style.display = 'inline-block'; };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 
