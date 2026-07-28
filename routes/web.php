@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\PermissionController;
@@ -18,6 +19,11 @@ use App\Http\Controllers\Backend\HomeKnowledgeSpectrumController;
 use App\Http\Controllers\Backend\HomeConnectController;
 use App\Http\Controllers\Backend\HomeEventsController;
 
+
+
+// =========================================================================== Frontend Routes
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // =========================================================================== Backend Routes

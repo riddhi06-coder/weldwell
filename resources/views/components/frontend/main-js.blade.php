@@ -1,1 +1,24 @@
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS here -->
+    <script src="{{ asset('frontend/assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/bootstrap-bundle.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugin.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/three.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/hover-effect.umd.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/split-type.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/swiper-bundle.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/swiper-gl.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/effect-slicer.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/magnific-popup.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/nice-select.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/purecounter.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/isotope-pkgd.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/imagesloaded-pkgd.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/atropos.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/backtop.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/ajax-form.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/slider-init.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/matter.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/throwable.js') }}"></script>
+
+    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/tp-cursor.js') }}"></script>
