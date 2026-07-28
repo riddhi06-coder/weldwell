@@ -86,8 +86,8 @@
                 </li>
                 @endif
 
-                @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view') || $u->hasPermission('company-stats.view') || $u->hasPermission('home-about.view') || $u->hasPermission('home-clients.view') || $u->hasPermission('testimony-intros.view') || $u->hasPermission('knowledge-spectrum.view')))
-                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*', 'manage-company-stats.*', 'manage-home-about.*', 'manage-home-clients.*', 'manage-testimony-intro.*','manage-home-knowledge-spectrum.*') ? 'active' : '' }}">
+                @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view') || $u->hasPermission('company-stats.view') || $u->hasPermission('home-about.view') || $u->hasPermission('home-clients.view') || $u->hasPermission('testimony-intros.view') || $u->hasPermission('knowledge-spectrum.view') || $u->hasPermission('home-connection.view')))
+                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*', 'manage-company-stats.*', 'manage-home-about.*', 'manage-home-clients.*', 'manage-testimony-intro.*','manage-home-knowledge-spectrum.*','manage-home-connection.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -125,6 +125,9 @@
                       <li><a href="{{ route('manage-home-knowledge-spectrum.index') }}" class="{{ request()->routeIs('manage-home-knowledge-spectrum.*') ? 'active' : '' }}">Knowledge Spectrum</a></li>
                       @endif
 
+                      @if($u->hasPermission('home-connection.view'))
+                      <li><a href="{{ route('manage-home-connection.index') }}" class="{{ request()->routeIs('manage-home-connection.*') ? 'active' : '' }}">Connection Info</a></li>
+                      @endif
 
 
 

@@ -78,6 +78,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create Knowledge Spectrum', 'slug' => 'knowledge-spectrum.create', 'module' => 'Home Page'],
                 ['name' => 'Edit Knowledge Spectrum',   'slug' => 'knowledge-spectrum.edit',   'module' => 'Home Page'],
                 ['name' => 'Delete Knowledge Spectrum', 'slug' => 'knowledge-spectrum.delete', 'module' => 'Home Page'],
+                // Home — Connection
+                ['name' => 'View Connection',   'slug' => 'home-connection.view',   'module' => 'Home Page'],
+                ['name' => 'Create Connection', 'slug' => 'home-connection.create', 'module' => 'Home Page'],
+                ['name' => 'Edit Connection',   'slug' => 'home-connection.edit',   'module' => 'Home Page'],
+                ['name' => 'Delete Connection', 'slug' => 'home-connection.delete', 'module' => 'Home Page'],
             ];
 
             foreach ($permissionData as $perm) {
