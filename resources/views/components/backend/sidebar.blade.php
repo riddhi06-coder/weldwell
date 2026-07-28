@@ -86,8 +86,8 @@
                 </li>
                 @endif
 
-                @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view') || $u->hasPermission('company-stats.view') || $u->hasPermission('home-about.view') || $u->hasPermission('home-clients.view')))
-                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*', 'manage-company-stats.*', 'manage-home-about.*', 'manage-home-clients.*') ? 'active' : '' }}">
+                @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view') || $u->hasPermission('company-stats.view') || $u->hasPermission('home-about.view') || $u->hasPermission('home-clients.view') || $u->hasPermission('testimony-intros.view')))
+                <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*', 'manage-company-stats.*', 'manage-home-about.*', 'manage-home-clients.*', 'manage-testimony-intro.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -116,6 +116,11 @@
                       @if($u->hasPermission('home-clients.view'))
                       <li><a href="{{ route('manage-home-clients.index') }}" class="{{ request()->routeIs('manage-home-clients.*') ? 'active' : '' }}">Client List</a></li>
                       @endif
+
+                      @if($u->hasPermission('testimony-intros.view'))
+                      <li><a href="{{ route('manage-testimony-intro.index') }}" class="{{ request()->routeIs('manage-testimony-intro.*') ? 'active' : '' }}">Testimony Intro</a></li>
+                      @endif
+
 
 
                   </ul>
