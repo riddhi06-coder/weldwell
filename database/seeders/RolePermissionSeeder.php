@@ -63,6 +63,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create About', 'slug' => 'home-about.create', 'module' => 'Home Page'],
                 ['name' => 'Edit About',   'slug' => 'home-about.edit',   'module' => 'Home Page'],
                 ['name' => 'Delete About', 'slug' => 'home-about.delete', 'module' => 'Home Page'],
+                // Home — Clients
+                ['name' => 'View Clients',   'slug' => 'home-clients.view',   'module' => 'Home Page'],
+                ['name' => 'Create Clients', 'slug' => 'home-clients.create', 'module' => 'Home Page'],
+                ['name' => 'Edit Clients',   'slug' => 'home-clients.edit',   'module' => 'Home Page'],
+                ['name' => 'Delete Clients', 'slug' => 'home-clients.delete', 'module' => 'Home Page'],
             ];
 
             foreach ($permissionData as $perm) {
