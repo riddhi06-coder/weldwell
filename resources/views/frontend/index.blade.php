@@ -112,7 +112,7 @@
                                     </span>
 
                                     <h2
-                                        class="tp-about-2-title fs-md-40 fs-xs-30 tp_text_invert invert-black-3 tp-ff-dm fw-600">
+                                        class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
                                         {!! strip_tags($productIntro->title, '<br><b><strong><i><em><u><a><span>') !!}
                                     </h2>
 
@@ -387,7 +387,7 @@
                                         </span>
 
                                         <h2
-                                            class="tp-about-2-title fs-md-40 fs-xs-30 tp_text_invert invert-black-3 tp-ff-dm fw-600">
+                                            class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
                                             {!! strip_tags($about->title, '<br><b><strong><i><em><u><a><span>') !!}
                                         </h2>
 
@@ -529,7 +529,7 @@
                             </span>
 
                             <h2
-                                class="tp-about-2-title fs-md-40 fs-xs-30 tp_text_invert invert-black-3 tp-ff-dm fw-600">
+                                class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
                                 {!! strip_tags($testimony->title, '<br><b><strong><i><em><u><a><span>') !!}
                             </h2>
 
@@ -850,7 +850,7 @@
                                 {{ $event->heading }}
                             </span>
 
-                            <h2 class="tp-about-2-title fs-md-40 fs-xs-30 tp_text_invert invert-black-3 tp-ff-dm fw-600">
+                            <h2 class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
                                 {!! strip_tags($event->title, '<br><b><strong><i><em><u><a><span>') !!}
                             </h2>
                             </div>
