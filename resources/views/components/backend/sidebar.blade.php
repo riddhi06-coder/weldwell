@@ -132,10 +132,24 @@
                       @if($u->hasPermission('home-events.view'))
                       <li><a href="{{ route('manage-home-events.index') }}" class="{{ request()->routeIs('manage-home-events.*') ? 'active' : '' }}">Event Intro</a></li>
                       @endif
-
-
-
                   </ul>
+                </li>
+                @endif
+
+
+                
+                @if($u && $u->hasPermission('activity-logs.view'))
+                <li class="sidebar-list {{ request()->routeIs('manage-contact-details.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title link-nav" href="{{ route('manage-contact-details.index') }}">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-contact') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-contact') }}"></use>
+                    </svg>
+                    <span>Contact Details</span>
+                  </a>
                 </li>
                 @endif
 

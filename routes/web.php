@@ -18,6 +18,8 @@ use App\Http\Controllers\Backend\HomeTestimonyIntroController;
 use App\Http\Controllers\Backend\HomeKnowledgeSpectrumController;
 use App\Http\Controllers\Backend\HomeConnectController;
 use App\Http\Controllers\Backend\HomeEventsController;
+use App\Http\Controllers\Backend\ContactDetailsController;
+
 
 
 
@@ -98,5 +100,9 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::resource('manage-home-knowledge-spectrum', HomeKnowledgeSpectrumController::class)->except('show');
         Route::resource('manage-home-connection', HomeConnectController::class)->except('show');
         Route::resource('manage-home-events', HomeEventsController::class)->except('show');
+
+
+        // ====== Contact Details
+        Route::resource('manage-contact-details', ContactDetailsController::class)->except('show');
 
 });
