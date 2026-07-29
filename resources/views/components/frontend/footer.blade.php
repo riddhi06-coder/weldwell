@@ -1,3 +1,9 @@
+@php
+    // Footer "Our Products" list — brand categories flagged for the product header (oldest first).
+    $footerProductCategories = \App\Models\MainCategory::where('show_in_product_header', true)
+        ->orderBy('id')->get();
+@endphp
+
   <footer>
                 <!-- tp-footer area start -->
                 <div class="tp-footer-area tp-bg-common-black pt-60 tp-techonolgy-capsule-wrapper tp-footer-pb-capsule-wrapper"
@@ -9,7 +15,7 @@
                                     <div class="tp-footer-widget tp-footer-pb-widget mb-45 tp_fade_anim"
                                         data-delay=".3">
                                         <div class="tp-footer-logo mb-35">
-                                            <a href="#">
+                                            <a href="{{ route('frontend.index') }}">
                                                 <img data-width="250" src="{{ asset('frontend/assets/images/logo1.webp') }}"
                                                     alt="Weldwell Speciality Pvt. Ltd.">
                                             </a>
@@ -86,11 +92,9 @@
                                         </h3>
 
                                         <ul>
-                                            <li><a href="#">Welding Consumables</a></li>
-                                            <li><a href="#">Thermal Spray Products</a></li>
-                                            <li><a href="#">Additive Manufacturing</a></li>
-                                            <li><a href="#">Welding Equipment</a></li>
-                                            <li><a href="#">Special Products</a></li>
+                                            @foreach($footerProductCategories as $pcat)
+                                            <li><a href="#">{{ $pcat->name }}</a></li>
+                                            @endforeach
                                         </ul>
 
                                     </div>
