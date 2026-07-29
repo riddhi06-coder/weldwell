@@ -23,7 +23,7 @@ use App\Http\Controllers\Backend\HomeEventsController;
 
 // =========================================================================== Frontend Routes
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
 
 
 // =========================================================================== Backend Routes

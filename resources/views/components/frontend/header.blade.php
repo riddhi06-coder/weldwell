@@ -1,4 +1,17 @@
-<!-- Preloader -->
+@php
+    // Header menus driven by the brand categories flagged for each header (oldest first).
+    $headerBrandCategories = \App\Models\MainCategory::where('show_in_brand_header', true)
+        ->with(['subCategories' => fn ($q) => $q->orderBy('id')])
+        ->orderBy('id')->get();
+
+    $headerProductCategories = \App\Models\MainCategory::where('show_in_product_header', true)
+        ->orderBy('id')->get();
+
+    // Icons cycled per menu item (categories have no icon field of their own).
+    $menuIcons = ['bi-shield-check', 'bi-fire', 'bi-layers', 'bi-tools', 'bi-stars'];
+@endphp
+
+    <!-- Preloader -->
     <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
             <path id="svg" d="M0,1005S175,995,500,995s500,5,500,5V0H0Z"></path>
@@ -57,41 +70,6 @@
         </div>
     </div>
     <!-- backtotop area end -->
-
-    <!--search-form-start -->
-    <!-- <div class="tp-search-body-overlay"></div>
-   <div class="tp-search-form-toggle">
-      <div class="container">
-         <div class="row mb-70">
-            <div class="col-lg-12">
-               <div class="tp-search-top d-flex justify-content-between align-items-center">
-                  <div class="cm-search-logo">
-                     <a href="#"><img data-width="150" src="{{ asset('frontend/assets/images/logo.jpg') }}" alt="logo"></a>
-                  </div>
-                  <button class="tp-search-close">
-                     <i class="fa-light fa-xmark"></i>
-                  </button>
-               </div>
-            </div>
-         </div>
-         <div class="row justify-content-center">
-            <div class="col-lg-12">
-               <div class="tp-search-form">
-                  <form action="#">
-                     <div class="tp-search-form-input">
-                        <input type="text" placeholder="What are you looking foor?" required>
-                        <span class="tp-search-focus-border"></span>
-                        <button class="tp-search-form-icon" type="submit">
-                           <i class="fa-sharp fa-regular fa-magnifying-glass"></i>
-                        </button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div> -->
-    <!-- search-form-end -->
 
     <!-- tp-offcanvus-area-start -->
     <div class="tp-offcanvas-area">
@@ -189,7 +167,7 @@
                     <div class="row align-items-center">
                         <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="tp-header-logo">
-                                <a href="#"><img data-width="240" src="{{ asset('frontend/assets/images/logo1.webp') }}" alt="logo"></a>
+                                <a href="{{ route('frontend.index') }}"><img data-width="240" src="{{ asset('frontend/assets/images/logo1.webp') }}" alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-xxl-7 col-xl-7 d-none d-xl-block">
@@ -224,60 +202,22 @@
                                                 <div class="row gx-0">
                                                     <div class="col-xl-12">
                                                         <div class="row gx-0">
+                                                            @foreach(($headerBrandCategories ?? collect()) as $bcat)
                                                             <div class="col-xl-3">
                                                                 <div class="tp-megamenu-list">
                                                                     <h4 class="tp-megamenu-title">
-                                                                        <i class="bi bi-shield-check me-2"></i>
-                                                                        Welding Consumables
+                                                                        <i class="bi {{ $menuIcons[$loop->index % count($menuIcons)] }} me-2"></i>
+                                                                        {{ $bcat->name }}
                                                                     </h4>
                                                                     <ul>
-                                                                        <li><a href="#">Special Metals Welding Products,
-                                                                                USA</a></li>
-                                                                        <li><a href="#">Kobelco Welding (Kobe Steel
-                                                                                Ltd., Japan)</a></li>
-                                                                        <li><a href="#">Taseto, Japan</a></li>
-                                                                        <li><a href="#">Ampco Metal, USA</a></li>
-                                                                        <li><a href="#">EXATON (formerly Sandvik,
-                                                                                Sweden)</a></li>
-                                                                        <li><a href="#">I.A. Barnes &amp; Company,
-                                                                                UK</a></li>
-                                                                        <li><a href="#">Alunox, Germany</a></li>
-                                                                        <li><a href="#">Beijing Metals, China</a></li>
-                                                                        <li><a href="#">Safra</a></li>
+                                                                        @foreach($bcat->subCategories as $sub)
+                                                                        <li><a href="#">{{ $sub->name }}</a></li>
+                                                                        @endforeach
                                                                     </ul>
                                                                 </div>
                                                             </div>
+                                                            @endforeach
 
-                                                            <div class="col-xl-3">
-                                                                <div class="tp-megamenu-list">
-                                                                    <h4 class="tp-megamenu-title">
-                                                                        <i class="bi bi-tools me-2"></i>
-                                                                        Equipment &amp; Accessories
-                                                                    </h4>
-                                                                    <ul>
-                                                                        <li><a href="#">Kemppi, Finland</a></li>
-                                                                        <li><a href="#">Panasonic, Japan</a></li>
-                                                                        <li><a href="#">Hypertherm, USA</a></li>
-                                                                        <li><a href="#">Huntingdon Fusion Techniques,
-                                                                                UK</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-xl-3">
-                                                                <div class="tp-megamenu-list">
-                                                                    <h4 class="tp-megamenu-title">
-                                                                        <i class="bi bi-fire me-2"></i>
-                                                                        Thermal Spray Products
-                                                                    </h4>
-                                                                    <ul>
-                                                                        <li><a href="#">SentesBir, Turkey</a></li>
-                                                                        <li><a href="#">Powder Alloys Corporation,
-                                                                                USA</a></li>
-                                                                        <li><a href="#">Technogenia</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
                                                             <div class="col-xl-3">
                                                                 <div class="tp-megamenu-list">
                                                                     <div class="tp-megamenu-thumb">
@@ -304,36 +244,14 @@
                                                 </span>
                                             </a>
                                             <ul class="tp-submenu submenu">
+                                                @foreach(($headerProductCategories ?? collect()) as $pcat)
                                                 <li>
                                                     <a href="#">
-                                                        <i class="bi bi-shield-check me-2"></i>
-                                                        Welding Consumables
+                                                        <i class="bi {{ $menuIcons[$loop->index % count($menuIcons)] }} me-2"></i>
+                                                        {{ $pcat->name }}
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="bi bi-fire me-2"></i>
-                                                        Thermal Spray Products
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="bi bi-layers me-2"></i>
-                                                        Additive Manufacturing
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="bi bi-tools me-2"></i>
-                                                        Welding Equipments
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="bi bi-stars me-2"></i>
-                                                        Special Products
-                                                    </a>
-                                                </li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="has-dropdown">
