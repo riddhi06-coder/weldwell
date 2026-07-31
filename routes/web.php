@@ -20,7 +20,7 @@ use App\Http\Controllers\Backend\HomeConnectController;
 use App\Http\Controllers\Backend\HomeEventsController;
 use App\Http\Controllers\Backend\ContactDetailsController;
 use App\Http\Controllers\Backend\TestimonialsController;
-
+use App\Http\Controllers\Backend\EventsController;
 
 
 // =========================================================================== Frontend Routes
@@ -107,5 +107,8 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         
         // ====== Testimonials
         Route::resource('manage-testimonials', TestimonialsController::class)->except('show');
+
+        // ====== Events
+        Route::resource('manage-events', EventsController::class)->except('show');
 
 });

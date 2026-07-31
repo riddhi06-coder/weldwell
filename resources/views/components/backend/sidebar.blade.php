@@ -152,6 +152,22 @@
                 </li>
                 @endif
 
+
+                @if($u && $u->hasPermission('testimonials.view'))
+                <li class="sidebar-list {{ request()->routeIs('manage-events.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title link-nav" href="{{ route('manage-events.index') }}">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-project') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-project') }}"></use>
+                    </svg>
+                    <span>Events</span>
+                  </a>
+                </li>
+                @endif
+
                 
                 @if($u && $u->hasPermission('contact-details.view'))
                 <li class="sidebar-list {{ request()->routeIs('manage-contact-details.*') ? 'active' : '' }}">
