@@ -137,6 +137,21 @@
                 @endif
 
 
+                @if($u && $u->hasPermission('testimonials.view'))
+                <li class="sidebar-list {{ request()->routeIs('manage-testimonials.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title link-nav" href="{{ route('manage-testimonials.index') }}">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-layout') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-layout') }}"></use>
+                    </svg>
+                    <span>Testimonials</span>
+                  </a>
+                </li>
+                @endif
+
                 
                 @if($u && $u->hasPermission('contact-details.view'))
                 <li class="sidebar-list {{ request()->routeIs('manage-contact-details.*') ? 'active' : '' }}">

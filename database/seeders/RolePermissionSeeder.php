@@ -93,6 +93,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create Contact Details', 'slug' => 'contact-details.create', 'module' => 'Contact'],
                 ['name' => 'Edit Contact Details',   'slug' => 'contact-details.edit',   'module' => 'Contact'],
                 ['name' => 'Delete Contact Details', 'slug' => 'contact-details.delete', 'module' => 'Contact'],
+                // Testimonials
+                ['name' => 'View Testimonials',   'slug' => 'testimonials.view',   'module' => 'Testimonials'],
+                ['name' => 'Create Testimonials', 'slug' => 'testimonials.create', 'module' => 'Testimonials'],
+                ['name' => 'Edit Testimonials',   'slug' => 'testimonials.edit',   'module' => 'Testimonials'],
+                ['name' => 'Delete Testimonials', 'slug' => 'testimonials.delete', 'module' => 'Testimonials'],
             ];
 
             foreach ($permissionData as $perm) {

@@ -19,7 +19,7 @@ use App\Http\Controllers\Backend\HomeKnowledgeSpectrumController;
 use App\Http\Controllers\Backend\HomeConnectController;
 use App\Http\Controllers\Backend\HomeEventsController;
 use App\Http\Controllers\Backend\ContactDetailsController;
-
+use App\Http\Controllers\Backend\TestimonialsController;
 
 
 
@@ -104,5 +104,8 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
         // ====== Contact Details
         Route::resource('manage-contact-details', ContactDetailsController::class)->except('show');
+        
+        // ====== Testimonials
+        Route::resource('manage-testimonials', TestimonialsController::class)->except('show');
 
 });
