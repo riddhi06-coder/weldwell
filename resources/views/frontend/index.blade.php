@@ -543,48 +543,15 @@
                                     </div> -->
                                     <div class="swiper-container ar-testimonial-active fix">
                                         <div class="swiper-wrapper">
+                                            @foreach(($testimonials ?? collect()) as $t)
                                             <div class="swiper-slide">
                                                 <div class="ar-testimonial-item text-center">
-                                                    <p>
-                                                        "Weldwell has been our trusted welding partner for years. Their
-                                                        premium
-                                                        welding consumables and technical support have consistently
-                                                        helped us
-                                                        improve productivity while maintaining the highest quality
-                                                        standards."
-                                                    </p>
-                                                    <h5 class="mt-30 mb-0">Manufacturing Industry Client</h5>
-                                                    <span>Automotive Components</span>
+                                                    {!! $t->testimony !!}
+                                                    <h5 class="mt-30 mb-0">{{ $t->client_name }}</h5>
+                                                    <span>{{ $t->industry_type }}</span>
                                                 </div>
                                             </div>
-
-                                            <div class="swiper-slide">
-                                                <div class="ar-testimonial-item text-center">
-                                                    <p>
-                                                        "The quality of Weldwell's welding equipment and consumables is
-                                                        exceptional. Their knowledgeable team always recommends the
-                                                        right
-                                                        solution for our critical fabrication and maintenance
-                                                        requirements."
-                                                    </p>
-                                                    <h5 class="mt-30 mb-0">Engineering Company</h5>
-                                                    <span>Heavy Fabrication</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <div class="ar-testimonial-item text-center">
-                                                    <p>
-                                                        "From thermal spray solutions to specialty welding products,
-                                                        Weldwell
-                                                        delivers reliable products backed by excellent customer service.
-                                                        We
-                                                        value their commitment to quality and long-term partnership."
-                                                    </p>
-                                                    <h5 class="mt-30 mb-0">Industrial Client</h5>
-                                                    <span>Power & Process Industry</span>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="fraction-wrapper d-none d-lg-block">

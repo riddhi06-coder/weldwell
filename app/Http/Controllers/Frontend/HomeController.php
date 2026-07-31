@@ -12,6 +12,7 @@ use App\Models\HomeEvent;
 use App\Models\HomeKnowledgeSpectrum;
 use App\Models\MainCategory;
 use App\Models\ProductIntro;
+use App\Models\Testimonial;
 use App\Models\TestimonyIntro;
 
 class HomeController extends Controller
@@ -29,6 +30,7 @@ class HomeController extends Controller
             'about'          => HomeAbout::where('is_active', true)->first(),
             'clients'        => HomeClient::where('is_active', true)->with('photos')->first(),
             'testimony'      => TestimonyIntro::where('is_active', true)->with('sliders')->first(),
+            'testimonials'   => Testimonial::where('is_active', true)->orderByDesc('id')->get(),
             'knowledge'      => HomeKnowledgeSpectrum::where('is_active', true)->first(),
             'connection'     => HomeConnection::where('is_active', true)->first(),
             'event'          => HomeEvent::where('is_active', true)->first(),
