@@ -138,7 +138,7 @@
 
 
                 
-                @if($u && $u->hasPermission('activity-logs.view'))
+                @if($u && $u->hasPermission('contact-details.view'))
                 <li class="sidebar-list {{ request()->routeIs('manage-contact-details.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title link-nav" href="{{ route('manage-contact-details.index') }}">

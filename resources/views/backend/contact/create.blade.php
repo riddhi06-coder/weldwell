@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Contact Details Form</h4>
-                            <p class="f-m-light mt-1">Enter the category name — the slug will be generated automatically.</p>
+                            <p class="f-m-light mt-1">Website contact info, social links and office locations.</p>
                         </div>
                         <div class="card-body">
 
@@ -43,49 +43,59 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-contact-details.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="row g-4 custom-input" action="{{ route('manage-contact-details.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
-                                <div class="col-md-6">
-                                    <label class="form-label" for="name">Category Name <span class="txt-danger">*</span></label>
-                                    <input class="form-control" id="name" type="text" name="name"
-                                        value="{{ old('name') }}" placeholder="e.g. Welding Consumables, Equipment & Accessories, Thermal Spray Products">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label" for="title">Title</label>
-                                    <input class="form-control" id="title" type="text" name="title"
-                                        value="{{ old('title') }}" placeholder="Title shown on the home page">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label" for="image">Image</label>
-                                    <input class="form-control" id="image" type="file" name="image" accept="image/*" onchange="previewImage(this)">
-                                    <small class="text-muted">JPG, PNG or
-                                         WebP. Max 2 MB. Shown on the home page.</small>
-                                    <div class="mt-2">
-                                        <img id="imagePreview" src="#" alt="Preview"
-                                            style="height:60px;width:auto;border-radius:6px;border:1px solid #eee;display:none;">
+                                {{-- ===================== Website Info ===================== --}}
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <h5 class="mb-3">Website Info</h5>
+                                        <div class="row g-3">
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="website_intro">Website Intro <span class="txt-danger">*</span></label>
+                                                <textarea class="form-control ckeditor-init" id="website_intro" name="website_intro" rows="3">{{ old('website_intro') }}</textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="website_address">Website Address <span class="txt-danger">*</span></label>
+                                                <textarea class="form-control ckeditor-init" id="website_address" name="website_address" rows="3">{{ old('website_address') }}</textarea>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="email">Email <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="email" type="email" name="email"
+                                                    value="{{ old('email') }}" placeholder="e.g. info@weldwell.com">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="telephone">Telephone No <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="telephone" type="text" name="telephone"
+                                                    value="{{ old('telephone') }}" placeholder="e.g. +91 22 6646 2000">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="map_url">Map URL <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="map_url" type="text" name="map_url"
+                                                    value="{{ old('map_url') }}" placeholder="https://maps.google.com/...">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="iframe_url">iFrame URL <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="iframe_url" type="text" name="iframe_url"
+                                                    value="{{ old('iframe_url') }}" placeholder="https://www.google.com/maps/embed?...">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <label class="form-label d-block">Brand Header</label>
-                                    <div class="form-check form-switch pt-1">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="show_in_brand_header" name="show_in_brand_header" value="1"
-                                            {{ old('show_in_brand_header') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="show_in_brand_header">Show in Brand header</label>
-                                    </div>
-                                </div>
+                                @include('backend.contact._socials', ['socials' => old('socials', [['platform' => '', 'url' => '']])])
 
-                                <div class="col-md-3">
-                                    <label class="form-label d-block">Product Header</label>
-                                    <div class="form-check form-switch pt-1">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="show_in_product_header" name="show_in_product_header" value="1"
-                                            {{ old('show_in_product_header') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="show_in_product_header">Show in Product header</label>
+                                @include('backend.contact._offices', ['offices' => old('offices', [])])
+
+                                {{-- ===================== Status ===================== --}}
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <label class="form-label d-block mb-2">Status</label>
+                                        <div class="form-check form-switch">
+                                            <input type="hidden" name="is_active" value="0">
+                                            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="is_active">Active</label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -104,6 +114,9 @@
 
     @include('components.backend.footer')
     @include('components.backend.main-js')
+
+    @include('backend.home.banner._ckeditor')
+    @include('backend.contact._contact_js')
 
 </body>
 
