@@ -13,11 +13,11 @@
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
-                    <div class="col-6"><h4>Add Events</h4></div>
+                    <div class="col-6"><h4>Add Event</h4></div>
                     <div class="col-6">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('manage-events.index') }}">Events</a></li>
-                            <li class="breadcrumb-item active">Add Events</li>
+                            <li class="breadcrumb-item active">Add Event</li>
                         </ol>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Events Form</h4>
-                            <p class="f-m-light mt-1">Add a client testimonial shown on the website.</p>
+                            <h4>Event Form</h4>
+                            <p class="f-m-light mt-1">Add an event — the slug is generated automatically from the title.</p>
                         </div>
                         <div class="card-body">
 
@@ -43,24 +43,36 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-events.store') }}" method="POST">
+                            <form class="row g-3 custom-input" action="{{ route('manage-events.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="col-md-6">
-                                    <label class="form-label" for="client_name">Client Name <span class="txt-danger">*</span></label>
-                                    <input class="form-control" id="client_name" type="text" name="client_name"
-                                        value="{{ old('client_name') }}" placeholder="e.g. Manufacturing Industry Client">
+                                    <label class="form-label" for="title">Title <span class="txt-danger">*</span></label>
+                                    <input class="form-control" id="title" type="text" name="title"
+                                        value="{{ old('title') }}" placeholder="e.g. Welding Expo 2025">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label" for="industry_type">Industry Type <span class="txt-danger">*</span></label>
-                                    <input class="form-control" id="industry_type" type="text" name="industry_type"
-                                        value="{{ old('industry_type') }}" placeholder="e.g. Automotive Components">
+                                    <label class="form-label" for="date">Date</label>
+                                    <input class="form-control" id="date" type="date" name="date" value="{{ old('date') }}">
                                 </div>
 
-                                <div class="col-md-12">
-                                    <label class="form-label" for="testimony">Testimony <span class="txt-danger">*</span></label>
-                                    <textarea class="form-control ckeditor-init" id="testimony" name="testimony" rows="5">{{ old('testimony') }}</textarea>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="thumbnail">Thumbnail Image <span class="txt-danger">*</span></label>
+                                    <input class="form-control image-input" id="thumbnail" type="file" name="thumbnail"
+                                        accept="image/*" data-preview="#preview_thumbnail" required>
+                                    <small class="text-muted">JPG, PNG or WebP · Max 2 MB.</small>
+                                    <div class="mt-2">
+                                        <img id="preview_thumbnail" src="#" alt="Thumbnail"
+                                            style="height:70px;width:auto;border-radius:6px;border:1px solid #eee;display:none;">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="tags">Tags</label>
+                                    <input class="form-control" id="tags" type="text" name="tags"
+                                        value="{{ old('tags') }}" placeholder="e.g. Welding Expo, Live Demo, Innovation">
+                                    <small class="text-muted">Separate multiple tags with commas.</small>
                                 </div>
 
                                 <div class="col-md-6">
@@ -88,7 +100,7 @@
     @include('components.backend.footer')
     @include('components.backend.main-js')
 
-    @include('backend.home.banner._ckeditor')
+    @include('backend.home.about._image_preview_js')
 
 </body>
 

@@ -154,9 +154,12 @@
 
 
                 @if($u && $u->hasPermission('testimonials.view'))
+
+
+                @if($u && $u->hasPermission('events.view'))
                 <li class="sidebar-list {{ request()->routeIs('manage-events.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
-                  <a class="sidebar-link sidebar-title link-nav" href="{{ route('manage-events.index') }}">
+                  <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-project') }}"></use>
                     </svg>
@@ -165,7 +168,13 @@
                     </svg>
                     <span>Events</span>
                   </a>
+                  <ul class="sidebar-submenu">
+                      <li><a href="{{ route('manage-events.index') }}" class="{{ request()->routeIs('manage-events.*') ? 'active' : '' }}">Listing</a></li>
+                      {{-- Details target to be wired later --}}
+                      <li><a href="#">Details</a></li>
+                  </ul>
                 </li>
+                @endif
                 @endif
 
                 
