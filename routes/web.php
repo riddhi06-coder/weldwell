@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\HomeEventsController;
 use App\Http\Controllers\Backend\ContactDetailsController;
 use App\Http\Controllers\Backend\TestimonialsController;
 use App\Http\Controllers\Backend\EventsController;
+use App\Http\Controllers\Backend\DashboardController;
 
 
 // =========================================================================== Frontend Routes
@@ -43,9 +44,7 @@ Route::post('/register', [LoginController::class, 'authenticate_register'])->nam
     
 // Admin Routes with Middleware
 Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHistoryMiddleware::class]], function () {
-        Route::get('/dashboard', function () {
-            return view('backend.dashboard');
-        })->name('admin.dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         // ===== Roles =====
         Route::get('roles',             [RoleController::class, 'index'])->middleware('permission:roles.view')->name('admin.roles.index');
