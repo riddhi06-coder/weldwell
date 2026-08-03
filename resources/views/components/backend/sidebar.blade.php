@@ -170,7 +170,6 @@
                   </a>
                   <ul class="sidebar-submenu">
                       <li><a href="{{ route('manage-events.index') }}" class="{{ request()->routeIs('manage-events.*') ? 'active' : '' }}">Listing</a></li>
-                      {{-- Details target to be wired later --}}
                       <li><a href="#">Details</a></li>
                   </ul>
                 </li>
@@ -179,7 +178,7 @@
 
                 
                 @if($u && $u->hasPermission('contact-details.view'))
-                <li class="sidebar-list {{ request()->routeIs('manage-contact-details.*') ? 'active' : '' }}">
+                <li class="sidebar-list {{ -request()->routeIs('manage-contact-details.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title link-nav" href="{{ route('manage-contact-details.index') }}">
                     <svg class="stroke-icon">
