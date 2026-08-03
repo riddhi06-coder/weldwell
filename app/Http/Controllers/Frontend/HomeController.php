@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyStat;
+use App\Models\Event;
 use App\Models\HomeAbout;
 use App\Models\HomeBanner;
 use App\Models\HomeClient;
@@ -34,6 +35,7 @@ class HomeController extends Controller
             'knowledge'      => HomeKnowledgeSpectrum::where('is_active', true)->first(),
             'connection'     => HomeConnection::where('is_active', true)->first(),
             'event'          => HomeEvent::where('is_active', true)->first(),
+            'events'         => Event::where('is_active', true)->orderByDesc('id')->get(),
 
             // Brand categories flagged for the site headers.
             'brandHeaderCategories'   => MainCategory::where('show_in_brand_header', true)->orderBy('name')->get(),

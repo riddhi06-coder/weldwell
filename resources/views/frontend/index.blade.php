@@ -826,20 +826,21 @@
 
                     <div class="row">
 
-                        <!-- Event 1 -->
+                        @foreach(($events ?? collect()) as $ev)
                         <div class="col-xl-4 col-lg-4 col-md-6 mb-30 tp_fade_anim" data-delay=".3">
                             <div class="al-blog-seo-item">
 
                             <div class="al-blog-seo-content mb-20">
+                                @if(!empty($ev->tags))
                                 <div class="al-blog-seo-category">
-                                    <a href="#">Welding Expo</a>
-                                    <a href="#">Live Demo</a>
+                                    @foreach($ev->tags as $tag)
+                                    <a href="#">{{ $tag }}</a>
+                                    @endforeach
                                 </div>
+                                @endif
 
                                 <h4 class="al-blog-seo-title">
-                                    <a href="#">
-                                        Explore Advanced Welding Consumables & Automation Solutions
-                                    </a>
+                                    <a href="#">{{ $ev->title }}</a>
                                 </h4>
 
                                 <div class="al-blog-seo-meta">
@@ -849,94 +850,21 @@
                                         <path d="M8 3.8V8L10.8 9.4" stroke="currentcolor" stroke-width="1.5"/>
                                         </svg>
                                     </span>
-                                    <span>Coming Soon</span>
+                                    <span>{{ $ev->date ? $ev->date->format('d M Y') : 'Coming Soon' }}</span>
                                 </div>
                             </div>
 
                             <div class="al-blog-seo-thumb fix">
                                 <a href="#">
-                                    <img class="w-100" src="{{ asset('frontend/assets/images/upcoming-event/1.webp') }}" alt="Welding Expo">
+                                    @if($ev->thumbnail)
+                                    <img class="w-100" src="{{ asset('events/' . $ev->thumbnail) }}" alt="{{ $ev->title }}">
+                                    @endif
                                 </a>
                             </div>
 
-
-
                             </div>
                         </div>
-                        <!-- Event 3 -->
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-30 tp_fade_anim" data-delay=".5">
-                            <div class="al-blog-seo-item">
-
-                            <div class="al-blog-seo-content mb-20">
-                                <div class="al-blog-seo-category">
-                                    <a href="#">Tech Showcase</a>
-                                    <a href="#">Thermal Spray</a>
-                                </div>
-
-                                <h4 class="al-blog-seo-title">
-                                    <a href="#">
-                                        Discover Thermal Spray, Hardfacing & Welding Repair Technologies
-                                    </a>
-                                </h4>
-
-                                <div class="al-blog-seo-meta">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15Z" stroke="currentcolor" stroke-width="1.5"/>
-                                        <path d="M8 3.8V8L10.8 9.4" stroke="currentcolor" stroke-width="1.5"/>
-                                        </svg>
-                                    </span>
-                                    <span>Coming Soon</span>
-                                </div>
-                            </div>
-
-                            <div class="al-blog-seo-thumb fix">
-                                <a href="#">
-                                    <img class="w-100" src="{{ asset('frontend/assets/images/upcoming-event/3.webp') }}" alt="Thermal Spray Event">
-                                </a>
-                            </div>
-
-
-
-                            </div>
-                        </div>
-                        <!-- Event 2 -->
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-30 tp_fade_anim" data-delay=".4">
-                            <div class="al-blog-seo-item">
-
-                            <div class="al-blog-seo-content mb-20">
-                                <div class="al-blog-seo-category">
-                                    <a href="#">Industrial Fair</a>
-                                    <a href="#">Innovation</a>
-                                </div>
-
-                                <h4 class="al-blog-seo-title">
-                                    <a href="#">
-                                        Experience Premium Welding Electrodes, Wires & Fluxes
-                                    </a>
-                                </h4>
-
-                                <div class="al-blog-seo-meta">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15Z" stroke="currentcolor" stroke-width="1.5"/>
-                                        <path d="M8 3.8V8L10.8 9.4" stroke="currentcolor" stroke-width="1.5"/>
-                                        </svg>
-                                    </span>
-                                    <span>Coming Soon</span>
-                                </div>
-                            </div>
-
-                            <div class="al-blog-seo-thumb fix">
-                                <a href="#">
-                                    <img class="w-100" src="{{ asset('frontend/assets/images/upcoming-event/2.webp') }}" alt="Industrial Exhibition">
-                                </a>
-                            </div>
-
-
-
-                            </div>
-                        </div>
+                        @endforeach
 
 
 
