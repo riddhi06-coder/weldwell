@@ -23,6 +23,10 @@ use App\Http\Controllers\Backend\TestimonialsController;
 use App\Http\Controllers\Backend\EventsController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\AboutIntroController;
+use App\Http\Controllers\Backend\AboutQualitiesController;
+
+
+
 
 // =========================================================================== Frontend Routes
 
@@ -103,6 +107,7 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
         // ===== About Us — Introduction =====
         Route::resource('manage-about-intro', AboutIntroController::class)->except('show');
+        Route::resource('manage-about-qualities', AboutQualitiesController::class)->except('show');
 
 
 

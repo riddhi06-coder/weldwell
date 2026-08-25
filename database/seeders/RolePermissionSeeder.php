@@ -108,6 +108,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create About Intro', 'slug' => 'about-intro.create', 'module' => 'About Us'],
                 ['name' => 'Edit About Intro',   'slug' => 'about-intro.edit',   'module' => 'About Us'],
                 ['name' => 'Delete About Intro', 'slug' => 'about-intro.delete', 'module' => 'About Us'],
+                // About Us — Core Qualities
+                ['name' => 'View Core Qualities',   'slug' => 'about-qualities.view',   'module' => 'About Us'],
+                ['name' => 'Create Core Qualities', 'slug' => 'about-qualities.create', 'module' => 'About Us'],
+                ['name' => 'Edit Core Qualities',   'slug' => 'about-qualities.edit',   'module' => 'About Us'],
+                ['name' => 'Delete Core Qualities', 'slug' => 'about-qualities.delete', 'module' => 'About Us'],
             ];
 
             foreach ($permissionData as $perm) {

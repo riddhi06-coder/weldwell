@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Testimonial::class,
         \App\Models\Event::class,
         \App\Models\AboutIntro::class,
+        \App\Models\AboutQuality::class,
     ];
 
     public function register(): void

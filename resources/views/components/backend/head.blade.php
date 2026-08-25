@@ -66,4 +66,13 @@
         .perm-card-header .form-check-input:checked { background-color: #4A55A2; border-color: #4A55A2; }
         .perm-matrix .form-check-input:focus,
         .perm-card-header .form-check-input:focus { border-color: #4A55A2; box-shadow: 0 0 0 .18rem rgba(74,85,162,.18); }
+
+        /* ===== CKEditor content — restore list bullets/numbers the admin theme resets ===== */
+        .ck-content ul,
+        .ck-content ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+        .ck-content ul { list-style: disc; }
+        .ck-content ul ul { list-style: circle; }
+        .ck-content ul ul ul { list-style: square; }
+        .ck-content ol { list-style: decimal; }
+        .ck-content li { display: list-item; }
     </style>
