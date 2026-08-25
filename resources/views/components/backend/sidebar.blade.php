@@ -137,6 +137,28 @@
                 @endif
 
 
+
+                @if($u && $u->hasPermission('about-intro.view'))
+                 <li class="sidebar-list {{ request()->routeIs('manage-about-intro.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-form') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-form') }}"></use>
+                    </svg>
+                    <span>About Us</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                      @if($u->hasPermission('about-intro.view'))
+                      <li><a href="{{ route('manage-about-intro.index') }}" class="{{ request()->routeIs('manage-about-intro.*') ? 'active' : '' }}">Introduction</a></li>
+                      @endif
+                  </ul>
+                </li>
+                @endif
+
+
                 @if($u && $u->hasPermission('testimonials.view'))
                 <li class="sidebar-list {{ request()->routeIs('manage-testimonials.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>

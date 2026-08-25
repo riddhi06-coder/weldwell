@@ -22,7 +22,7 @@ use App\Http\Controllers\Backend\ContactDetailsController;
 use App\Http\Controllers\Backend\TestimonialsController;
 use App\Http\Controllers\Backend\EventsController;
 use App\Http\Controllers\Backend\DashboardController;
-
+use App\Http\Controllers\Backend\AboutIntroController;
 
 // =========================================================================== Frontend Routes
 
@@ -99,6 +99,11 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::resource('manage-home-knowledge-spectrum', HomeKnowledgeSpectrumController::class)->except('show');
         Route::resource('manage-home-connection', HomeConnectController::class)->except('show');
         Route::resource('manage-home-events', HomeEventsController::class)->except('show');
+
+
+        // ===== About Us — Introduction =====
+        Route::resource('manage-about-intro', AboutIntroController::class)->except('show');
+
 
 
         // ====== Contact Details
