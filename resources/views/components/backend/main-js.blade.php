@@ -36,8 +36,90 @@
     <script src="{{ asset('admin/assets/js/script.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 
+    {{--
+        Shared CKEditor 5 bootstrapper (loaded on every admin page via main-js).
+          • auto-initialises every <textarea class="ckeditor-init"> present on load, and
+          • exposes window.initCKEditor(textarea) / window.destroyCKEditor(textarea)
+            so repeaters can attach/detach an editor on dynamically-added rows.
+        No per-page include needed — just add class="ckeditor-init" to a textarea.
+    --}}
+    <script>
+        (function () {
+            window.wwCkEditors = window.wwCkEditors || new Map();
 
- 
+            var CONFIG = {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'link',
+                    'bulletedList', 'numberedList', '|',
+                    'alignment', 'outdent', 'indent', '|',
+                    'undo', 'redo', 'removeFormat'
+                ],
+                // Make the dropdown labels match the actual tags (Heading 2 => <h2>, etc.).
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                    ]
+                }
+            };
+
+            // Attach an editor to a textarea (no-op if already attached or CKEditor not loaded yet).
+            window.initCKEditor = function (textarea) {
+                if (!textarea || window.wwCkEditors.has(textarea) || typeof ClassicEditor === 'undefined') return;
+                ClassicEditor.create(textarea, CONFIG)
+                    .then(function (editor) { window.wwCkEditors.set(textarea, editor); })
+                    .catch(function (err) { console.error(err); });
+            };
+
+            // Detach an editor (used before removing a repeater row). Returns a promise.
+            window.destroyCKEditor = function (textarea) {
+                var editor = window.wwCkEditors.get(textarea);
+                if (editor) {
+                    window.wwCkEditors.delete(textarea);
+                    return editor.destroy().catch(function () {});
+                }
+                return Promise.resolve();
+            };
+
+            function initAll() {
+                document.querySelectorAll('.ckeditor-init').forEach(window.initCKEditor);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                // CKEditor 5 loads from the CDN above; wait for it if it isn't ready yet.
+                if (typeof ClassicEditor === 'undefined') {
+                    var tries = 0;
+                    var wait = setInterval(function () {
+                        if (typeof ClassicEditor !== 'undefined' || tries++ > 40) {
+                            clearInterval(wait);
+                            initAll();
+                        }
+                    }, 100);
+                } else {
+                    initAll();
+                }
+
+                /* ---------- Live video preview (only acts when #video + #video-preview exist) ---------- */
+                var videoInput = document.getElementById('video');
+                var videoPreview = document.getElementById('video-preview');
+                if (videoInput && videoPreview) {
+                    videoInput.addEventListener('change', function () {
+                        var file = videoInput.files && videoInput.files[0];
+                        if (file) {
+                            videoPreview.src = URL.createObjectURL(file);
+                            videoPreview.parentElement.style.display = '';
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
 
     <script>new WOW().init();</script>
 

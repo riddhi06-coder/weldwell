@@ -92,7 +92,6 @@
     @include('components.backend.footer')
     @include('components.backend.main-js')
 
-    @include('backend.home.banner._ckeditor')
     @include('backend.home.product_intro._qualities_js')
 
 </body>

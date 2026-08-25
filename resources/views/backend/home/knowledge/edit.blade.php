@@ -96,7 +96,6 @@
     @include('components.backend.footer')
     @include('components.backend.main-js')
 
-    @include('backend.home.banner._ckeditor')
     @include('backend.home.about._image_preview_js')
 
 </body>

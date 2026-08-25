@@ -30,7 +30,7 @@
             var tr = rowTemplate(index++);
             body.appendChild(tr);
             var ta = tr.querySelector('.ckeditor-init');
-            if (window.initAboutCKEditor) window.initAboutCKEditor(ta);
+            if (window.initCKEditor) window.initCKEditor(ta);
             renumber();
         });
 
@@ -43,7 +43,7 @@
             var last = body.querySelectorAll('.vision-row').length <= 1;
 
             // Destroy the editor first so it releases the (soon-to-be-gone) DOM cleanly.
-            var destroyed = (ta && window.destroyAboutCKEditor) ? window.destroyAboutCKEditor(ta) : Promise.resolve();
+            var destroyed = (ta && window.destroyCKEditor) ? window.destroyCKEditor(ta) : Promise.resolve();
 
             destroyed.then(function () {
                 if (!last) {
@@ -54,7 +54,7 @@
                     if (input) input.value = '';
                     if (ta) {
                         ta.value = '';
-                        if (window.initAboutCKEditor) window.initAboutCKEditor(ta);
+                        if (window.initCKEditor) window.initCKEditor(ta);
                     }
                 }
                 renumber();

@@ -87,7 +87,6 @@
     @include('components.backend.footer')
     @include('components.backend.main-js')
 
-    @include('backend.home.banner._ckeditor')
     @include('backend.home.testimony_intro._sliders_js')
 
 </body>

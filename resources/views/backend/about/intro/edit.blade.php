@@ -137,7 +137,6 @@
     @include('components.backend.footer')
     @include('components.backend.main-js')
 
-    @include('backend.about.intro._ckeditor')
     @include('backend.about.intro._visions_js')
     @include('backend.home.about._image_preview_js')
 
