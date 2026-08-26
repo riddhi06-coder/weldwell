@@ -373,7 +373,6 @@
 		tp_text_invert();
 	});
 
-
 	///////////////////////////////////////////////////
 	// 14. fade-class-active — onscroll fade-in effect (.tp_fade_anim)
 	// Add class="tp_fade_anim" to any element to fade it in as it scrolls into view.
@@ -494,6 +493,29 @@
 			);
 		});
 	}
-	
+        (function () {
+            var panels = document.querySelectorAll('.tsp-panel');
+            if (!panels.length) return;
+
+            if (!('IntersectionObserver' in window)) {
+                panels.forEach(function (p) { p.classList.add('is-in-view'); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry, i) {
+                    if (entry.isIntersecting) {
+                        var panel = entry.target;
+                        var delay = Array.prototype.indexOf.call(panels, panel) % 2 === 0 ? 0 : 90;
+                        setTimeout(function () {
+                            panel.classList.add('is-in-view');
+                        }, delay);
+                        observer.unobserve(panel);
+                    }
+                });
+            }, { threshold: 0.25, rootMargin: '0px 0px -60px 0px' });
+
+            panels.forEach(function (panel) { observer.observe(panel); });
+        })();
 
 })(jQuery);

@@ -31,7 +31,7 @@ use App\Http\Controllers\Backend\AboutCustomerController;
 // =========================================================================== Frontend Routes
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
-
+Route::get('/about-us', [HomeController::class, 'about_us'])->name('frontend.about_us');
 
 // =========================================================================== Backend Routes
 

@@ -54,7 +54,8 @@
                                         <div class="row g-3">
                                             <div class="col-md-12">
                                                 <label class="form-label" for="heading">Heading</label>
-                                                <textarea class="form-control ckeditor-init" id="heading" name="heading" rows="3">{{ old('heading', $quality->heading) }}</textarea>
+                                                <textarea class="form-control" id="heading" name="heading" rows="3" placeholder="e.g. What Sets Us Apart&#10;Three Decades of Welding Expertise,&#10;Trusted Partnerships &amp; Knowledge Sharing.">{{ old('heading', $quality->heading) }}</textarea>
+                                                <small class="text-muted">Plain text. Each new line becomes a line break in the heading.</small>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label" for="image">Image</label>
@@ -109,7 +110,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <label class="form-label" for="more_info_desc">Description</label>
-                                                <textarea class="form-control ckeditor-init" id="more_info_desc" name="more_info_desc" rows="4">{{ old('more_info_desc', $quality->more_info_desc) }}</textarea>
+                                                <textarea class="form-control" id="more_info_desc" name="more_info_desc" rows="4" placeholder="A short description shown over the video image.">{{ old('more_info_desc', $quality->more_info_desc) }}</textarea>
+                                                <small class="text-muted">Plain text. Each new line becomes a line break.</small>
                                             </div>
                                             <div class="col-md-12">
                                                 <label class="form-label" for="statement">Statement</label>

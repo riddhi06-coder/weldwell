@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AboutCustomer;
+use App\Models\AboutIntro;
+use App\Models\AboutQuality;
 use App\Models\CompanyStat;
 use App\Models\Event;
 use App\Models\HomeAbout;
@@ -43,5 +46,20 @@ class HomeController extends Controller
         ];
 
         return view('frontend.index', $data);
+    }
+
+
+    public function about_us()
+    {
+        $data = [
+            'intro'      => AboutIntro::where('is_active', true)->with('visions')->first(),
+            'quality'    => AboutQuality::where('is_active', true)->with('values')->first(),
+            'customer'   => AboutCustomer::where('is_active', true)->with(['features', 'highlights'])->first(),
+            'connection' => HomeConnection::where('is_active', true)->first(),
+
+            'productHeaderCategories' => MainCategory::where('show_in_product_header', true)->orderBy('name')->get(),
+        ];
+
+        return view('frontend.about_us', $data);
     }
 }
