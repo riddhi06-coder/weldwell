@@ -138,7 +138,7 @@
 
 
 
-                @if($u && ($u->hasPermission('about-intro.view') || $u->hasPermission('about-qualities.view')))
+                @if($u && ($u->hasPermission('about-intro.view') || $u->hasPermission('about-qualities.view') || $u->hasPermission('about-customer.view')))
                  <li class="sidebar-list {{ request()->routeIs('manage-about-intro.*', 'manage-about-qualities.*','manage-about-customer.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
@@ -159,7 +159,9 @@
                       <li><a href="{{ route('manage-about-qualities.index') }}" class="{{ request()->routeIs('manage-about-qualities.*') ? 'active' : '' }}">Core Qualities</a></li>
                       @endif
 
+                      @if($u->hasPermission('about-customer.view'))
                       <li><a href="{{ route('manage-about-customer.index') }}" class="{{ request()->routeIs('manage-about-customer.*') ? 'active' : '' }}">Customers Served</a></li>
+                      @endif
 
 
                   </ul>

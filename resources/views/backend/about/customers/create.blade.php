@@ -13,11 +13,11 @@
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
-                    <div class="col-6"><h4>Add Customer Served</h4></div>
+                    <div class="col-6"><h4>Add Customers Served</h4></div>
                     <div class="col-6">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('manage-about-customer.index') }}">Customer Served</a></li>
-                            <li class="breadcrumb-item active">Add Customer Served</li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-about-customer.index') }}">Customers Served</a></li>
+                            <li class="breadcrumb-item active">Add Customers Served</li>
                         </ol>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Customer Served Form</h4>
-                            <p class="f-m-light mt-1">Intro heading &amp; image, the vision/mission list and the partner message.</p>
+                            <h4>Customers Served Form</h4>
+                            <p class="f-m-light mt-1">Heading &amp; title, the features list and the highlights list.</p>
                         </div>
                         <div class="card-body">
 
@@ -43,63 +43,64 @@
                                 </div>
                             @endif
 
-                            <form class="row g-4 custom-input" action="{{ route('manage-about-customer.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="row g-4 custom-input" action="{{ route('manage-about-customer.store') }}" method="POST">
                                 @csrf
 
-                                {{-- ===================== Introduction ===================== --}}
+                                {{-- ===================== Details ===================== --}}
                                 <div class="col-12">
                                     <div class="border rounded p-3">
-                                        <h5 class="mb-3">Introduction</h5>
+                                        <h5 class="mb-3">Details</h5>
                                         <div class="row g-3">
                                             <div class="col-md-6">
-                                                <label class="form-label" for="heading">Intro Heading <span class="txt-danger">*</span></label>
+                                                <label class="form-label" for="heading">Heading <span class="txt-danger">*</span></label>
                                                 <input class="form-control" id="heading" type="text" name="heading"
-                                                    value="{{ old('heading') }}" placeholder="e.g. About Weldwell">
+                                                    value="{{ old('heading') }}" placeholder="e.g. Customers We Serve">
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="form-label" for="image">Image <span class="txt-danger">*</span></label>
-                                                <input class="form-control image-input" id="image" type="file" name="image"
-                                                    accept="image/*" data-preview="#preview_image">
-                                                <small class="text-muted">JPG, PNG or WebP · Max 2 MB.</small>
-                                                <div class="mt-2">
-                                                    <img id="preview_image" src="#" alt="Image"
-                                                        style="height:70px;width:auto;border-radius:6px;border:1px solid #eee;display:none;">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label class="form-label" for="introduction">Introduction</label>
-                                                <textarea class="form-control ckeditor-init" id="introduction" name="introduction" rows="4">{{ old('introduction') }}</textarea>
+                                                <label class="form-label" for="title">Title</label>
+                                                <input class="form-control" id="title" type="text" name="title"
+                                                    value="{{ old('title') }}" placeholder="e.g. Trusted across industries">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {{-- ===================== Vision & Mission ===================== --}}
+                                {{-- ===================== Features ===================== --}}
                                 <div class="col-12">
                                     <div class="border rounded p-3">
-                                        <h5 class="mb-3">Vision &amp; Mission</h5>
+                                        <h5 class="mb-3">Features</h5>
                                         <div class="row g-3">
-                                            @include('backend.about.intro._visions', [
-                                                'visions' => old('visions', [['heading' => '', 'description' => '']]),
+                                            @include('backend.about.customers._repeater', [
+                                                'label'       => 'Features',
+                                                'columnLabel' => 'Feature Name',
+                                                'name'        => 'features',
+                                                'addId'       => 'addFeature',
+                                                'bodyId'      => 'featuresBody',
+                                                'rowClass'    => 'feature-row',
+                                                'removeClass' => 'remove-feature',
+                                                'placeholder' => 'Enter a feature',
+                                                'rows'        => old('features', ['']),
                                             ])
                                         </div>
                                     </div>
                                 </div>
 
-                                {{-- ===================== Partner Message ===================== --}}
+                                {{-- ===================== Highlights ===================== --}}
                                 <div class="col-12">
                                     <div class="border rounded p-3">
-                                        <h5 class="mb-3">Partner Message</h5>
+                                        <h5 class="mb-3">Highlights</h5>
                                         <div class="row g-3">
-                                            <div class="col-md-12">
-                                                <label class="form-label" for="motto_heading">Motto Heading</label>
-                                                <input class="form-control" id="motto_heading" type="text" name="motto_heading"
-                                                    value="{{ old('motto_heading') }}" placeholder="e.g. Welding a stronger tomorrow">
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label class="form-label" for="motto_description">Description</label>
-                                                <textarea class="form-control ckeditor-init" id="motto_description" name="motto_description" rows="4">{{ old('motto_description') }}</textarea>
-                                            </div>
+                                            @include('backend.about.customers._repeater', [
+                                                'label'       => 'Highlights',
+                                                'columnLabel' => 'Highlight Name',
+                                                'name'        => 'highlights',
+                                                'addId'       => 'addHighlight',
+                                                'bodyId'      => 'highlightsBody',
+                                                'rowClass'    => 'highlight-row',
+                                                'removeClass' => 'remove-highlight',
+                                                'placeholder' => 'Enter a highlight',
+                                                'rows'        => old('highlights', ['']),
+                                            ])
                                         </div>
                                     </div>
                                 </div>
@@ -132,8 +133,14 @@
     @include('components.backend.footer')
     @include('components.backend.main-js')
 
-    @include('backend.about.intro._visions_js')
-    @include('backend.home.about._image_preview_js')
+    @include('backend.about.customers._repeater_js', [
+        'name' => 'features', 'addId' => 'addFeature', 'bodyId' => 'featuresBody',
+        'rowClass' => 'feature-row', 'removeClass' => 'remove-feature', 'placeholder' => 'Enter a feature',
+    ])
+    @include('backend.about.customers._repeater_js', [
+        'name' => 'highlights', 'addId' => 'addHighlight', 'bodyId' => 'highlightsBody',
+        'rowClass' => 'highlight-row', 'removeClass' => 'remove-highlight', 'placeholder' => 'Enter a highlight',
+    ])
 
 </body>
 
