@@ -67,7 +67,7 @@ class MasterBrandController extends Controller implements HasMiddleware
             'show_in_product_header' => $request->boolean('show_in_product_header'),
         ]);
 
-        return redirect()->route('manage-brand-catgeory.index')->with('message', 'Brand category added successfully.');
+        return redirect()->route('manage-brand-category.index')->with('message', 'Brand category added successfully.');
     }
 
     public function edit($id)
@@ -113,7 +113,7 @@ class MasterBrandController extends Controller implements HasMiddleware
             'show_in_product_header' => $request->boolean('show_in_product_header'),
         ]);
 
-        return redirect()->route('manage-brand-catgeory.index')->with('message', 'Brand category updated successfully.');
+        return redirect()->route('manage-brand-category.index')->with('message', 'Brand category updated successfully.');
     }
 
     public function destroy($id)
@@ -122,7 +122,7 @@ class MasterBrandController extends Controller implements HasMiddleware
         $this->deleteImage($category->image);
         $category->delete();
 
-        return redirect()->route('manage-brand-catgeory.index')->with('message', 'Brand category deleted successfully.');
+        return redirect()->route('manage-brand-category.index')->with('message', 'Brand category deleted successfully.');
     }
 
     /** Move the uploaded image into /public/brand/category and return its filename. */

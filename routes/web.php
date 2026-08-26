@@ -88,10 +88,10 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::get('activity-logs/{id}',            [ActivityLogController::class, 'show'])->whereNumber('id')->middleware('permission:activity-logs.view')->name('admin.activity-logs.show');
 
         // ===== Brands — Main Category =====
-        Route::resource('manage-brand-catgeory', MasterBrandController::class)->except('show');
+        Route::resource('manage-brand-category', MasterBrandController::class)->except('show');
 
         // ===== Brands — Sub Category =====
-        Route::resource('manage-brand-subcategory', SubCategoryController::class)->except('show');
+        Route::resource('manage-brand-list', SubCategoryController::class)->except('show');
 
         // ===== Home Page Section ===== 
         Route::resource('manage-home-banner', HomeBannerController::class)->except('show');

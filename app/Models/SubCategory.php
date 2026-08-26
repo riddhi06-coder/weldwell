@@ -10,7 +10,7 @@ class SubCategory extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'sub_categories';
+    protected $table = 'brand_lists';
 
     protected $fillable = [
         'main_category_id',

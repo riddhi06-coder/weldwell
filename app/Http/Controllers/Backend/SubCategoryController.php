@@ -52,7 +52,7 @@ class SubCategoryController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         $request->validate([
-            'main_category_id' => 'required|exists:main_categories,id',
+            'main_category_id' => 'required|exists:brand_categories,id',
             'name'             => 'required|string|max:255',
             'image'            => 'nullable|' . self::IMAGE_RULES,
         ], self::IMAGE_MESSAGES + [
@@ -67,7 +67,7 @@ class SubCategoryController extends Controller implements HasMiddleware
             'slug'             => $this->uniqueSlug($request->name),
         ]);
 
-        return redirect()->route('manage-brand-subcategory.index')->with('message', 'Sub category added successfully.');
+        return redirect()->route('manage-brand-list.index')->with('message', 'Brand added successfully.');
     }
 
     public function edit($id)
@@ -85,7 +85,7 @@ class SubCategoryController extends Controller implements HasMiddleware
         $subCategory = SubCategory::findOrFail($id);
 
         $request->validate([
-            'main_category_id' => 'required|exists:main_categories,id',
+            'main_category_id' => 'required|exists:brand_categories,id',
             'name'             => 'required|string|max:255',
             'image'            => 'nullable|' . self::IMAGE_RULES,
         ], self::IMAGE_MESSAGES + [
@@ -112,7 +112,7 @@ class SubCategoryController extends Controller implements HasMiddleware
             'slug'             => $slug,
         ]);
 
-        return redirect()->route('manage-brand-subcategory.index')->with('message', 'Sub category updated successfully.');
+        return redirect()->route('manage-brand-list.index')->with('message', 'Brand updated successfully.');
     }
 
     public function destroy($id)
@@ -120,7 +120,7 @@ class SubCategoryController extends Controller implements HasMiddleware
         $subCategory = SubCategory::findOrFail($id);
         $subCategory->delete();
 
-        return redirect()->route('manage-brand-subcategory.index')->with('message', 'Sub category deleted successfully.');
+        return redirect()->route('manage-brand-list.index')->with('message', 'Brand deleted successfully.');
     }
 
     /** Move the uploaded image into /public/brand/subcategory and return its filename. */

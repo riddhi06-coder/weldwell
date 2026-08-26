@@ -13,11 +13,11 @@
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
-                    <div class="col-6"><h4>Add Sub Category</h4></div>
+                    <div class="col-6"><h4>Add Brand List</h4></div>
                     <div class="col-6">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('manage-brand-subcategory.index') }}">Sub Category</a></li>
-                            <li class="breadcrumb-item active">Add Sub Category</li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-brand-list.index') }}">Brand List</a></li>
+                            <li class="breadcrumb-item active">Add Brand List</li>
                         </ol>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Sub Category Form</h4>
-                            <p class="f-m-light mt-1">Pick a parent category and enter the sub category name — the slug is generated automatically.</p>
+                            <h4>Brand List Form</h4>
+                            <p class="f-m-light mt-1">Pick a brand category and enter the brand name — the slug is generated automatically.</p>
                         </div>
                         <div class="card-body">
 
@@ -43,11 +43,11 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-brand-subcategory.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="row g-3 custom-input" action="{{ route('manage-brand-list.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="col-md-6">
-                                    <label class="form-label" for="main_category_id">Parent Category <span class="txt-danger">*</span></label>
+                                    <label class="form-label" for="main_category_id">Brand Category <span class="txt-danger">*</span></label>
                                     <select class="form-control" id="main_category_id" name="main_category_id">
                                         <option value="">-- Select a category --</option>
                                         @foreach($categories as $category)
@@ -57,7 +57,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label" for="name">Sub Category Name <span class="txt-danger">*</span></label>
+                                    <label class="form-label" for="name">Brand Name <span class="txt-danger">*</span></label>
                                     <input class="form-control" id="name" type="text" name="name"
                                         value="{{ old('name') }}" placeholder="e.g. Kemppi (Finland), Hypertherm (USA), Kobelco Welding (Japan)">
                                 </div>
@@ -74,7 +74,7 @@
                                 </div>
 
                                 <div class="col-12 text-end">
-                                    <a href="{{ route('manage-brand-subcategory.index') }}" class="btn btn-danger px-4">Cancel</a>
+                                    <a href="{{ route('manage-brand-list.index') }}" class="btn btn-danger px-4">Cancel</a>
                                     <button class="btn btn-primary" type="submit">Submit</button>
                                 </div>
                             </form>

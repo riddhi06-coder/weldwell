@@ -64,7 +64,7 @@
                 @endif
 
                 @if($u && ($u->hasPermission('brand-categories.view') || $u->hasPermission('brand-subcategories.view')))
-                <li class="sidebar-list {{ request()->routeIs('manage-brand-catgeory.*', 'manage-brand-subcategory.*') ? 'active' : '' }}">
+                <li class="sidebar-list {{ request()->routeIs('manage-brand-category.*', 'manage-brand-list.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -77,17 +77,17 @@
                   </a>
                   <ul class="sidebar-submenu">
                       @if($u->hasPermission('brand-categories.view'))
-                          <li><a href="{{ route('manage-brand-catgeory.index') }}" class="{{ request()->routeIs('manage-brand-catgeory.*') ? 'active' : '' }}">Category</a></li>
+                          <li><a href="{{ route('manage-brand-category.index') }}" class="{{ request()->routeIs('manage-brand-category.*') ? 'active' : '' }}">Brand Category</a></li>
                       @endif
                       @if($u->hasPermission('brand-subcategories.view'))
-                          <li><a href="{{ route('manage-brand-subcategory.index') }}" class="{{ request()->routeIs('manage-brand-subcategory.*') ? 'active' : '' }}">Sub Category</a></li>
+                          <li><a href="{{ route('manage-brand-list.index') }}" class="{{ request()->routeIs('manage-brand-list.*') ? 'active' : '' }}">Brand List</a></li>
                       @endif
                   </ul>
                 </li>
                 @endif
 
 
-                   <li class="sidebar-list {{ request()->routeIs('manage-brand-catgeory.*', 'manage-brand-subcategory.*') ? 'active' : '' }}">
+                   <li class="sidebar-list {{ request()->routeIs('manage-brand-category.*', 'manage-brand-list.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -99,8 +99,8 @@
                     <span>Products</span>
                   </a>
                   <ul class="sidebar-submenu">
-                          <li><a href="{{ route('manage-brand-catgeory.index') }}" class="{{ request()->routeIs('manage-brand-catgeory.*') ? 'active' : '' }}">Category</a></li>
-                          <li><a href="{{ route('manage-brand-subcategory.index') }}" class="{{ request()->routeIs('manage-brand-subcategory.*') ? 'active' : '' }}">Sub Category</a></li>
+                          <li><a href="{{ route('manage-brand-category.index') }}" class="{{ request()->routeIs('manage-brand-category.*') ? 'active' : '' }}">Category</a></li>
+                          <li><a href="{{ route('manage-brand-list.index') }}" class="{{ request()->routeIs('manage-brand-list.*') ? 'active' : '' }}">Sub Category</a></li>
                   </ul>
                 </li>
 

@@ -33,11 +33,11 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb mb-0">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active">Brand Categories</li>
+                                    <li class="breadcrumb-item active">Brand Category</li>
                                 </ol>
                             </nav>
                             @if(auth()->user()->hasPermission('brand-categories.create'))
-                        <a href="{{ route('manage-brand-catgeory.create') }}" class="btn btn-primary px-5 radius-30">+ Add Category</a>
+                        <a href="{{ route('manage-brand-category.create') }}" class="btn btn-primary px-5 radius-30">+ Add Brand Category</a>
                     @endif
                         </div>
 
@@ -47,7 +47,7 @@
                                     <tr>
                                         <th>Sr No.</th>
                                         <th class="text-center">Image</th>
-                                        <th>Category Name</th>
+                                        <th>Brand Category Name</th>
                                         <th>Title</th>
                                         <th class="text-center">Brand Header</th>
                                         <th class="text-center">Product Header</th>
@@ -85,10 +85,10 @@
                                             <td class="text-end">
                                                 <div class="d-flex gap-1 justify-content-end">
                                                     @if(auth()->user()->hasPermission('brand-categories.edit'))
-                                                        <a href="{{ route('manage-brand-catgeory.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                        <a href="{{ route('manage-brand-category.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('brand-categories.delete'))
-                                                        <form action="{{ route('manage-brand-catgeory.destroy', $category->id) }}" method="POST" class="m-0" onsubmit="return confirm('Delete this category?')">
+                                                        <form action="{{ route('manage-brand-category.destroy', $category->id) }}" method="POST" class="m-0" onsubmit="return confirm('Delete this category?')">
                                                             @csrf @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                         </form>

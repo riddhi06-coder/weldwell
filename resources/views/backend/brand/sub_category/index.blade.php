@@ -33,52 +33,43 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb mb-0">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active">Brand Sub Categories</li>
+                                    <li class="breadcrumb-item active">Brand List</li>
                                 </ol>
                             </nav>
                             @if(auth()->user()->hasPermission('brand-subcategories.create'))
-                        <a href="{{ route('manage-brand-subcategory.create') }}" class="btn btn-primary px-5 radius-30">+ Add Sub Category</a>
-                    @endif
+                                <a href="{{ route('manage-brand-list.create') }}" class="btn btn-primary px-5 radius-30">+ Add Brand List</a>
+                            @endif
                         </div>
 
                         <div class="table-responsive custom-scrollbar">
-                            <table class="display" id="basic-1">
+                            <table class="display" id="brandListTable">
                                 <thead>
                                     <tr>
-                                        <th>Sr No.</th>
-                                        <th>Image</th>
-                                        <th>Sub Category Name</th>
-                                        <th>Parent Category</th>
-                                        <th class="text-end" style="min-width:170px;">Actions</th>
+                                        <th style="width:20%;">Logo</th>
+                                        <th style="width:50%;">Brand Name</th>
+                                        <th>Brand Category</th>
+                                        <th class="text-end" style="width:30%;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($subCategories as $sub)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 @if($sub->image)
-                                                    <img src="{{ asset('brand/subcategory/' . $sub->image) }}" alt="{{ $sub->name }}"
-                                                        style="height:40px;width:auto;border-radius:6px;border:1px solid #eee;">
+                                                    <img src="{{ asset('brand/subcategory/' . $sub->image) }}" alt="{{ $sub->name }}">
                                                 @else
                                                     <span class="text-muted">—</span>
                                                 @endif
                                             </td>
                                             <td>{{ $sub->name }}</td>
-                                            <td>
-                                                @if($sub->mainCategory)
-                                                    <span class="badge bg-primary">{{ $sub->mainCategory->name }}</span>
-                                                @else
-                                                    <span class="text-muted">—</span>
-                                                @endif
-                                            </td>
+                                            <td>{{ $sub->mainCategory?->name ?? 'Uncategorized' }}</td>
                                             <td class="text-end">
                                                 <div class="d-flex gap-1 justify-content-end">
                                                     @if(auth()->user()->hasPermission('brand-subcategories.edit'))
-                                                        <a href="{{ route('manage-brand-subcategory.edit', $sub->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                        <a href="{{ route('manage-brand-list.edit', $sub->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('brand-subcategories.delete'))
-                                                        <form action="{{ route('manage-brand-subcategory.destroy', $sub->id) }}" method="POST" class="m-0" onsubmit="return confirm('Delete this sub category?')">
+                                                        <form action="{{ route('manage-brand-list.destroy', $sub->id) }}" method="POST" class="m-0" onsubmit="return confirm('Delete this brand?')">
                                                             @csrf @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                         </form>
@@ -87,7 +78,7 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr><td colspan="5" class="text-center text-muted py-4">No sub categories found.</td></tr>
+                                        <tr><td colspan="4" class="text-center text-muted py-4">No brand list entries found.</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -102,5 +93,49 @@
 </div>
 
 @include('components.backend.main-js')
+
+{{-- DataTables RowGroup — grouped by Brand Category. --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.1.4/css/rowGroup.dataTables.min.css">
+<script src="https://cdn.datatables.net/rowgroup/1.1.4/js/dataTables.rowGroup.min.js"></script>
+<style>
+    #brandListTable tr.dtrg-group td {
+        background: #999090;
+        color: #fff;
+        font-weight: 600;
+    }
+    /* every logo rendered in an identical white tile so mixed-background images line up */
+    #brandListTable tbody td:first-child img {
+        height: 48px;
+        width: 108px;
+        object-fit: contain;
+        background: #fff;
+        border: 1px solid #ececec;
+        border-radius: 6px;
+        padding: 5px 8px;
+        display: block;
+    }
+    #brandListTable tbody td { vertical-align: middle; }
+    /* fill the full card width with proportional (%) columns */
+    #brandListTable { width: 100% !important; table-layout: fixed; }
+</style>
+<script>
+    (function () {
+        function initGrouped() {
+            if (!window.jQuery || !$.fn.dataTable || !$.fn.dataTable.RowGroup) {
+                return setTimeout(initGrouped, 100);
+            }
+            if (!document.getElementById('brandListTable') || $.fn.dataTable.isDataTable('#brandListTable')) return;
+
+            $('#brandListTable').DataTable({
+                autoWidth: false,
+                order: [[2, 'asc'], [1, 'asc']],
+                columnDefs: [{ targets: 2, visible: false }],
+                rowGroup: { dataSrc: 2 }
+            });
+        }
+        initGrouped();
+    })();
+</script>
+
 </body>
 </html>

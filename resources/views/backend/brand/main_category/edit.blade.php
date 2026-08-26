@@ -16,7 +16,7 @@
                     <div class="col-6"><h4>Edit Brand Category</h4></div>
                     <div class="col-6">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('manage-brand-catgeory.index') }}">Brand Category</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-brand-category.index') }}">Brand Category</a></li>
                             <li class="breadcrumb-item active">Edit Brand Category</li>
                         </ol>
                     </div>
@@ -43,12 +43,12 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-brand-catgeory.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                            <form class="row g-3 custom-input" action="{{ route('manage-brand-category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="col-md-6">
-                                    <label class="form-label" for="name">Category Name <span class="txt-danger">*</span></label>
+                                    <label class="form-label" for="name">Brand Category Name <span class="txt-danger">*</span></label>
                                     <input class="form-control" id="name" type="text" name="name"
                                         value="{{ old('name', $category->name) }}" placeholder="e.g. Welding Consumables, Equipment & Accessories, Thermal Spray Products">
                                 </div>
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="col-12 text-end">
-                                    <a href="{{ route('manage-brand-catgeory.index') }}" class="btn btn-danger px-4">Cancel</a>
+                                    <a href="{{ route('manage-brand-category.index') }}" class="btn btn-danger px-4">Cancel</a>
                                     <button class="btn btn-primary" type="submit">Update</button>
                                 </div>
                             </form>
