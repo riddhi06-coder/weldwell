@@ -30,6 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>Image</th>
                                         <th>Sub Category Name</th>
                                         <th>Parent Category</th>
                                         <th class="text-end" style="min-width:170px;">Actions</th>
@@ -39,6 +40,14 @@
                                     @forelse($subCategories as $sub)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if($sub->image)
+                                                    <img src="{{ asset('brand/subcategory/' . $sub->image) }}" alt="{{ $sub->name }}"
+                                                        style="height:40px;width:auto;border-radius:6px;border:1px solid #eee;">
+                                                @else
+                                                    <span class="text-muted">—</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $sub->name }}</td>
                                             <td>
                                                 @if($sub->mainCategory)
@@ -62,7 +71,7 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr><td colspan="6" class="text-center text-muted py-4">No sub categories found.</td></tr>
+                                        <tr><td colspan="5" class="text-center text-muted py-4">No sub categories found.</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>

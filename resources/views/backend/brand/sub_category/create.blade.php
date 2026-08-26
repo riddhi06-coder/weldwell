@@ -43,7 +43,7 @@
                                 </div>
                             @endif
 
-                            <form class="row g-3 custom-input" action="{{ route('manage-brand-subcategory.store') }}" method="POST">
+                            <form class="row g-3 custom-input" action="{{ route('manage-brand-subcategory.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="col-md-6">
@@ -62,6 +62,17 @@
                                         value="{{ old('name') }}" placeholder="e.g. Kemppi (Finland), Hypertherm (USA), Kobelco Welding (Japan)">
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label class="form-label" for="image">Image / Logo</label>
+                                    <input class="form-control image-input" id="image" type="file" name="image"
+                                        accept="image/*" data-preview="#preview_image">
+                                    <small class="text-muted">JPG, PNG or WebP · Max 2 MB.</small>
+                                    <div class="mt-2">
+                                        <img id="preview_image" src="#" alt="Image"
+                                            style="height:60px;width:auto;border-radius:6px;border:1px solid #eee;display:none;">
+                                    </div>
+                                </div>
+
                                 <div class="col-12 text-end">
                                     <a href="{{ route('manage-brand-subcategory.index') }}" class="btn btn-danger px-4">Cancel</a>
                                     <button class="btn btn-primary" type="submit">Submit</button>
@@ -77,6 +88,8 @@
 
     @include('components.backend.footer')
     @include('components.backend.main-js')
+
+    @include('backend.home.about._image_preview_js')
 
 </body>
 

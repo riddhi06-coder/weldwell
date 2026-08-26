@@ -13,6 +13,18 @@ use Illuminate\Support\Str;
 
 class SubCategoryController extends Controller implements HasMiddleware
 {
+    /** Allowed image formats + size (2 MB — project-wide image cap). */
+    private const IMAGE_RULES = 'image|mimes:jpg,jpeg,png,webp|max:2048';
+
+    private const IMAGE_MESSAGES = [
+        'image.image' => 'The uploaded file must be an image.',
+        'image.mimes' => 'Only JPG, PNG or WebP images are allowed.',
+        'image.max'   => 'The image must not be larger than 2 MB.',
+    ];
+
+    /** Files are stored here (served directly from /public, no storage:link needed). */
+    private const UPLOAD_DIR = 'brand/subcategory';
+
     public static function middleware(): array
     {
         return [
@@ -42,7 +54,8 @@ class SubCategoryController extends Controller implements HasMiddleware
         $request->validate([
             'main_category_id' => 'required|exists:main_categories,id',
             'name'             => 'required|string|max:255',
-        ], [
+            'image'            => 'nullable|' . self::IMAGE_RULES,
+        ], self::IMAGE_MESSAGES + [
             'main_category_id.required' => 'Please choose a parent category.',
             'name.required'             => 'Please enter a sub category name.',
         ]);
@@ -50,6 +63,7 @@ class SubCategoryController extends Controller implements HasMiddleware
         SubCategory::create([
             'main_category_id' => $request->main_category_id,
             'name'             => $request->name,
+            'image'            => $this->storeImage($request),
             'slug'             => $this->uniqueSlug($request->name),
         ]);
 
@@ -73,7 +87,8 @@ class SubCategoryController extends Controller implements HasMiddleware
         $request->validate([
             'main_category_id' => 'required|exists:main_categories,id',
             'name'             => 'required|string|max:255',
-        ], [
+            'image'            => 'nullable|' . self::IMAGE_RULES,
+        ], self::IMAGE_MESSAGES + [
             'main_category_id.required' => 'Please choose a parent category.',
             'name.required'             => 'Please enter a sub category name.',
         ]);
@@ -83,9 +98,17 @@ class SubCategoryController extends Controller implements HasMiddleware
             $slug = $this->uniqueSlug($request->name, $subCategory->id);
         }
 
+        // Replace the image only when a new one is uploaded; otherwise keep the existing file.
+        $image = $subCategory->image;
+        if ($request->hasFile('image')) {
+            $this->deleteImage($subCategory->image);
+            $image = $this->storeImage($request);
+        }
+
         $subCategory->update([
             'main_category_id' => $request->main_category_id,
             'name'             => $request->name,
+            'image'            => $image,
             'slug'             => $slug,
         ]);
 
@@ -98,6 +121,33 @@ class SubCategoryController extends Controller implements HasMiddleware
         $subCategory->delete();
 
         return redirect()->route('manage-brand-subcategory.index')->with('message', 'Sub category deleted successfully.');
+    }
+
+    /** Move the uploaded image into /public/brand/subcategory and return its filename. */
+    private function storeImage(Request $request): ?string
+    {
+        if (! $request->hasFile('image')) {
+            return null;
+        }
+
+        $file   = $request->file('image');
+        $folder = public_path(self::UPLOAD_DIR);
+
+        if (! file_exists($folder)) {
+            mkdir($folder, 0755, true);
+        }
+
+        $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move($folder, $fileName);
+
+        return $fileName;
+    }
+
+    private function deleteImage(?string $fileName): void
+    {
+        if ($fileName && file_exists(public_path(self::UPLOAD_DIR . '/' . $fileName))) {
+            @unlink(public_path(self::UPLOAD_DIR . '/' . $fileName));
+        }
     }
 
     private function uniqueSlug(string $source, ?int $ignoreId = null): string

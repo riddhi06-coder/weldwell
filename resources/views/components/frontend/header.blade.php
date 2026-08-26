@@ -202,118 +202,22 @@
                                                 <div class="row gx-0">
                                                     <div class="col-xl-12">
                                                         <div class="row gx-0">
+                                                            @foreach(($headerBrandCategories ?? collect()) as $bcat)
                                                             <div class="col-xl-3">
                                                                 <div class="tp-megamenu-list">
                                                                     <h4 class="tp-megamenu-title">
-                                                                        <i class="bi bi-gear-wide-connected me-2"></i>
-                                                                        Welding Consumables
+                                                                        <i class="bi {{ $menuIcons[$loop->index % count($menuIcons)] }} me-2"></i>
+                                                                        {{ $bcat->name }}
                                                                     </h4>
                                                                     <ul>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/special-metals.webp') }}"
-                                                                                    alt="Special Metals Welding Products logo"
-                                                                                    class="tp-megamenu-brand-logo">Special
-                                                                                Metals Welding Products, USA</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/kobelco.webp') }}"
-                                                                                    alt="Kobelco Welding logo"
-                                                                                    class="tp-megamenu-brand-logo">Kobelco
-                                                                                Welding (Kobe Steel Ltd., Japan)</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/taseto.webp') }}"
-                                                                                    alt="Taseto logo"
-                                                                                    class="tp-megamenu-brand-logo">Taseto,
-                                                                                Japan</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/ampco-metal.webp') }}"
-                                                                                    alt="Ampco Metal logo"
-                                                                                    class="tp-megamenu-brand-logo">Ampco
-                                                                                Metal, USA</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/exaton.webp') }}"
-                                                                                    alt="EXATON logo"
-                                                                                    class="tp-megamenu-brand-logo">EXATON
-                                                                                (formerly Sandvik, Sweden)</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/ia-barnes.webp') }}"
-                                                                                    alt="I.A. Barnes & Company logo"
-                                                                                    class="tp-megamenu-brand-logo">I.A.
-                                                                                Barnes &amp; Company, UK</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/alunox.webp') }}"
-                                                                                    alt="Alunox logo"
-                                                                                    class="tp-megamenu-brand-logo">Alunox,
-                                                                                Germany</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/beijing-metals.webp') }}"
-                                                                                    alt="Beijing Metals logo"
-                                                                                    class="tp-megamenu-brand-logo">Beijing
-                                                                                Metals, China</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/safra.webp') }}"
-                                                                                    alt="Safra logo"
-                                                                                    class="tp-megamenu-brand-logo">Safra</a>
-                                                                        </li>
+                                                                        @foreach($bcat->subCategories as $sub)
+                                                                        <li><a href="#">@if($sub->image)<img src="{{ asset('brand/subcategory/'.$sub->image) }}" alt="{{ $sub->name }} logo" class="tp-megamenu-brand-logo">@endif{{ $sub->name }}</a></li>
+                                                                        @endforeach
                                                                     </ul>
                                                                 </div>
                                                             </div>
+                                                            @endforeach
 
-                                                            <div class="col-xl-3">
-                                                                <div class="tp-megamenu-list">
-                                                                    <h4 class="tp-megamenu-title">
-                                                                        <i class="bi bi-tools me-2"></i>
-                                                                        Equipment &amp; Accessories
-                                                                    </h4>
-                                                                    <ul>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/kemppi.webp') }}"
-                                                                                    alt="Kemppi logo"
-                                                                                    class="tp-megamenu-brand-logo">Kemppi,
-                                                                                Finland</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/panasonic.webp') }}"
-                                                                                    alt="Panasonic logo"
-                                                                                    class="tp-megamenu-brand-logo">Panasonic,
-                                                                                Japan</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/hypertherm.webp') }}"
-                                                                                    alt="Hypertherm logo"
-                                                                                    class="tp-megamenu-brand-logo">Hypertherm,
-                                                                                USA</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/huntingdon-fusion.webp') }}"
-                                                                                    alt="Huntingdon Fusion Techniques logo"
-                                                                                    class="tp-megamenu-brand-logo">Huntingdon
-                                                                                Fusion Techniques, UK</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-xl-3">
-                                                                <div class="tp-megamenu-list">
-                                                                    <h4 class="tp-megamenu-title">
-                                                                        <i class="bi bi-fire me-2"></i>
-                                                                        Thermal Spray Products
-                                                                    </h4>
-                                                                    <ul>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/sentesbir.webp') }}"
-                                                                                    alt="SentesBir logo"
-                                                                                    class="tp-megamenu-brand-logo">SentesBir,
-                                                                                Turkey</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/powder-alloys.webp') }}"
-                                                                                    alt="Powder Alloys Corporation logo"
-                                                                                    class="tp-megamenu-brand-logo">Powder
-                                                                                Alloys Corporation, USA</a></li>
-                                                                        <li><a href="#"><img
-                                                                                    src="{{ asset('frontend/assets/images/brands/technogenia.webp') }}"
-                                                                                    alt="Technogenia logo"
-                                                                                    class="tp-megamenu-brand-logo">Technogenia</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
                                                             <div class="col-xl-3">
                                                                 <div class="tp-megamenu-list">
                                                                     <div class="tp-megamenu-thumb">
