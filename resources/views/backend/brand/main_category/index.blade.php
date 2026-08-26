@@ -11,11 +11,15 @@
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
-                <div class="col-6"><h3>Brand Categories</h3></div>
-                <div class="col-6 text-end">
-                    @if(auth()->user()->hasPermission('brand-categories.create'))
-                        <a href="{{ route('manage-brand-catgeory.create') }}" class="btn btn-primary">+ Add Category</a>
-                    @endif
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.dashboard') }}">
+                                <svg class="stroke-icon"><use href="../assets/svg/icon-sprite.svg#stroke-home"></use></svg>
+                            </a>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -25,8 +29,20 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="display table table-bordered table-hover">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item active">Brand Categories</li>
+                                </ol>
+                            </nav>
+                            @if(auth()->user()->hasPermission('brand-categories.create'))
+                        <a href="{{ route('manage-brand-catgeory.create') }}" class="btn btn-primary px-5 radius-30">+ Add Category</a>
+                    @endif
+                        </div>
+
+                        <div class="table-responsive custom-scrollbar">
+                            <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>

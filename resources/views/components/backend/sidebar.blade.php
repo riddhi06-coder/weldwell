@@ -86,6 +86,24 @@
                 </li>
                 @endif
 
+
+                   <li class="sidebar-list {{ request()->routeIs('manage-brand-catgeory.*', 'manage-brand-subcategory.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-ecommerce') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-ecommerce') }}"></use>
+                    </svg>
+                    <span>Products</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                          <li><a href="{{ route('manage-brand-catgeory.index') }}" class="{{ request()->routeIs('manage-brand-catgeory.*') ? 'active' : '' }}">Category</a></li>
+                          <li><a href="{{ route('manage-brand-subcategory.index') }}" class="{{ request()->routeIs('manage-brand-subcategory.*') ? 'active' : '' }}">Sub Category</a></li>
+                  </ul>
+                </li>
+
                 @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view') || $u->hasPermission('company-stats.view') || $u->hasPermission('home-about.view') || $u->hasPermission('home-clients.view') || $u->hasPermission('testimony-intros.view') || $u->hasPermission('knowledge-spectrum.view') || $u->hasPermission('home-connection.view') || $u->hasPermission('home-events.view')))
                 <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*', 'manage-company-stats.*', 'manage-home-about.*', 'manage-home-clients.*', 'manage-testimony-intro.*','manage-home-knowledge-spectrum.*','manage-home-connection.*','manage-home-events.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>

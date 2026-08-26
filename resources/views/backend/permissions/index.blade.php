@@ -11,11 +11,15 @@
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
-                <div class="col-6"><h3>Permissions by Role</h3></div>
-                <div class="col-6 text-end">
-                    @if(auth()->user()->hasPermission('permissions.assign'))
-                        <a href="{{ route('admin.permissions.manage') }}" class="btn btn-primary">Manage Permission Catalog</a>
-                    @endif
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.dashboard') }}">
+                                <svg class="stroke-icon"><use href="../assets/svg/icon-sprite.svg#stroke-home"></use></svg>
+                            </a>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -25,9 +29,21 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item active">Permissions by Role</li>
+                                </ol>
+                            </nav>
+                            @if(auth()->user()->hasPermission('permissions.assign'))
+                        <a href="{{ route('admin.permissions.manage') }}" class="btn btn-primary px-5 radius-30">Manage Permission Catalog</a>
+                    @endif
+                        </div>
+
                         <p class="text-muted mb-3">Choose a role to assign which sections/actions it can access. Super Admin always has full access.</p>
-                        <div class="table-responsive">
-                            <table class="display table table-bordered table-hover">
+                        <div class="table-responsive custom-scrollbar">
+                            <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
                                         <th>Role</th>
