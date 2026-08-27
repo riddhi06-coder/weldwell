@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MainCategory extends Model
+class ProductCategory extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'brand_categories';
+    protected $table = 'product_categories';
 
     protected $fillable = [
         'name',
@@ -23,9 +22,4 @@ class MainCategory extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
-
-    public function subCategories(): HasMany
-    {
-        return $this->hasMany(SubCategory::class);
-    }
 }

@@ -68,26 +68,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <label class="form-label d-block">Brand Header</label>
-                                    <div class="form-check form-switch pt-1">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="show_in_brand_header" name="show_in_brand_header" value="1"
-                                            {{ old('show_in_brand_header') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="show_in_brand_header">Show in Brand header</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="form-label d-block">Product Header</label>
-                                    <div class="form-check form-switch pt-1">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="show_in_product_header" name="show_in_product_header" value="1"
-                                            {{ old('show_in_product_header') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="show_in_product_header">Show in Product header</label>
-                                    </div>
-                                </div>
-
                                 <div class="col-12 text-end">
                                     <a href="{{ route('manage-brand-category.index') }}" class="btn btn-danger px-4">Cancel</a>
                                     <button class="btn btn-primary" type="submit">Submit</button>

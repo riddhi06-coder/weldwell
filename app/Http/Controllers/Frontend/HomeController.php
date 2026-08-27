@@ -15,6 +15,7 @@ use App\Models\HomeConnection;
 use App\Models\HomeEvent;
 use App\Models\HomeKnowledgeSpectrum;
 use App\Models\MainCategory;
+use App\Models\ProductCategory;
 use App\Models\ProductIntro;
 use App\Models\Testimonial;
 use App\Models\TestimonyIntro;
@@ -40,9 +41,9 @@ class HomeController extends Controller
             'event'          => HomeEvent::where('is_active', true)->first(),
             'events'         => Event::where('is_active', true)->orderByDesc('id')->get(),
 
-            // Brand categories flagged for the site headers.
-            'brandHeaderCategories'   => MainCategory::where('show_in_brand_header', true)->orderBy('name')->get(),
-            'productHeaderCategories' => MainCategory::where('show_in_product_header', true)->orderBy('name')->get(),
+            // Header menus: brand categories and product categories.
+            'brandHeaderCategories'   => MainCategory::where('is_active', true)->orderBy('name')->get(),
+            'productHeaderCategories' => ProductCategory::where('is_active', true)->orderBy('id')->get(),
         ];
 
         return view('frontend.index', $data);
@@ -57,7 +58,7 @@ class HomeController extends Controller
             'customer'   => AboutCustomer::where('is_active', true)->with(['features', 'highlights'])->first(),
             'connection' => HomeConnection::where('is_active', true)->first(),
 
-            'productHeaderCategories' => MainCategory::where('show_in_product_header', true)->orderBy('name')->get(),
+            'productHeaderCategories' => ProductCategory::where('is_active', true)->orderBy('id')->get(),
         ];
 
         return view('frontend.about_us', $data);

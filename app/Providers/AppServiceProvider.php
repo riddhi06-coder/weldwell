@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\User::class,
         \App\Models\MainCategory::class,
         \App\Models\SubCategory::class,
+        \App\Models\ProductCategory::class,
         \App\Models\HomeBanner::class,
         \App\Models\ProductIntro::class,
         \App\Models\CompanyStat::class,

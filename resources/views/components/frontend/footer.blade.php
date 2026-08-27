@@ -1,6 +1,6 @@
 @php
-    // Footer "Our Products" list — brand categories flagged for the product header (oldest first).
-    $footerProductCategories = \App\Models\MainCategory::where('show_in_product_header', true)
+    // Footer "Our Products" list — product categories (oldest first).
+    $footerProductCategories = \App\Models\ProductCategory::where('is_active', true)
         ->orderBy('id')->get();
 @endphp
 

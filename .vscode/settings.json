@@ -1,0 +1,11 @@
+{
+    "// note": "Blade templates embed {{ }} expressions inside HTML style attributes; the built-in CSS/HTML validators don't understand Blade and report false-positive errors. Disable them for this workspace.",
+    "css.validate": false,
+    "scss.validate": false,
+    "less.validate": false,
+    "html.validate.styles": false,
+    "html.validate.scripts": false,
+    "files.associations": {
+        "*.blade.php": "blade"
+    }
+}

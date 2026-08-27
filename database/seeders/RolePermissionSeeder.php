@@ -43,6 +43,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create Sub Categories', 'slug' => 'brand-subcategories.create', 'module' => 'Brands'],
                 ['name' => 'Edit Sub Categories',   'slug' => 'brand-subcategories.edit',   'module' => 'Brands'],
                 ['name' => 'Delete Sub Categories', 'slug' => 'brand-subcategories.delete', 'module' => 'Brands'],
+                // Products — Category
+                ['name' => 'View Product Categories',   'slug' => 'product-categories.view',   'module' => 'Products'],
+                ['name' => 'Create Product Categories', 'slug' => 'product-categories.create', 'module' => 'Products'],
+                ['name' => 'Edit Product Categories',   'slug' => 'product-categories.edit',   'module' => 'Products'],
+                ['name' => 'Delete Product Categories', 'slug' => 'product-categories.delete', 'module' => 'Products'],
                 // Home — Banner
                 ['name' => 'View Banners',   'slug' => 'home-banners.view',   'module' => 'Home Page'],
                 ['name' => 'Create Banners', 'slug' => 'home-banners.create', 'module' => 'Home Page'],

@@ -1,10 +1,10 @@
 @php
     // Header menus driven by the brand categories flagged for each header (oldest first).
-    $headerBrandCategories = \App\Models\MainCategory::where('show_in_brand_header', true)
+    $headerBrandCategories = \App\Models\MainCategory::where('is_active', true)
         ->with(['subCategories' => fn ($q) => $q->orderBy('id')])
         ->orderBy('id')->get();
 
-    $headerProductCategories = \App\Models\MainCategory::where('show_in_product_header', true)
+    $headerProductCategories = \App\Models\ProductCategory::where('is_active', true)
         ->orderBy('id')->get();
 
     // Icons cycled per menu item (categories have no icon field of their own).

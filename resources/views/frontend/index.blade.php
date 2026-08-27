@@ -37,7 +37,7 @@
                                                 <h3 class="al-hero-shop-title tp-text-common-white">
                                                     {!! strip_tags($banner->heading, '<br><b><strong><i><em><u><a><span>') !!}
                                                 </h3>
-                                            
+
 
                                                 <p class="mb-35 tp-text-common-white">
                                                     {!! strip_tags($banner->title, '<br><b><strong><i><em><u><a><span>') !!}
@@ -78,7 +78,7 @@
                                                             </span>
                                                         </a>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                         </span>
                                     </div>
 
-                                                                       <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
+                                    <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
                                         data-fade-from="top" data-ease="bounce">
 
                                         <div class="btn_wrapper d-inline-block">
@@ -165,13 +165,15 @@
                             <div class="col-lg-7">
                                 <div class="tp-portfolio-pp-item-wrap">
 
-                                    <!-- Product 1 -->
+                                    @forelse(($productHeaderCategories ?? collect()) as $product)
+                                    <!-- Product {{ $loop->iteration }} -->
                                     <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
                                         <div class="tp-portfolio-overlay"></div>
                                         <div class="not-hide-cursor" data-cursor="View Product">
                                             <a href="#" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
-                                                <img class="w-100" src="{{ asset('frontend/assets/images/products/1.webp') }}"
-                                                    alt="Welding Consumables">
+                                                <img class="w-100"
+                                                    src="{{ $product->image ? asset('product/category/' . $product->image) : asset('frontend/assets/images/products/1.webp') }}"
+                                                    alt="{{ $product->name }}">
                                             </a>
                                         </div>
 
@@ -180,140 +182,24 @@
                                             <div>
                                                 <h3 class="tp-portfolio-title fw-700 fs-25 lh-36 mb-10">
                                                     <a class="underline-black" href="#">
-                                                        Welding Consumables
+                                                        {{ $product->name }}
                                                     </a>
                                                 </h3>
 
+                                                @if($product->title)
                                                 <div class="tp-portfolio-tag">
-                                                    <span>Electrodes • Wires • Fluxes</span>
+                                                    <span>{{ $product->title }}</span>
                                                 </div>
+                                                @endif
                                             </div>
 
                                             <div class="tp-portfolio-tag">
-                                                <span>01</span>
+                                                <span>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Product 2 -->
-                                    <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
-                                        <div class="tp-portfolio-overlay"></div>
-                                        <div class="not-hide-cursor" data-cursor="View Product">
-                                            <a href="thermal-spray-#"
-                                                class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
-                                                <img class="w-100" src="{{ asset('frontend/assets/images/products/2.webp') }}"
-                                                    alt="Thermal Spray Products">
-                                            </a>
-                                        </div>
-
-                                        <div
-                                            class="tp-portfolio-2-content tp-portfolio-pp-content d-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h3 class="tp-portfolio-title fw-700 fs-25 lh-36 mb-10">
-                                                    <a class="underline-black" href="thermal-spray-#">
-                                                        Thermal Spray Products
-                                                    </a>
-                                                </h3>
-
-                                                <div class="tp-portfolio-tag">
-                                                    <span>Powders • Wires • Coatings</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="tp-portfolio-tag">
-                                                <span>02</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product 3 -->
-                                    <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
-                                        <div class="tp-portfolio-overlay"></div>
-                                        <div class="not-hide-cursor" data-cursor="View Product">
-                                            <a href="#" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
-                                                <img class="w-100" src="{{ asset('frontend/assets/images/products/3.webp') }}"
-                                                    alt="Additive Manufacturing">
-                                            </a>
-                                        </div>
-
-                                        <div
-                                            class="tp-portfolio-2-content tp-portfolio-pp-content d-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h3 class="tp-portfolio-title fw-700 fs-25 lh-36 mb-10">
-                                                    <a class="underline-black" href="#">
-                                                        Additive Manufacturing
-                                                    </a>
-                                                </h3>
-
-                                                <div class="tp-portfolio-tag">
-                                                    <span>Metal 3D Printing Solutions</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="tp-portfolio-tag">
-                                                <span>03</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product 4 -->
-                                    <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
-                                        <div class="tp-portfolio-overlay"></div>
-                                        <div class="not-hide-cursor" data-cursor="View Product">
-                                            <a href="#" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
-                                                <img class="w-100" src="{{ asset('frontend/assets/images/products/4.webp') }}"
-                                                    alt="Welding Equipments">
-                                            </a>
-                                        </div>
-
-                                        <div
-                                            class="tp-portfolio-2-content tp-portfolio-pp-content d-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h3 class="tp-portfolio-title fw-700 fs-25 lh-36 mb-10">
-                                                    <a class="underline-black" href="#">
-                                                        Welding Equipments
-                                                    </a>
-                                                </h3>
-
-                                                <div class="tp-portfolio-tag">
-                                                    <span>MIG • TIG • ARC • Plasma</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="tp-portfolio-tag">
-                                                <span>04</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product 5 -->
-                                    <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
-                                        <div class="not-hide-cursor" data-cursor="View Product">
-                                            <a href="#" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
-                                                <img class="w-100" src="{{ asset('frontend/assets/images/products/5.webp') }}"
-                                                    alt="Special Products">
-                                            </a>
-                                        </div>
-
-                                        <div
-                                            class="tp-portfolio-2-content tp-portfolio-pp-content d-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h3 class="tp-portfolio-title fw-700 fs-25 lh-36 mb-10">
-                                                    <a class="underline-black" href="#">
-                                                        Special Products
-                                                    </a>
-                                                </h3>
-
-                                                <div class="tp-portfolio-tag">
-                                                    <span>Industrial Welding Solutions</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="tp-portfolio-tag">
-                                                <span>05</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @empty
+                                    @endforelse
 
                                 </div>
                             </div>
@@ -518,7 +404,7 @@
                 <!-- testimonial area start -->
                 <!-- tp-counter-area-end -->
                 <!-- testimonial area start -->
-                 
+
                 @if($testimony)
                 <div class="ar-testimonial-area pt-90 pb-90">
                     <div class="container container-1350">
@@ -676,8 +562,8 @@
                                                     <a href="#">
                                                         <span>
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                                <path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                                                <path d="M1 1H11V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                                <path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                                                <path d="M1 1H11V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                                             </svg>
                                                         </span>
                                                     </a>
@@ -717,8 +603,8 @@
                                                     <a href="#">
                                                         <span>
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                                <path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5"/>
-                                                                <path d="M1 1H11V11" stroke="currentColor" stroke-width="1.5"/>
+                                                                <path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" />
+                                                                <path d="M1 1H11V11" stroke="currentColor" stroke-width="1.5" />
                                                             </svg>
                                                         </span>
                                                     </a>
@@ -809,67 +695,67 @@
                 <!-- blog area start -->
                 @if($event)
                 <div class="al-blog-seo-area grey-bg-3 pt-90 pb-90" data-bg-color="#eff1f2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="al-blog-seo-title-box text-center mb-40">
-                            <span class="cnt-section-subtitle mb-20 tp_fade_anim" data-delay=".3">
-                                {{ $event->heading }}
-                            </span>
-
-                            <h2 class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
-                                {!! strip_tags($event->title, '<br><b><strong><i><em><u><a><span>') !!}
-                            </h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        @foreach(($events ?? collect()) as $ev)
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-30 tp_fade_anim" data-delay=".3">
-                            <div class="al-blog-seo-item">
-
-                            <div class="al-blog-seo-content mb-20">
-                                @if(!empty($ev->tags))
-                                <div class="al-blog-seo-category">
-                                    @foreach($ev->tags as $tag)
-                                    <a href="#">{{ $tag }}</a>
-                                    @endforeach
-                                </div>
-                                @endif
-
-                                <h4 class="al-blog-seo-title">
-                                    <a href="#">{{ $ev->title }}</a>
-                                </h4>
-
-                                <div class="al-blog-seo-meta">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15Z" stroke="currentcolor" stroke-width="1.5"/>
-                                        <path d="M8 3.8V8L10.8 9.4" stroke="currentcolor" stroke-width="1.5"/>
-                                        </svg>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="al-blog-seo-title-box text-center mb-40">
+                                    <span class="cnt-section-subtitle mb-20 tp_fade_anim" data-delay=".3">
+                                        {{ $event->heading }}
                                     </span>
-                                    <span>{{ $ev->date ? $ev->date->format('d M Y') : 'Coming Soon' }}</span>
+
+                                    <h2 class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
+                                        {!! strip_tags($event->title, '<br><b><strong><i><em><u><a><span>') !!}
+                                    </h2>
                                 </div>
                             </div>
-
-                            <div class="al-blog-seo-thumb fix">
-                                <a href="#">
-                                    @if($ev->thumbnail)
-                                    <img class="w-100" src="{{ asset('events/' . $ev->thumbnail) }}" alt="{{ $ev->title }}">
-                                    @endif
-                                </a>
-                            </div>
-
-                            </div>
                         </div>
-                        @endforeach
+
+                        <div class="row">
+
+                            @foreach(($events ?? collect()) as $ev)
+                            <div class="col-xl-4 col-lg-4 col-md-6 mb-30 tp_fade_anim" data-delay=".3">
+                                <div class="al-blog-seo-item">
+
+                                    <div class="al-blog-seo-content mb-20">
+                                        @if(!empty($ev->tags))
+                                        <div class="al-blog-seo-category">
+                                            @foreach($ev->tags as $tag)
+                                            <a href="#">{{ $tag }}</a>
+                                            @endforeach
+                                        </div>
+                                        @endif
+
+                                        <h4 class="al-blog-seo-title">
+                                            <a href="#">{{ $ev->title }}</a>
+                                        </h4>
+
+                                        <div class="al-blog-seo-meta">
+                                            <span>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15Z" stroke="currentcolor" stroke-width="1.5" />
+                                                    <path d="M8 3.8V8L10.8 9.4" stroke="currentcolor" stroke-width="1.5" />
+                                                </svg>
+                                            </span>
+                                            <span>{{ $ev->date ? $ev->date->format('d M Y') : 'Coming Soon' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="al-blog-seo-thumb fix">
+                                        <a href="#">
+                                            @if($ev->thumbnail)
+                                            <img class="w-100" src="{{ asset('events/' . $ev->thumbnail) }}" alt="{{ $ev->title }}">
+                                            @endif
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            @endforeach
 
 
 
+                        </div>
                     </div>
-                </div>
                 </div>
                 @endif
                 <!-- blog area end -->

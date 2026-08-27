@@ -33,11 +33,11 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb mb-0">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active">Brand Category</li>
+                                    <li class="breadcrumb-item active">Product Category</li>
                                 </ol>
                             </nav>
-                            @if(auth()->user()->hasPermission('brand-categories.create'))
-                        <a href="{{ route('manage-brand-category.create') }}" class="btn btn-primary px-5 radius-30">+ Add Brand Category</a>
+                            @if(auth()->user()->hasPermission('product-categories.create'))
+                        <a href="{{ route('manage-product-category.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Category</a>
                     @endif
                         </div>
 
@@ -47,7 +47,8 @@
                                     <tr>
                                         <th>Sr No.</th>
                                         <th class="text-center">Image</th>
-                                        <th>Brand Category Name</th>
+                                        <th>Product Category Name</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-end" style="min-width:170px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -57,7 +58,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="text-center">
                                                 @if($category->image)
-                                                    <img src="{{ asset('brand/category/' . $category->image) }}" alt="{{ $category->name }}"
+                                                    <img src="{{ asset('product/category/' . $category->image) }}" alt="{{ $category->name }}"
                                                         width="90" height="90" loading="lazy" decoding="async"
                                                         style="height:90px;width:90px;object-fit:cover;border-radius:6px;">
                                                 @else
@@ -65,13 +66,20 @@
                                                 @endif
                                             </td>
                                             <td>{{ $category->name }}</td>
+                                            <td class="text-center">
+                                                @if($category->is_active)
+                                                    <span class="badge bg-success">Active</span>
+                                                @else
+                                                    <span class="badge bg-secondary">Inactive</span>
+                                                @endif
+                                            </td>
                                             <td class="text-end">
                                                 <div class="d-flex gap-1 justify-content-end">
-                                                    @if(auth()->user()->hasPermission('brand-categories.edit'))
-                                                        <a href="{{ route('manage-brand-category.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                    @if(auth()->user()->hasPermission('product-categories.edit'))
+                                                        <a href="{{ route('manage-product-category.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                     @endif
-                                                    @if(auth()->user()->hasPermission('brand-categories.delete'))
-                                                        <form action="{{ route('manage-brand-category.destroy', $category->id) }}" method="POST" class="m-0" onsubmit="return confirm('Delete this category?')">
+                                                    @if(auth()->user()->hasPermission('product-categories.delete'))
+                                                        <form action="{{ route('manage-product-category.destroy', $category->id) }}" method="POST" class="m-0" onsubmit="return confirm('Delete this category?')">
                                                             @csrf @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                         </form>
@@ -80,7 +88,7 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr><td colspan="4" class="text-center text-muted py-4">No categories found.</td></tr>
+                                        <tr><td colspan="5" class="text-center text-muted py-4">No categories found.</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>

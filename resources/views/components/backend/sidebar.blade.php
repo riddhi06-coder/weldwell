@@ -87,7 +87,8 @@
                 @endif
 
 
-                   <li class="sidebar-list {{ request()->routeIs('manage-brand-category.*', 'manage-brand-list.*') ? 'active' : '' }}">
+                @if($u && $u->hasPermission('product-categories.view'))
+                <li class="sidebar-list {{ request()->routeIs('manage-product-category.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -99,10 +100,10 @@
                     <span>Products</span>
                   </a>
                   <ul class="sidebar-submenu">
-                          <li><a href="{{ route('manage-brand-category.index') }}" class="{{ request()->routeIs('manage-brand-category.*') ? 'active' : '' }}">Category</a></li>
-                          <li><a href="{{ route('manage-brand-list.index') }}" class="{{ request()->routeIs('manage-brand-list.*') ? 'active' : '' }}">Sub Category</a></li>
+                          <li><a href="{{ route('manage-product-category.index') }}" class="{{ request()->routeIs('manage-product-category.*') ? 'active' : '' }}">Product Category</a></li>
                   </ul>
                 </li>
+                @endif
 
                 @if($u && ($u->hasPermission('home-banners.view') || $u->hasPermission('product-intros.view') || $u->hasPermission('company-stats.view') || $u->hasPermission('home-about.view') || $u->hasPermission('home-clients.view') || $u->hasPermission('testimony-intros.view') || $u->hasPermission('knowledge-spectrum.view') || $u->hasPermission('home-connection.view') || $u->hasPermission('home-events.view')))
                 <li class="sidebar-list {{ request()->routeIs('manage-home-banner.*', 'manage-product-intro.*', 'manage-company-stats.*', 'manage-home-about.*', 'manage-home-clients.*', 'manage-testimony-intro.*','manage-home-knowledge-spectrum.*','manage-home-connection.*','manage-home-events.*') ? 'active' : '' }}">
