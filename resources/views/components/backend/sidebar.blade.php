@@ -241,7 +241,7 @@
 
 
                 @if($u && $u->hasPermission('career-page-details.view'))
-                <li class="sidebar-list {{ request()->routeIs('manage-career-page-details.*') ? 'active' : '' }}">
+                <li class="sidebar-list {{ request()->routeIs('manage-career-page-details.*','manage-job-listing.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -254,6 +254,8 @@
                   </a>
                   <ul class="sidebar-submenu">
                       <li><a href="{{ route('manage-career-page-details.index') }}" class="{{ request()->routeIs('manage-career-page-details.*') ? 'active' : '' }}">Page Details</a></li>
+                      <li><a href="{{ route('manage-job-listing.index') }}" class="{{ request()->routeIs('manage-job-listing.*') ? 'active' : '' }}">Job Listing</a></li>
+
                   </ul>
                 </li>
                 @endif

@@ -28,7 +28,7 @@ use App\Http\Controllers\Backend\AboutIntroController;
 use App\Http\Controllers\Backend\AboutQualitiesController;
 use App\Http\Controllers\Backend\AboutCustomerController;
 use App\Http\Controllers\Backend\CareerPageController;
-
+use App\Http\Controllers\Backend\JobListingController;
 
 // =========================================================================== Frontend Routes
 
@@ -122,7 +122,7 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
         // Career
         Route::resource('manage-career-page-details', CareerPageController::class)->except('show');
-
+        Route::resource('manage-job-listing', JobListingController::class)->except('show');
 
         // ====== Contact Details
         Route::resource('manage-contact-details', ContactDetailsController::class)->except('show');

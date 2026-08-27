@@ -104,15 +104,14 @@
                         </div>
 
                         <div class="row">
+                            @forelse($jobs as $job)
                             <div class="col-lg-6 mb-30">
                                 <div class="tp-contact-us-wrap" style="border:1px solid rgba(0,0,0,0.08); padding:30px; border-radius:8px;">
-                                    <h4 class="tp-contact-us-title mb-10" style="font-size:24px;">Sales Engineer &ndash; Welding Consumables</h4>
-                                    <p class="fs-16 tp-ff-p mb-20">Mumbai, India &middot; Full-time</p>
-                                    <p class="fs-16 tp-ff-p lh-140-per mb-25">
-                                        Drive B2B sales of welding consumables and equipment across
-                                        industrial accounts, working closely with our principal brand
-                                        partners to deliver technical solutions to clients.
-                                    </p>
+                                    <h4 class="tp-contact-us-title mb-10" style="font-size:24px;">{{ $job->role_name }}</h4>
+                                    <p class="fs-16 tp-ff-p mb-20">{{ $job->location }} &middot; {{ $job->job_type }}</p>
+                                    <div class="fs-16 tp-ff-p lh-140-per mb-25">
+                                        {!! $job->description !!}
+                                    </div>
                                     <div class="tp-rounded-btn-wrap tp-about-wd-btn mt-30 tp_fade_anim" data-delay=".5"
                                         data-fade-from="top" data-ease="bounce">
 
@@ -136,105 +135,11 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6 mb-30">
-                                <div class="tp-contact-us-wrap" style="border:1px solid rgba(0,0,0,0.08); padding:30px; border-radius:8px;">
-                                    <h4 class="tp-contact-us-title mb-10" style="font-size:24px;">Application Engineer &ndash; Thermal Spray</h4>
-                                    <p class="fs-16 tp-ff-p mb-20">Navi Mumbai, India &middot; Full-time</p>
-                                    <p class="fs-16 tp-ff-p lh-140-per mb-25">
-                                        Support customers with surface engineering and thermal spray
-                                        applications, from technical consultation to on-site
-                                        troubleshooting and process optimization.
-                                    </p>
-                                    <div class="tp-rounded-btn-wrap tp-about-wd-btn mt-30 tp_fade_anim" data-delay=".5"
-                                        data-fade-from="top" data-ease="bounce">
-
-                                        <div class="btn_wrapper d-inline-block">
-
-                                            <a href="#apply" class="tp-btn-rounded btn-item">
-
-
-                                                Apply Now
-                                                <span class="d-block ml-15">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                        <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                    </svg>
-                                                </span>
-                                                <i class="tp-btn-circle-dot"></i>
-
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-                                </div>
+                            @empty
+                            <div class="col-12 text-center">
+                                <p class="fs-18 tp-ff-p">No open positions at the moment. Please check back soon.</p>
                             </div>
-
-                            <div class="col-lg-6 mb-30">
-                                <div class="tp-contact-us-wrap" style="border:1px solid rgba(0,0,0,0.08); padding:30px; border-radius:8px;">
-                                    <h4 class="tp-contact-us-title mb-10" style="font-size:24px;">Warehouse &amp; Logistics Executive</h4>
-                                    <p class="fs-16 tp-ff-p mb-20">Juinagar, Navi Mumbai &middot; Full-time</p>
-                                    <p class="fs-16 tp-ff-p lh-140-per mb-25">
-                                        Oversee inbound and outbound stock movement, inventory accuracy,
-                                        and dispatch coordination at our Navi Mumbai warehouse facility.
-                                    </p>
-                                    <div class="tp-rounded-btn-wrap tp-about-wd-btn mt-30 tp_fade_anim" data-delay=".5"
-                                        data-fade-from="top" data-ease="bounce">
-
-                                        <div class="btn_wrapper d-inline-block">
-
-                                            <a href="#apply" class="tp-btn-rounded btn-item">
-
-
-                                                Apply Now
-                                                <span class="d-block ml-15">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                        <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                    </svg>
-                                                </span>
-                                                <i class="tp-btn-circle-dot"></i>
-
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 mb-30">
-                                <div class="tp-contact-us-wrap" style="border:1px solid rgba(0,0,0,0.08); padding:30px; border-radius:8px;">
-                                    <h4 class="tp-contact-us-title mb-10" style="font-size:24px;">Digital Marketing Executive</h4>
-                                    <p class="fs-16 tp-ff-p mb-20">Mumbai, India &middot; Full-time</p>
-                                    <p class="fs-16 tp-ff-p lh-140-per mb-25">
-                                        Own our digital presence &mdash; website content, social media,
-                                        and campaign execution &mdash; to grow brand awareness across
-                                        our industrial customer base.
-                                    </p>
-                                    <div class="tp-rounded-btn-wrap tp-about-wd-btn mt-30 tp_fade_anim" data-delay=".5"
-                                        data-fade-from="top" data-ease="bounce">
-
-                                        <div class="btn_wrapper d-inline-block">
-
-                                            <a href="#apply" class="tp-btn-rounded btn-item">
-
-
-                                                Apply Now
-                                                <span class="d-block ml-15">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                        <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                    </svg>
-                                                </span>
-                                                <i class="tp-btn-circle-dot"></i>
-
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -333,70 +238,19 @@
                     <div class="swiper-container tp-text-slider-active">
                         <div class="swiper-wrapper slide-transtion">
 
+                            @foreach(($customer?->highlights ?? collect()) as $hl)
                             <div class="swiper-slide">
                                 <div class="tp-text-slider-item">
-                                    <span>Growth Opportunities</span>
+                                    <span>{{ $hl->highlight_name }}</span>
                                     <span class="icons">
                                         <svg width="68" height="12" viewBox="0 0 68 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M59.416 11.8926L67.62 6.76034C67.7367 6.67779 67.8325 6.56504 67.8989 6.43228C67.9652 6.29953 67.9999 6.15095 67.9999 6C67.9999 5.84905 67.9652 5.70048 67.8989 5.56772C67.8325 5.43496 67.7367 5.32221 67.62 5.23966L59.416 0.107354C59.2561 0.0134291 59.0719 -0.0202036 58.8925 0.0117582C58.713 0.04372 58.5485 0.139459 58.4248 0.28388C58.3011 0.428302 58.2254 0.613192 58.2094 0.809402C58.1935 1.00561 58.2383 1.20198 58.3369 1.36755L60.7161 5.11998L0.812592 5.11998C0.597076 5.11998 0.390396 5.21269 0.238007 5.37773C0.0856171 5.54277 0 5.7666 0 6C0 6.2334 0.0856171 6.45724 0.238007 6.62227C0.390396 6.78731 0.597076 6.88003 0.812592 6.88003C0.812592 6.88003 49.0381 6.88003 60.7161 6.88003L58.3369 10.6325C58.2383 10.798 58.1935 10.9944 58.2094 11.1906C58.2254 11.3868 58.3011 11.5717 58.4248 11.7161C58.5485 11.8605 58.713 11.9563 58.8925 11.9882C59.0719 12.0202 59.2561 11.9866 59.416 11.8926Z" fill="#030303" />
                                         </svg>
                                     </span>
-                                    <span>Learning Culture</span>
                                     <span class="borders"></span>
                                 </div>
                             </div>
-
-                            <div class="swiper-slide">
-                                <div class="tp-text-slider-item">
-                                    <span>Industry Leadership</span>
-                                    <span class="icons">
-                                        <svg width="68" height="12" viewBox="0 0 68 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M59.416 11.8926L67.62 6.76034C67.7367 6.67779 67.8325 6.56504 67.8989 6.43228C67.9652 6.29953 67.9999 6.15095 67.9999 6C67.9999 5.84905 67.9652 5.70048 67.8989 5.56772C67.8325 5.43496 67.7367 5.32221 67.62 5.23966L59.416 0.107354C59.2561 0.0134291 59.0719 -0.0202036 58.8925 0.0117582C58.713 0.04372 58.5485 0.139459 58.4248 0.28388C58.3011 0.428302 58.2254 0.613192 58.2094 0.809402C58.1935 1.00561 58.2383 1.20198 58.3369 1.36755L60.7161 5.11998L0.812592 5.11998C0.597076 5.11998 0.390396 5.21269 0.238007 5.37773C0.0856171 5.54277 0 5.7666 0 6C0 6.2334 0.0856171 6.45724 0.238007 6.62227C0.390396 6.78731 0.597076 6.88003 0.812592 6.88003C0.812592 6.88003 49.0381 6.88003 60.7161 6.88003L58.3369 10.6325C58.2383 10.798 58.1935 10.9944 58.2094 11.1906C58.2254 11.3868 58.3011 11.5717 58.4248 11.7161C58.5485 11.8605 58.713 11.9563 58.8925 11.9882C59.0719 12.0202 59.2561 11.9866 59.416 11.8926Z" fill="#030303" />
-                                        </svg>
-                                    </span>
-                                    <span>Trusted Since 1991</span>
-                                    <span class="borders"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="tp-text-slider-item">
-                                    <span>Team Collaboration</span>
-                                    <span class="icons">
-                                        <svg width="68" height="12" viewBox="0 0 68 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M59.416 11.8926L67.62 6.76034C67.7367 6.67779 67.8325 6.56504 67.8989 6.43228C67.9652 6.29953 67.9999 6.15095 67.9999 6C67.9999 5.84905 67.9652 5.70048 67.8989 5.56772C67.8325 5.43496 67.7367 5.32221 67.62 5.23966L59.416 0.107354C59.2561 0.0134291 59.0719 -0.0202036 58.8925 0.0117582C58.713 0.04372 58.5485 0.139459 58.4248 0.28388C58.3011 0.428302 58.2254 0.613192 58.2094 0.809402C58.1935 1.00561 58.2383 1.20198 58.3369 1.36755L60.7161 5.11998L0.812592 5.11998C0.597076 5.11998 0.390396 5.21269 0.238007 5.37773C0.0856171 5.54277 0 5.7666 0 6C0 6.2334 0.0856171 6.45724 0.238007 6.62227C0.390396 6.78731 0.597076 6.88003 0.812592 6.88003C0.812592 6.88003 49.0381 6.88003 60.7161 6.88003L58.3369 10.6325C58.2383 10.798 58.1935 10.9944 58.2094 11.1906C58.2254 11.3868 58.3011 11.5717 58.4248 11.7161C58.5485 11.8605 58.713 11.9563 58.8925 11.9882C59.0719 12.0202 59.2561 11.9866 59.416 11.8926Z" fill="#030303" />
-                                        </svg>
-                                    </span>
-                                    <span>Ownership Mindset</span>
-                                    <span class="borders"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="tp-text-slider-item">
-                                    <span>Global Brand Exposure</span>
-                                    <span class="icons">
-                                        <svg width="68" height="12" viewBox="0 0 68 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M59.416 11.8926L67.62 6.76034C67.7367 6.67779 67.8325 6.56504 67.8989 6.43228C67.9652 6.29953 67.9999 6.15095 67.9999 6C67.9999 5.84905 67.9652 5.70048 67.8989 5.56772C67.8325 5.43496 67.7367 5.32221 67.62 5.23966L59.416 0.107354C59.2561 0.0134291 59.0719 -0.0202036 58.8925 0.0117582C58.713 0.04372 58.5485 0.139459 58.4248 0.28388C58.3011 0.428302 58.2254 0.613192 58.2094 0.809402C58.1935 1.00561 58.2383 1.20198 58.3369 1.36755L60.7161 5.11998L0.812592 5.11998C0.597076 5.11998 0.390396 5.21269 0.238007 5.37773C0.0856171 5.54277 0 5.7666 0 6C0 6.2334 0.0856171 6.45724 0.238007 6.62227C0.390396 6.78731 0.597076 6.88003 0.812592 6.88003C0.812592 6.88003 49.0381 6.88003 60.7161 6.88003L58.3369 10.6325C58.2383 10.798 58.1935 10.9944 58.2094 11.1906C58.2254 11.3868 58.3011 11.5717 58.4248 11.7161C58.5485 11.8605 58.713 11.9563 58.8925 11.9882C59.0719 12.0202 59.2561 11.9866 59.416 11.8926Z" fill="#030303" />
-                                        </svg>
-                                    </span>
-                                    <span>Skill Development</span>
-                                    <span class="borders"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="tp-text-slider-item">
-                                    <span>Merit-Based Growth</span>
-                                    <span class="icons">
-                                        <svg width="68" height="12" viewBox="0 0 68 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M59.416 11.8926L67.62 6.76034C67.7367 6.67779 67.8325 6.56504 67.8989 6.43228C67.9652 6.29953 67.9999 6.15095 67.9999 6C67.9999 5.84905 67.9652 5.70048 67.8989 5.56772C67.8325 5.43496 67.7367 5.32221 67.62 5.23966L59.416 0.107354C59.2561 0.0134291 59.0719 -0.0202036 58.8925 0.0117582C58.713 0.04372 58.5485 0.139459 58.4248 0.28388C58.3011 0.428302 58.2254 0.613192 58.2094 0.809402C58.1935 1.00561 58.2383 1.20198 58.3369 1.36755L60.7161 5.11998L0.812592 5.11998C0.597076 5.11998 0.390396 5.21269 0.238007 5.37773C0.0856171 5.54277 0 5.7666 0 6C0 6.2334 0.0856171 6.45724 0.238007 6.62227C0.390396 6.78731 0.597076 6.88003 0.812592 6.88003C0.812592 6.88003 49.0381 6.88003 60.7161 6.88003L58.3369 10.6325C58.2383 10.798 58.1935 10.9944 58.2094 11.1906C58.2254 11.3868 58.3011 11.5717 58.4248 11.7161C58.5485 11.8605 58.713 11.9563 58.8925 11.9882C59.0719 12.0202 59.2561 11.9866 59.416 11.8926Z" fill="#030303" />
-                                        </svg>
-                                    </span>
-                                    <span>Work That Matters</span>
-                                    <span class="borders"></span>
-                                </div>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>

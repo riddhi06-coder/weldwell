@@ -133,6 +133,11 @@ class RolePermissionSeeder extends Seeder
                 ['name' => 'Create Career Page', 'slug' => 'career-page-details.create', 'module' => 'Careers'],
                 ['name' => 'Edit Career Page',   'slug' => 'career-page-details.edit',   'module' => 'Careers'],
                 ['name' => 'Delete Career Page', 'slug' => 'career-page-details.delete', 'module' => 'Careers'],
+                // Careers — Job Listing
+                ['name' => 'View Job Listing',   'slug' => 'job-listings.view',   'module' => 'Careers'],
+                ['name' => 'Create Job Listing', 'slug' => 'job-listings.create', 'module' => 'Careers'],
+                ['name' => 'Edit Job Listing',   'slug' => 'job-listings.edit',   'module' => 'Careers'],
+                ['name' => 'Delete Job Listing', 'slug' => 'job-listings.delete', 'module' => 'Careers'],
             ];
 
             foreach ($permissionData as $perm) {

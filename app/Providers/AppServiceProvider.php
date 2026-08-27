@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\AboutQuality::class,
         \App\Models\AboutCustomer::class,
         \App\Models\CareerPageDetail::class,
+        \App\Models\JobListing::class,
     ];
 
     public function register(): void

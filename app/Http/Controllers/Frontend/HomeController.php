@@ -7,6 +7,7 @@ use App\Models\AboutCustomer;
 use App\Models\AboutIntro;
 use App\Models\AboutQuality;
 use App\Models\CareerPageDetail;
+use App\Models\JobListing;
 use App\Models\CompanyStat;
 use App\Models\Contact;
 use App\Models\Event;
@@ -103,7 +104,10 @@ class HomeController extends Controller
     public function careers()
     {
         $detail = CareerPageDetail::where('is_active', true)->with('benefits')->first();
+        $jobs = JobListing::where('is_active', true)->orderByDesc('id')->get();
+        // Global marquee highlights — same source the About Us page uses.
+        $customer = AboutCustomer::where('is_active', true)->with('highlights')->first();
 
-        return view('frontend.careers', compact('detail'));
+        return view('frontend.careers', compact('detail', 'jobs', 'customer'));
     }
 }
