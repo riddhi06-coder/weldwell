@@ -27,7 +27,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\AboutIntroController;
 use App\Http\Controllers\Backend\AboutQualitiesController;
 use App\Http\Controllers\Backend\AboutCustomerController;
-
+use App\Http\Controllers\Backend\CareerPageController;
 
 
 // =========================================================================== Frontend Routes
@@ -35,6 +35,7 @@ use App\Http\Controllers\Backend\AboutCustomerController;
 Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
 Route::get('/about-us', [HomeController::class, 'about_us'])->name('frontend.about_us');
 Route::get('/contact-us', [HomeController::class, 'contact_us'])->name('frontend.contact_us');
+Route::get('/careers', [HomeController::class, 'careers'])->name('frontend.careers');
 Route::get('/product/{slug}', [HomeController::class, 'product_category_details'])->name('frontend.product_category_details');
 
 // =========================================================================== Backend Routes
@@ -119,6 +120,8 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         Route::resource('manage-about-qualities', AboutQualitiesController::class)->except('show');
         Route::resource('manage-about-customer', AboutCustomerController::class)->except('show');
 
+        // Career
+        Route::resource('manage-career-page-details', CareerPageController::class)->except('show');
 
 
         // ====== Contact Details

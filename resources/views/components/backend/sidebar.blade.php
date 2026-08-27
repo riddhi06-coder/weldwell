@@ -239,6 +239,27 @@
                 @endif
 
 
+
+                @if($u && $u->hasPermission('career-page-details.view'))
+                <li class="sidebar-list {{ request()->routeIs('manage-career-page-details.*') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-project') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-project') }}"></use>
+                    </svg>
+                    <span>Careers</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                      <li><a href="{{ route('manage-career-page-details.index') }}" class="{{ request()->routeIs('manage-career-page-details.*') ? 'active' : '' }}">Page Details</a></li>
+                  </ul>
+                </li>
+                @endif
+
+
+
                 @if($u && $u->hasPermission('testimonials.view'))
                 <li class="sidebar-list {{ request()->routeIs('manage-testimonials.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>

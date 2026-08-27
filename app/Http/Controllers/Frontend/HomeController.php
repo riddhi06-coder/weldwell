@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AboutCustomer;
 use App\Models\AboutIntro;
 use App\Models\AboutQuality;
+use App\Models\CareerPageDetail;
 use App\Models\CompanyStat;
 use App\Models\Contact;
 use App\Models\Event;
@@ -94,5 +95,15 @@ class HomeController extends Controller
         $customer = AboutCustomer::where('is_active', true)->with('highlights')->first();
 
         return view('frontend.contact_us', compact('contact', 'customer'));
+    }
+
+    /**
+     * Careers page — the single career page details record (with its benefits).
+     */
+    public function careers()
+    {
+        $detail = CareerPageDetail::where('is_active', true)->with('benefits')->first();
+
+        return view('frontend.careers', compact('detail'));
     }
 }
