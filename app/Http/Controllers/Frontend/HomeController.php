@@ -16,6 +16,7 @@ use App\Models\HomeEvent;
 use App\Models\HomeKnowledgeSpectrum;
 use App\Models\MainCategory;
 use App\Models\ProductCategory;
+use App\Models\ProductCategoryDetail;
 use App\Models\ProductIntro;
 use App\Models\Testimonial;
 use App\Models\TestimonyIntro;
@@ -62,5 +63,21 @@ class HomeController extends Controller
         ];
 
         return view('frontend.about_us', $data);
+    }
+
+    /**
+     * Product category detail page — fetch the active detail (with its features
+     * and industries) for the given product category slug.
+     */
+    public function product_category_details($slug)
+    {
+        $category = ProductCategory::where('slug', $slug)->where('is_active', true)->firstOrFail();
+
+        $detail = ProductCategoryDetail::where('product_category_id', $category->id)
+            ->where('is_active', true)
+            ->with(['features', 'industries'])
+            ->first();
+
+        return view('frontend.product_category_details', compact('category', 'detail'));
     }
 }
