@@ -1,4 +1,45 @@
 <!-- Page Body Start-->
+<style>
+    /* 3rd-level sidebar menu (e.g. Products › Product Category › Listing/Details)
+       — render the nested items with the same dotted + connecting-line look as
+       the standard submenu. Uses currentColor so it works in light & dark mode. */
+    .sidebar-wrapper .submenu-content {
+        position: relative;
+        margin-left: 16px;
+        padding-left: 16px;
+    }
+    .sidebar-wrapper .submenu-content::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 6px;
+        bottom: 6px;
+        width: 1px;
+        background: currentColor;
+        opacity: .18;
+    }
+    .sidebar-wrapper .submenu-content > li > a {
+        position: relative;
+        display: block;
+        padding: 7px 12px 7px 18px;
+        font-size: 13px;
+    }
+    .sidebar-wrapper .submenu-content > li > a::before {
+        content: "";
+        position: absolute;
+        left: -2px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        margin-top: -3px;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: .5;
+    }
+    .sidebar-wrapper .submenu-content > li > a.active::before {
+        opacity: 1;
+    }
+</style>
  <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper" data-layout="stroke-svg">
@@ -87,20 +128,30 @@
                 @endif
 
 
-                @if($u && $u->hasPermission('product-categories.view'))
-                <li class="sidebar-list {{ request()->routeIs('manage-product-category.*') ? 'active' : '' }}">
+                @if($u && ($u->hasPermission('product-categories.view') || $u->hasPermission('product-category-details.view')))
+                <li class="sidebar-list {{ request()->routeIs('manage-product-category.*', 'manage-product-category-details.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-ecommerce') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-bookmark') }}"></use>
                     </svg>
                     <svg class="fill-icon">
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-ecommerce') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-bookmark') }}"></use>
                     </svg>
                     <span>Products</span>
                   </a>
                   <ul class="sidebar-submenu">
-                          <li><a href="{{ route('manage-product-category.index') }}" class="{{ request()->routeIs('manage-product-category.*') ? 'active' : '' }}">Product Category</a></li>
+                      <li>
+                        <a class="submenu-title" href="#">Product Category</a>
+                        <ul class="submenu-content">
+                            @if($u->hasPermission('product-categories.view'))
+                                <li><a href="{{ route('manage-product-category.index') }}" class="{{ request()->routeIs('manage-product-category.*') ? 'active' : '' }}">Listing</a></li>
+                            @endif
+                            @if($u->hasPermission('product-category-details.view'))
+                                <li><a href="{{ route('manage-product-category-details.index') }}" class="{{ request()->routeIs('manage-product-category-details.*') ? 'active' : '' }}">Details</a></li>
+                            @endif
+                        </ul>
+                      </li>
                   </ul>
                 </li>
                 @endif
@@ -264,3 +315,60 @@
             </div>
           </nav>
         </div>
+
+<script>
+    // Authoritative sidebar active-state + auto-open, run on `load` (after the
+    // theme's ready handler). The theme marks items active by substring URL match
+    // (current.includes(link)), so "/manage-product-category" wrongly matches
+    // "/manage-product-category-details". This replaces that with boundary-aware
+    // path matching and opens the parent chain of the real active item.
+    window.addEventListener('load', function () {
+        var wrapper = document.querySelector('.sidebar-wrapper');
+        if (!wrapper) return;
+
+        var currentPath = window.location.pathname.replace(/\/+$/, '');
+
+        // Undo the theme's (possibly wrong) active marking.
+        wrapper.querySelectorAll('a.active, li.active').forEach(function (el) {
+            el.classList.remove('active');
+        });
+
+        wrapper.querySelectorAll('nav a[href]').forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (!href || href === '#') return;
+
+            var linkPath;
+            try { linkPath = new URL(href, window.location.origin).pathname.replace(/\/+$/, ''); }
+            catch (e) { return; }
+            if (!linkPath || linkPath === '') return;
+
+            // Exact match, or a sub-page of this link (with a "/" boundary so
+            // "/x" never matches "/x-details").
+            if (currentPath !== linkPath && currentPath.indexOf(linkPath + '/') !== 0) return;
+
+            a.classList.add('active');
+            var topLi = a.closest('li.sidebar-list');
+            if (topLi) topLi.classList.add('active');
+
+            // Open every ancestor submenu and highlight its toggle.
+            var node = a.parentElement;
+            while (node && !node.classList.contains('sidebar-wrapper')) {
+                if (node.tagName === 'UL' &&
+                    (node.classList.contains('sidebar-submenu') || node.classList.contains('submenu-content'))) {
+                    node.style.display = 'block';
+
+                    var toggle = node.previousElementSibling;
+                    while (toggle && !(toggle.classList.contains('sidebar-title') || toggle.classList.contains('submenu-title'))) {
+                        toggle = toggle.previousElementSibling;
+                    }
+                    if (toggle) {
+                        toggle.classList.add('active');
+                        var arrow = toggle.querySelector('.according-menu i');
+                        if (arrow) { arrow.classList.remove('fa-angle-right'); arrow.classList.add('fa-angle-down'); }
+                    }
+                }
+                node = node.parentElement;
+            }
+        });
+    });
+</script>

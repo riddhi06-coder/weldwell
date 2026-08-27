@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\MainCategory::class,
         \App\Models\SubCategory::class,
         \App\Models\ProductCategory::class,
+        \App\Models\ProductCategoryDetail::class,
         \App\Models\HomeBanner::class,
         \App\Models\ProductIntro::class,
         \App\Models\CompanyStat::class,

@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ActivityLogController;
 use App\Http\Controllers\Backend\MasterBrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductCategoryController;
+use App\Http\Controllers\Backend\ProductCategoryDetailsController;
 use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\HomeProductIntroController;
 use App\Http\Controllers\Backend\HomeCompanyStatsController;
@@ -96,8 +97,9 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
         // ===== Products — Category =====
         Route::resource('manage-product-category', ProductCategoryController::class)->except('show');
+        Route::resource('manage-product-category-details', ProductCategoryDetailsController::class)->except('show');
 
-        
+
         // ===== Home Page Section ===== 
         Route::resource('manage-home-banner', HomeBannerController::class)->except('show');
         Route::resource('manage-product-intro', HomeProductIntroController::class)->except('show');
