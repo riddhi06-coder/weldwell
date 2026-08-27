@@ -46,8 +46,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th class="text-center">Image</th>
-                                        <th>Name</th>
+                                        <th class="text-center">Banner</th>
                                         <th>Product Category</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-end" style="min-width:170px;">Actions</th>
@@ -58,15 +57,14 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="text-center">
-                                                @if($detail->image)
-                                                    <img src="{{ asset('product/details/' . $detail->image) }}" alt="{{ $detail->name }}"
-                                                        width="64" height="64" loading="lazy" decoding="async"
-                                                        style="height:64px;width:64px;object-fit:cover;border-radius:6px;">
+                                                @if($detail->banner_image)
+                                                    <img src="{{ asset('product/details/banner/' . $detail->banner_image) }}" alt="Banner"
+                                                        width="140" height="80" loading="lazy" decoding="async"
+                                                        style="height:80px;width:140px;object-fit:cover;border-radius:6px;">
                                                 @else
                                                     <span class="text-muted">—</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $detail->name }}</td>
                                             <td>{{ $detail->productCategory?->name ?? 'Uncategorized' }}</td>
                                             <td class="text-center">
                                                 @if($detail->is_active)
