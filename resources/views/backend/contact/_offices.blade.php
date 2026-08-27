@@ -1,7 +1,7 @@
 {{-- Dynamic office blocks. Expects $offices (array of office data incl. 'image' filename). --}}
 <div class="col-12">
     <div class="border rounded p-3">
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center section-bar">
             <h5 class="mb-0">Office Details <span class="txt-danger">*</span></h5>
             <button type="button" id="addOffice" class="btn btn-sm btn-primary">+ Add More</button>
         </div>
@@ -15,7 +15,7 @@
                             <h6 class="mb-0 office-title">Office {{ $i + 1 }}</h6>
                             <button type="button" class="btn btn-sm btn-danger remove-office">Remove</button>
                         </div>
-                        <div class="row g-3 custom-input">
+                        <div class="row g-4 custom-input">
                             <div class="col-md-4">
                                 <label class="form-label">Image <span class="txt-danger">*</span></label>
                                 <input class="form-control office-image-input" type="file" name="offices[{{ $i }}][image]" accept="image/*">

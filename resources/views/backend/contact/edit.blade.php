@@ -9,6 +9,21 @@
     @include('components.backend.header')
     @include('components.backend.sidebar')
 
+    <style>
+        /* Highlighted section header bar inside each bordered section box. */
+        .custom-input .section-title,
+        .custom-input .section-bar {
+            padding: 12px 16px;
+            margin: -16px -16px 22px -16px;
+            border-bottom: 1px solid rgba(128, 128, 128, .2);
+            border-left: 4px solid #e5011c;
+            border-radius: 8px 8px 0 0;
+            background: rgba(128, 128, 128, .18);
+        }
+        .custom-input .section-title { font-size: 15px; font-weight: 600; letter-spacing: .2px; }
+        .custom-input .section-bar h5 { font-size: 15px; font-weight: 600; }
+    </style>
+
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -61,8 +76,22 @@
                                 {{-- ===================== Website Info ===================== --}}
                                 <div class="col-12">
                                     <div class="border rounded p-3">
-                                        <h5 class="mb-3">Website Info</h5>
-                                        <div class="row g-3">
+                                        <h5 class="section-title">Website Info</h5>
+                                        <div class="row g-4">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="heading">Heading <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="heading" type="text" name="heading"
+                                                    value="{{ old('heading', $contact->heading) }}" placeholder="e.g. Get in Touch">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="address_heading">Address Heading <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="address_heading" type="text" name="address_heading"
+                                                    value="{{ old('address_heading', $contact->address_heading) }}" placeholder="e.g. Our Address">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="intro_message">Intro Message <span class="txt-danger">*</span></label>
+                                                <textarea class="form-control" id="intro_message" name="intro_message" rows="3" placeholder="Short intro message">{{ old('intro_message', $contact->intro_message) }}</textarea>
+                                            </div>
                                             <div class="col-md-12">
                                                 <label class="form-label" for="website_intro">Website Intro <span class="txt-danger">*</span></label>
                                                 <textarea class="form-control ckeditor-init" id="website_intro" name="website_intro" rows="3">{{ old('website_intro', $contact->website_intro) }}</textarea>
@@ -90,6 +119,39 @@
                                                 <label class="form-label" for="iframe_url">iFrame URL <span class="txt-danger">*</span></label>
                                                 <input class="form-control" id="iframe_url" type="text" name="iframe_url"
                                                     value="{{ old('iframe_url', $contact->iframe_url) }}" placeholder="https://www.google.com/maps/embed?...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- ===================== Sidebar Section ===================== --}}
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <h5 class="section-title">Sidebar Section</h5>
+                                        <div class="row g-4">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="sidebar_company_name">Company Name <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="sidebar_company_name" type="text" name="sidebar_company_name"
+                                                    value="{{ old('sidebar_company_name', $contact->sidebar_company_name) }}" placeholder="e.g. Weldwell Speciality Pvt. Ltd.">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="sidebar_contact_no">Contact No <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="sidebar_contact_no" type="text" name="sidebar_contact_no"
+                                                    value="{{ old('sidebar_contact_no', $contact->sidebar_contact_no) }}" placeholder="e.g. +91 22 6646 2000">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="sidebar_email">Email <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="sidebar_email" type="email" name="sidebar_email"
+                                                    value="{{ old('sidebar_email', $contact->sidebar_email) }}" placeholder="e.g. info@weldwell.com">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="sidebar_website">Website <span class="txt-danger">*</span></label>
+                                                <input class="form-control" id="sidebar_website" type="text" name="sidebar_website"
+                                                    value="{{ old('sidebar_website', $contact->sidebar_website) }}" placeholder="e.g. www.weldwell.com">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="sidebar_desc">Description <span class="txt-danger">*</span></label>
+                                                <textarea class="form-control" id="sidebar_desc" name="sidebar_desc" rows="3" placeholder="Short description">{{ old('sidebar_desc', $contact->sidebar_desc) }}</textarea>
                                             </div>
                                         </div>
                                     </div>

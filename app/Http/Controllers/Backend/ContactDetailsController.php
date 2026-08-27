@@ -112,6 +112,16 @@ class ContactDetailsController extends Controller implements HasMiddleware
         $platforms = implode(',', array_keys(\App\Models\ContactSocial::PLATFORMS));
 
         return [
+            'heading'                => 'required|string|max:255',
+            'intro_message'          => 'required|string',
+            'address_heading'        => 'required|string|max:255',
+
+            'sidebar_company_name'   => 'required|string|max:255',
+            'sidebar_desc'           => 'required|string',
+            'sidebar_contact_no'     => 'required|string|max:50',
+            'sidebar_email'          => 'required|email|max:255',
+            'sidebar_website'        => 'required|string|max:255',
+
             'website_intro'          => 'required|string',
             'website_address'        => 'required|string',
             'email'                  => 'required|email|max:255',
@@ -136,6 +146,15 @@ class ContactDetailsController extends Controller implements HasMiddleware
     private function messages(): array
     {
         return [
+            'heading.required'            => 'Please enter the heading.',
+            'intro_message.required'      => 'Please enter the intro message.',
+            'address_heading.required'    => 'Please enter the address heading.',
+            'sidebar_company_name.required' => 'Please enter the company name.',
+            'sidebar_desc.required'       => 'Please enter the sidebar description.',
+            'sidebar_contact_no.required' => 'Please enter the contact number.',
+            'sidebar_email.required'      => 'Please enter the sidebar email.',
+            'sidebar_email.email'         => 'Please enter a valid sidebar email address.',
+            'sidebar_website.required'    => 'Please enter the website.',
             'website_intro.required'      => 'Please enter the website intro.',
             'website_address.required'    => 'Please enter the website address.',
             'email.required'              => 'Please enter the email.',
@@ -175,6 +194,14 @@ class ContactDetailsController extends Controller implements HasMiddleware
     private function mainPayload(Request $request): array
     {
         return [
+            'heading'         => $request->heading,
+            'intro_message'   => $request->intro_message,
+            'address_heading' => $request->address_heading,
+            'sidebar_company_name' => $request->sidebar_company_name,
+            'sidebar_desc'         => $request->sidebar_desc,
+            'sidebar_contact_no'   => $request->sidebar_contact_no,
+            'sidebar_email'        => $request->sidebar_email,
+            'sidebar_website'      => $request->sidebar_website,
             'website_intro'   => $request->website_intro,
             'website_address' => $request->website_address,
             'email'           => $request->email,

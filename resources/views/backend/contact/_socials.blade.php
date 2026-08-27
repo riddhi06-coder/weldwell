@@ -1,7 +1,7 @@
 {{-- Dynamic social-media rows (platform dropdown + url). Expects $socials (array of ['platform'=>,'url'=>]). --}}
 <div class="col-12">
     <div class="border rounded p-3">
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center section-bar">
             <h5 class="mb-0">Social Media <span class="txt-danger">*</span></h5>
             <button type="button" id="addSocial" class="btn btn-sm btn-primary">+ Add More</button>
         </div>

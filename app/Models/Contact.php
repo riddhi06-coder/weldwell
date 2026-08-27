@@ -13,6 +13,14 @@ class Contact extends Model
     protected $table = 'contacts';
 
     protected $fillable = [
+        'heading',
+        'intro_message',
+        'address_heading',
+        'sidebar_company_name',
+        'sidebar_desc',
+        'sidebar_contact_no',
+        'sidebar_email',
+        'sidebar_website',
         'website_intro',
         'website_address',
         'email',
