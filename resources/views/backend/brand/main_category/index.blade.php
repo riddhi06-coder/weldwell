@@ -48,7 +48,6 @@
                                         <th>Sr No.</th>
                                         <th class="text-center">Image</th>
                                         <th>Brand Category Name</th>
-                                        <th>Title</th>
                                         <th class="text-center">Brand Header</th>
                                         <th class="text-center">Product Header</th>
                                         <th class="text-end" style="min-width:170px;">Actions</th>
@@ -61,13 +60,13 @@
                                             <td class="text-center">
                                                 @if($category->image)
                                                     <img src="{{ asset('brand/category/' . $category->image) }}" alt="{{ $category->name }}"
-                                                        style="height:40px;width:40px;object-fit:cover;border-radius:6px;">
+                                                        width="90" height="90" loading="lazy" decoding="async"
+                                                        style="height:90px;width:90px;object-fit:cover;border-radius:6px;">
                                                 @else
                                                     <span class="text-muted">—</span>
                                                 @endif
                                             </td>
                                             <td>{{ $category->name }}</td>
-                                            <td>{{ $category->title ?: '—' }}</td>
                                             <td class="text-center">
                                                 @if($category->show_in_brand_header)
                                                     <span class="badge bg-success">Shown</span>
@@ -97,7 +96,7 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr><td colspan="7" class="text-center text-muted py-4">No categories found.</td></tr>
+                                        <tr><td colspan="6" class="text-center text-muted py-4">No categories found.</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>
