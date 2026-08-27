@@ -50,7 +50,6 @@ class HomeController extends Controller
         return view('frontend.index', $data);
     }
 
-
     public function about_us()
     {
         $data = [
@@ -78,6 +77,9 @@ class HomeController extends Controller
             ->with(['features', 'industries'])
             ->first();
 
-        return view('frontend.product_category_details', compact('category', 'detail'));
+        // Global marquee highlights — same source the About Us page uses.
+        $customer = AboutCustomer::where('is_active', true)->with('highlights')->first();
+
+        return view('frontend.product_category_details', compact('category', 'detail', 'customer'));
     }
 }
