@@ -34,6 +34,7 @@ use App\Http\Controllers\Backend\AboutCustomerController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
 Route::get('/about-us', [HomeController::class, 'about_us'])->name('frontend.about_us');
+Route::get('/contact-us', [HomeController::class, 'contact_us'])->name('frontend.contact_us');
 Route::get('/product/{slug}', [HomeController::class, 'product_category_details'])->name('frontend.product_category_details');
 
 // =========================================================================== Backend Routes

@@ -7,6 +7,7 @@ use App\Models\AboutCustomer;
 use App\Models\AboutIntro;
 use App\Models\AboutQuality;
 use App\Models\CompanyStat;
+use App\Models\Contact;
 use App\Models\Event;
 use App\Models\HomeAbout;
 use App\Models\HomeBanner;
@@ -81,5 +82,17 @@ class HomeController extends Controller
         $customer = AboutCustomer::where('is_active', true)->with('highlights')->first();
 
         return view('frontend.product_category_details', compact('category', 'detail', 'customer'));
+    }
+
+    /**
+     * Contact page — the single contact-details record (with offices) plus the
+     * global marquee highlights from About Customer.
+     */
+    public function contact_us()
+    {
+        $contact  = Contact::where('is_active', true)->with(['socials', 'offices'])->first();
+        $customer = AboutCustomer::where('is_active', true)->with('highlights')->first();
+
+        return view('frontend.contact_us', compact('contact', 'customer'));
     }
 }

@@ -82,11 +82,11 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <label class="form-label" for="website_intro">Website Intro <span class="txt-danger">*</span></label>
-                                                <textarea class="form-control ckeditor-init" id="website_intro" name="website_intro" rows="3">{{ old('website_intro') }}</textarea>
+                                                <textarea class="form-control" id="website_intro" name="website_intro" rows="3">{{ old('website_intro') }}</textarea>
                                             </div>
                                             <div class="col-md-12">
                                                 <label class="form-label" for="website_address">Website Address <span class="txt-danger">*</span></label>
-                                                <textarea class="form-control ckeditor-init" id="website_address" name="website_address" rows="3">{{ old('website_address') }}</textarea>
+                                                <textarea class="form-control" id="website_address" name="website_address" rows="3">{{ old('website_address') }}</textarea>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label" for="email">Email <span class="txt-danger">*</span></label>

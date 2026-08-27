@@ -2,6 +2,9 @@
     // Footer "Our Products" list — product categories (oldest first).
     $footerProductCategories = \App\Models\ProductCategory::where('is_active', true)
         ->with('activeDetail')->orderBy('id')->get();
+
+    // Footer contact info — the Sidebar section of the contact details.
+    $footerContact = \App\Models\Contact::where('is_active', true)->with('socials')->first();
 @endphp
 
   <footer>
@@ -22,16 +25,13 @@
                                         </div>
 
                                         <p class="tp-text-grey-5 fs-16 tp-ff-inter lh-150-per mb-25">
-                                            Delivering premium welding consumables, thermal spray products,
-                                            additive manufacturing materials and industrial welding equipment
-                                            with trusted global brands since 1991.
+                                            {!! $footerContact?->website_intro !!}
                                         </p>
 
                                         <div class="tp-footer-wd-social d-flex">
-                                            <div><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></div>
-                                            <div><a href="#"><i class="fa-brands fa-facebook-f"></i></a></div>
-                                            <div><a href="#"><i class="fa-brands fa-instagram"></i></a></div>
-                                            <div><a href="#"><i class="fa-brands fa-youtube"></i></a></div>
+                                            @foreach(($footerContact?->socials ?? collect()) as $social)
+                                            <div><a href="{{ $social->url ?: '#' }}" target="_blank"><i class="{{ \App\Models\ContactSocial::PLATFORMS[$social->platform]['icon'] ?? 'fa-brands fa-link' }}"></i></a></div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -45,20 +45,17 @@
                                         </h3>
 
                                         <a class="tp-text-grey-5 opacity-8 tp-ff-inter fs-16 lh-140-per d-block mb-25"
-                                            href="https://maps.google.com" target="_blank">
-
-                                            401, Vikas Commercial Centre,<br>
-                                            Dr. C. Gidwani Road,<br>
-                                            Chembur, Mumbai - 400074
+                                            href="{{ $footerContact?->map_url ?: '#' }}" target="_blank">
+                                            {!! $footerContact?->website_address !!}
                                         </a>
 
                                         <a class="tp-ff-inter fw-600 fs-16 tp-text-grey-5 d-block mb-20"
-                                            href="tel:+912266462000">
-                                            +91 22 6646 2000
+                                            href="tel:{{ $footerContact?->telephone }}">
+                                            {{ $footerContact?->telephone }}
                                         </a>
 
-                                        <a class="tp-ff-inter fs-16 tp-text-grey-5" href="mailto:sales@weldwell.com">
-                                            sales@weldwell.com
+                                        <a class="tp-ff-inter fs-16 tp-text-grey-5" href="mailto:{{ $footerContact?->email }}">
+                                            {{ $footerContact?->email }}
                                         </a>
 
                                     </div>
@@ -77,7 +74,7 @@
                                             <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
                                             <li><a href="#">Products</a></li>
                                             <li><a href="#">Brands</a></li>
-                                            <li><a href="#">Contact Us</a></li>
+                                            <li><a href="{{ route('frontend.contact_us') }}">Contact Us</a></li>
                                         </ul>
 
                                     </div>
@@ -116,7 +113,7 @@
                                                         fill="#F3F1F2" />
                                                 </svg>
                                             </span>
-                                            2026 Weldwell Speciality Pvt. Ltd. All Rights Reserved. Designed & Developed
+                                            {{ date('Y') }} Weldwell Speciality Pvt. Ltd. All Rights Reserved. Designed & Developed
                                             by <a href="#"> Matrix Bricks .</a>
 
 
