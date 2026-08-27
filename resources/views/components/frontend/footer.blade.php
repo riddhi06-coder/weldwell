@@ -1,7 +1,7 @@
 @php
     // Footer "Our Products" list — product categories (oldest first).
     $footerProductCategories = \App\Models\ProductCategory::where('is_active', true)
-        ->orderBy('id')->get();
+        ->with('activeDetail')->orderBy('id')->get();
 @endphp
 
   <footer>
@@ -93,7 +93,7 @@
 
                                         <ul>
                                             @foreach($footerProductCategories as $pcat)
-                                            <li><a href="#">{{ $pcat->name }}</a></li>
+                                            <li><a href="{{ $pcat->activeDetail ? route('frontend.product_category_details', $pcat->slug) : '#' }}">{{ $pcat->name }}</a></li>
                                             @endforeach
                                         </ul>
 

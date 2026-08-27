@@ -44,7 +44,7 @@ class HomeController extends Controller
 
             // Header menus: brand categories and product categories.
             'brandHeaderCategories'   => MainCategory::where('is_active', true)->orderBy('name')->get(),
-            'productHeaderCategories' => ProductCategory::where('is_active', true)->orderBy('id')->get(),
+            'productHeaderCategories' => ProductCategory::where('is_active', true)->with('activeDetail')->orderBy('id')->get(),
         ];
 
         return view('frontend.index', $data);

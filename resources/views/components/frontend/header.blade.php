@@ -5,7 +5,7 @@
         ->orderBy('id')->get();
 
     $headerProductCategories = \App\Models\ProductCategory::where('is_active', true)
-        ->orderBy('id')->get();
+        ->with('activeDetail')->orderBy('id')->get();
 
     // Icons cycled per menu item (categories have no icon field of their own).
     $menuIcons = ['bi-shield-check', 'bi-fire', 'bi-layers', 'bi-tools', 'bi-stars'];
@@ -246,7 +246,7 @@
                                             <ul class="tp-submenu submenu">
                                                 @foreach(($headerProductCategories ?? collect()) as $pcat)
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ $pcat->activeDetail ? route('frontend.product_category_details', $pcat->slug) : '#' }}">
                                                         <i class="bi {{ $menuIcons[$loop->index % count($menuIcons)] }} me-2"></i>
                                                         {{ $pcat->name }}
                                                     </a>

@@ -170,7 +170,7 @@
                                     <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
                                         <div class="tp-portfolio-overlay"></div>
                                         <div class="not-hide-cursor" data-cursor="View Product">
-                                            <a href="#" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
+                                            <a href="{{ $product->activeDetail ? route('frontend.product_category_details', $product->slug) : '#' }}" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
                                                 <img class="w-100"
                                                     src="{{ $product->image ? asset('product/category/' . $product->image) : asset('frontend/assets/images/products/1.webp') }}"
                                                     alt="{{ $product->name }}">
@@ -181,7 +181,7 @@
                                             class="tp-portfolio-2-content tp-portfolio-pp-content d-flex justify-content-between align-items-start">
                                             <div>
                                                 <h3 class="tp-portfolio-title fw-700 fs-25 lh-36 mb-10">
-                                                    <a class="underline-black" href="#">
+                                                    <a class="underline-black" href="{{ $product->activeDetail ? route('frontend.product_category_details', $product->slug) : '#' }}">
                                                         {{ $product->name }}
                                                     </a>
                                                 </h3>
