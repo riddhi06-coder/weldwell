@@ -100,15 +100,22 @@
 
 
                         </div>
+
+
+                        @php
+                            // Rotating icon set — sub categories have no icon field, so cycle through these.
+                            $tspIcons = ['bi-cloud-haze2', 'bi-lightning-charge', 'bi-link-45deg', 'bi-tools', 'bi-life-preserver', 'bi-box-seam', 'bi-gear', 'bi-diagram-3'];
+                        @endphp
                         <div class="tsp-box-grid">
 
+                            @foreach($subCategories as $sub)
                             <div class="tsp-box">
                                 <div class="tsp-box-top">
-                                    <span class="tsp-box-icon"><i class="bi bi-cloud-haze2"></i></span>
-                                    <span class="tsp-box-num">01</span>
+                                    <span class="tsp-box-icon"><i class="bi {{ $tspIcons[$loop->index % count($tspIcons)] }}"></i></span>
+                                    <span class="tsp-box-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                 </div>
-                                <h3 class="tsp-box-title">Thermal Spray Powders</h3>
-                                <p class="tsp-box-copy">Engineered metal, ceramic and carbide powders formulated for coatings that resist wear, heat and corrosion.</p>
+                                <h3 class="tsp-box-title">{{ $sub->name }}</h3>
+                                <p class="tsp-box-copy">{{ \Illuminate\Support\Str::limit(strip_tags($sub->short_description ?? ''), 140) }}</p>
                                 <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
                                     data-fade-from="top" data-ease="bounce">
 
@@ -134,138 +141,7 @@
                                 </div>
 
                             </div>
-
-                            <div class="tsp-box">
-                                <div class="tsp-box-top">
-                                    <span class="tsp-box-icon"><i class="bi bi-lightning-charge"></i></span>
-                                    <span class="tsp-box-num">02</span>
-                                </div>
-                                <h3 class="tsp-box-title">Thermal Spray Wires</h3>
-                                <p class="tsp-box-copy">Precision-drawn wires for arc and flame spray processes, delivering consistent feed and dense, well-bonded coatings.</p>
-                                <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
-                                    data-fade-from="top" data-ease="bounce">
-
-                                    <div class="btn_wrapper d-inline-block">
-
-                                        <a href="#" class="tp-btn-rounded btn-item">
-
-
-
-                                            Learn More
-
-                                            <span class="d-block ml-15">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                    <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                </svg>
-                                            </span>
-                                            <i class="tp-btn-circle-dot"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="tsp-box">
-                                <div class="tsp-box-top">
-                                    <span class="tsp-box-icon"><i class="bi bi-link-45deg"></i></span>
-                                    <span class="tsp-box-num">03</span>
-                                </div>
-                                <h3 class="tsp-box-title">Tungsten Carbide Flexible Rope</h3>
-                                <p class="tsp-box-copy">Flexible tungsten carbide rope for rebuilding and hardfacing worn components on-site, no spray booth required.</p>
-                                <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
-                                    data-fade-from="top" data-ease="bounce">
-
-                                    <div class="btn_wrapper d-inline-block">
-
-                                        <a href="#" class="tp-btn-rounded btn-item">
-
-
-
-                                            Learn More
-
-                                            <span class="d-block ml-15">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                    <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                </svg>
-                                            </span>
-                                            <i class="tp-btn-circle-dot"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="tsp-box">
-                                <div class="tsp-box-top">
-                                    <span class="tsp-box-icon"><i class="bi bi-tools"></i></span>
-                                    <span class="tsp-box-num">04</span>
-                                </div>
-                                <h3 class="tsp-box-title">Equipment & Spare Parts</h3>
-                                <p class="tsp-box-copy">Spray guns, feed systems and genuine spare parts engineered to keep every production line running.</p>
-                                <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
-                                    data-fade-from="top" data-ease="bounce">
-
-                                    <div class="btn_wrapper d-inline-block">
-
-                                        <a href="#" class="tp-btn-rounded btn-item">
-
-
-
-                                            Learn More
-
-                                            <span class="d-block ml-15">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                    <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                </svg>
-                                            </span>
-                                            <i class="tp-btn-circle-dot"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="tsp-box">
-                                <div class="tsp-box-top">
-                                    <span class="tsp-box-icon"><i class="bi bi-life-preserver"></i></span>
-                                    <span class="tsp-box-num">05</span>
-                                </div>
-                                <h3 class="tsp-box-title">Service</h3>
-                                <p class="tsp-box-copy">Application support, operator training and preventive maintenance backed by our engineering team.</p>
-                                <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
-                                    data-fade-from="top" data-ease="bounce">
-
-                                    <div class="btn_wrapper d-inline-block">
-
-                                        <a href="#" class="tp-btn-rounded btn-item">
-
-
-
-                                            Learn More
-
-                                            <span class="d-block ml-15">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                    <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                </svg>
-                                            </span>
-                                            <i class="tp-btn-circle-dot"></i>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
+                            @endforeach
 
                             <div class="tsp-box c-ink">
                                 <div class="tsp-box-top">
@@ -301,6 +177,8 @@
                             </div>
 
                         </div>
+
+                        
                     </div>
                 </div>
                 <!-- tsp-box-grid-end -->

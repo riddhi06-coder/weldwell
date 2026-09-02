@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\MasterBrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductCategoryDetailsController;
+use App\Http\Controllers\Backend\ProductSubCategoryController;
+use App\Http\Controllers\Backend\ProductSubCategoryDetailsController;
 use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\HomeProductIntroController;
 use App\Http\Controllers\Backend\HomeCompanyStatsController;
@@ -101,6 +103,11 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         // ===== Products — Category =====
         Route::resource('manage-product-category', ProductCategoryController::class)->except('show');
         Route::resource('manage-product-category-details', ProductCategoryDetailsController::class)->except('show');
+
+
+        // ===== Products — Sub Category =====
+        Route::resource('manage-product-subcategory', ProductSubCategoryController::class)->except('show');
+        // Route::resource('manage-product-subcategory-details', ProductSubCategoryDetailsController::class)->parameters(['manage-product-subcategory-details' => 'subcategory_detail'])->except('show');
 
 
         // ===== Home Page Section ===== 

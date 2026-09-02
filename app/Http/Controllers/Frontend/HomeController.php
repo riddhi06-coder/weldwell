@@ -80,10 +80,16 @@ class HomeController extends Controller
             ->with(['features', 'industries'])
             ->first();
 
+        // Active sub categories mapped to this product category — powers the product range grid.
+        $subCategories = $category->subCategories()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
         // Global marquee highlights — same source the About Us page uses.
         $customer = AboutCustomer::where('is_active', true)->with('highlights')->first();
 
-        return view('frontend.product_category_details', compact('category', 'detail', 'customer'));
+        return view('frontend.product_category_details', compact('category', 'detail', 'subCategories', 'customer'));
     }
 
     /**

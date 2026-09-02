@@ -129,7 +129,7 @@
 
 
                 @if($u && ($u->hasPermission('product-categories.view') || $u->hasPermission('product-category-details.view')))
-                <li class="sidebar-list {{ request()->routeIs('manage-product-category.*', 'manage-product-category-details.*') ? 'active' : '' }}">
+                <li class="sidebar-list {{ request()->routeIs('manage-product-category.*', 'manage-product-category-details.*','manage-product-subcategory.*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon">
@@ -142,10 +142,22 @@
                   </a>
                   <ul class="sidebar-submenu">
                       <li>
-                        <a class="submenu-title" href="#">Product Category</a>
+                        <a class="submenu-title" href="#"> Category</a>
                         <ul class="submenu-content">
                             @if($u->hasPermission('product-categories.view'))
                                 <li><a href="{{ route('manage-product-category.index') }}" class="{{ request()->routeIs('manage-product-category.*') ? 'active' : '' }}">Listing</a></li>
+                            @endif
+                            @if($u->hasPermission('product-category-details.view'))
+                                <li><a href="{{ route('manage-product-category-details.index') }}" class="{{ request()->routeIs('manage-product-category-details.*') ? 'active' : '' }}">Details</a></li>
+                            @endif
+                        </ul>
+                      </li>
+
+                      <li>
+                        <a class="submenu-title" href="#"> SubCategory</a>
+                        <ul class="submenu-content">
+                            @if($u->hasPermission('product-categories.view'))
+                                <li><a href="{{ route('manage-product-subcategory.index') }}" class="{{ request()->routeIs('manage-product-subcategory.*') ? 'active' : '' }}">Listing</a></li>
                             @endif
                             @if($u->hasPermission('product-category-details.view'))
                                 <li><a href="{{ route('manage-product-category-details.index') }}" class="{{ request()->routeIs('manage-product-category-details.*') ? 'active' : '' }}">Details</a></li>
