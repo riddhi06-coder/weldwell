@@ -159,9 +159,6 @@
                             @if($u->hasPermission('product-categories.view'))
                                 <li><a href="{{ route('manage-product-subcategory.index') }}" class="{{ request()->routeIs('manage-product-subcategory.*') ? 'active' : '' }}">Listing</a></li>
                             @endif
-                            @if($u->hasPermission('product-category-details.view'))
-                                <li><a href="{{ route('manage-product-category-details.index') }}" class="{{ request()->routeIs('manage-product-category-details.*') ? 'active' : '' }}">Details</a></li>
-                            @endif
                         </ul>
                       </li>
                   </ul>
