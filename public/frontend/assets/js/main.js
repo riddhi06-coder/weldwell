@@ -171,7 +171,24 @@
 
 	////////////////////////////////////////////////////
 	// 08. Counter Js
-	new PureCounter();
+	const funfactSection = document.querySelector('.ar-funfact-area');
+	if (funfactSection) {
+		const counterObserver = new IntersectionObserver((entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					new PureCounter({
+						selector: '.ar-funfact-area .purecounter',
+						duration: 3,
+						delay: 12,
+						once: true,
+					});
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.2 });
+
+		counterObserver.observe(funfactSection);
+	}
 
 	////////////////////////////////////////////////////
 	// 09. section-triger-slicer (image reveal on scroll)
@@ -493,29 +510,188 @@
 			);
 		});
 	}
-        (function () {
-            var panels = document.querySelectorAll('.tsp-panel');
-            if (!panels.length) return;
+/* ============================================================
+       Thermal Spray Product Finder — search/filter/pagination logic
+       Sentes-BIR + PAC catalogue, cards are static HTML in #pfGrid
+       ============================================================ */
+    (function () {
 
-            if (!('IntersectionObserver' in window)) {
-                panels.forEach(function (p) { p.classList.add('is-in-view'); });
+        var PAGE_SIZE = 10;
+
+        var grid = document.getElementById('pfGrid');
+        if (!grid) return;
+
+        var cards = Array.prototype.slice.call(grid.querySelectorAll('.tsp-pf-card'));
+        var searchInput = document.getElementById('pfSearchInput');
+        var searchWrap = document.getElementById('pfSearchWrap');
+        var clearBtn = document.getElementById('pfClearBtn');
+        var brandButtons = Array.prototype.slice.call(document.querySelectorAll('#pfBrands .tsp-pf-brand'));
+        var chips = Array.prototype.slice.call(document.querySelectorAll('#pfFilters .tsp-pf-chip'));
+        var emptyState = document.getElementById('pfEmpty');
+        var countEl = document.getElementById('pfCount');
+        var paginationEl = document.getElementById('pfPagination');
+        var total = cards.length;
+        var activeBrand = 'all';
+        var activeGroup = 'all';
+        var currentPage = 1;
+
+        function getMatches() {
+            var query = (searchInput.value || '').trim().toLowerCase();
+            return cards.filter(function (card) {
+                var brand = card.getAttribute('data-brand');
+                var group = card.getAttribute('data-group');
+                var haystack = card.getAttribute('data-search') || '';
+
+                var matchesBrand = activeBrand === 'all' || brand === activeBrand;
+                var matchesGroup = activeGroup === 'all' || group === activeGroup;
+                var matchesSearch = !query || haystack.indexOf(query) !== -1;
+
+                return matchesBrand && matchesGroup && matchesSearch;
+            });
+        }
+
+        function renderPagination(matches) {
+            var pageCount = Math.ceil(matches.length / PAGE_SIZE);
+
+            if (!paginationEl) return;
+
+            if (pageCount <= 1) {
+                paginationEl.innerHTML = '';
+                paginationEl.hidden = true;
                 return;
             }
 
-            var observer = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry, i) {
-                    if (entry.isIntersecting) {
-                        var panel = entry.target;
-                        var delay = Array.prototype.indexOf.call(panels, panel) % 2 === 0 ? 0 : 90;
-                        setTimeout(function () {
-                            panel.classList.add('is-in-view');
-                        }, delay);
-                        observer.unobserve(panel);
-                    }
+            paginationEl.hidden = false;
+
+            var html = '';
+            html += '<button type="button" class="tsp-pf-page-btn tsp-pf-page-nav" data-page="' + (currentPage - 1) + '"' + (currentPage === 1 ? ' disabled' : '') + ' aria-label="Previous page"><i class="bi bi-chevron-left"></i></button>';
+
+            for (var p = 1; p <= pageCount; p++) {
+                html += '<button type="button" class="tsp-pf-page-btn' + (p === currentPage ? ' is-active' : '') + '" data-page="' + p + '">' + p + '</button>';
+            }
+
+            html += '<button type="button" class="tsp-pf-page-btn tsp-pf-page-nav" data-page="' + (currentPage + 1) + '"' + (currentPage === pageCount ? ' disabled' : '') + ' aria-label="Next page"><i class="bi bi-chevron-right"></i></button>';
+
+            paginationEl.innerHTML = html;
+
+            Array.prototype.slice.call(paginationEl.querySelectorAll('.tsp-pf-page-btn')).forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    if (btn.disabled) return;
+                    currentPage = parseInt(btn.getAttribute('data-page'), 10);
+                    renderPage();
+                    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
-            }, { threshold: 0.25, rootMargin: '0px 0px -60px 0px' });
+            });
+        }
 
-            panels.forEach(function (panel) { observer.observe(panel); });
-        })();
+        function renderPage() {
+            var matches = getMatches();
+            var pageCount = Math.max(1, Math.ceil(matches.length / PAGE_SIZE));
+            currentPage = Math.min(Math.max(currentPage, 1), pageCount);
 
+            var start = (currentPage - 1) * PAGE_SIZE;
+            var end = start + PAGE_SIZE;
+            var pageSlice = matches.slice(start, end);
+
+            cards.forEach(function (card) {
+                card.classList.toggle('is-hidden', pageSlice.indexOf(card) === -1);
+            });
+
+            if (matches.length === 0) {
+                countEl.textContent = 'Showing 0 of ' + total + ' products';
+            } else {
+                countEl.textContent = 'Showing ' + (start + 1) + '\u2013' + Math.min(end, matches.length) + ' of ' + matches.length + ' products';
+            }
+
+            emptyState.hidden = matches.length !== 0;
+            renderPagination(matches);
+        }
+
+        function applyFilters() {
+            currentPage = 1;
+            var query = (searchInput.value || '').trim().toLowerCase();
+            searchWrap.classList.toggle('has-value', !!query);
+            renderPage();
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+
+        clearBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            searchInput.focus();
+            applyFilters();
+        });
+
+        brandButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                brandButtons.forEach(function (b) { b.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+                activeBrand = btn.getAttribute('data-brand');
+                applyFilters();
+            });
+        });
+
+        chips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                chips.forEach(function (c) { c.classList.remove('is-active'); });
+                chip.classList.add('is-active');
+                activeGroup = chip.getAttribute('data-filter');
+                applyFilters();
+            });
+        });
+
+        applyFilters();
+
+        // Top-level category tabs: All / Powders / Wires / Rope / Equipment / Service
+        var catButtons = Array.prototype.slice.call(document.querySelectorAll('#pfCategories .tsp-pf-cat'));
+        var pfPanels = Array.prototype.slice.call(document.querySelectorAll('.tsp-pf-panel'));
+
+        catButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var target = btn.getAttribute('data-category');
+                catButtons.forEach(function (b) { b.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+                pfPanels.forEach(function (panel) {
+                    panel.hidden = panel.getAttribute('data-panel') !== target;
+                });
+            });
+        });
+    })();
+
+	        (function () {
+			var tabNavs = Array.prototype.slice.call(document.querySelectorAll('.wk-tabs-nav'));
+
+			tabNavs.forEach(function (nav) {
+				var tabBtns = Array.prototype.slice.call(nav.querySelectorAll('.wk-tab-btn'));
+				var scope = nav.parentElement;
+
+				while (scope && !scope.querySelector('.wk-tab-panel')) {
+					scope = scope.parentElement;
+				}
+
+				if (!scope) {
+					return;
+				}
+
+				var panels = Array.prototype.slice.call(scope.querySelectorAll('.wk-tab-panel'));
+
+				tabBtns.forEach(function (btn) {
+					btn.addEventListener('click', function () {
+						var target = btn.getAttribute('data-tab');
+
+						tabBtns.forEach(function (tabBtn) {
+							tabBtn.classList.remove('active');
+							tabBtn.setAttribute('aria-selected', 'false');
+						});
+						btn.classList.add('active');
+						btn.setAttribute('aria-selected', 'true');
+
+						panels.forEach(function (panel) {
+							var panelTarget = panel.getAttribute('data-panel') || panel.id;
+							panel.classList.toggle('active', panelTarget === target);
+						});
+					});
+				});
+			});
+		})();
 })(jQuery);

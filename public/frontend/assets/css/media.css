@@ -30,6 +30,8 @@
   .fs-md-40 {
     font-size: 40px;
   }
+              .pw-stat{ border-right:none; border-bottom:1px solid #e7e7e9; }
+            .pw-spotlight{ padding:36px 26px; }
 }
 @media (max-width: 575.98px) {
 
@@ -490,7 +492,8 @@
 }
 @media (max-width: 574.98px) {
   .tp-cta-wd-email {
-    padding: 15px 21px;
+    padding: 10px 18px;
+    font-size: 20px;
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 574.98px) {
@@ -1068,7 +1071,7 @@
 }
 @media only screen and (min-width: 1400px) and (max-width: 1599px) {
   .tp-video-vp-img-inner-2 {
-    height: 800px;
+    height: 500px;
   }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
@@ -1465,12 +1468,11 @@
     }
 
     .industry-card {
-        min-height: 165px;
-        padding: 25px;
+      height: 245px;
     }
 
     .industry-content {
-        padding-right: 65px;
+      padding: 12px 15px;
     }
 
     .industry-content h3 {
@@ -1481,16 +1483,8 @@
         font-size: 13px;
     }
 
-    .industry-icon {
-        width: 52px;
-        height: 52px;
-        right: 20px;
-        font-size: 21px;
-    }
-
-    .industry-icon::before {
-        width: 70px;
-        height: 70px;
+    .industry-image {
+      height: 175px;
     }
 }
 /* ---- Media queries extracted from main.css ---- */

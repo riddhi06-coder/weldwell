@@ -95,24 +95,45 @@
                 </div>
                 @endif
                 <!-- hero area end -->
+
+                <!-- brand area start -->
+                @if($clients && $clients->photos->isNotEmpty())
+                <div class="dgm-brand-area fix">
+                    <div class="dgm-brand-wrapper cst-border-b">
+                        <div class="swiper-container dgm-brand-active">
+                            <div class="swiper-wrapper">
+                                @foreach($clients->photos as $photo)
+                                <div class="swiper-slide">
+                                    <div class="dgm-brand-item">
+                                        <img src="{{ asset('home/clients/' . $photo->photo) }}" alt="">
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <!-- brand area end -->
+
                 <!-- about area start -->
                 <!-- tp-portfolio-area-start -->
                 <!-- Product Area Start -->
                 @if($productIntro)
-                <div class="tp-portfolio-area pt-90 pb-90 tp-panel-pin-area">
+                <div class="tp-portfolio-area pt-90 pb-90 tp-products-bento-area">
                     <div class="container">
                         <div class="row">
 
-                            <!-- Left Content -->
-                            <div class="col-lg-5">
-                                <div class="tp-portfolio-sa-title-wrap mb-40 tp-panel-pin">
+                            <!-- Centered Heading -->
+                            <div class="col-12">
+                                <div class="tp-portfolio-sa-title-wrap text-center mb-40 tp-products-bento-heading">
 
                                     <span class="cnt-section-subtitle mb-20 tp_fade_anim" data-delay=".3">
                                         {{ $productIntro->heading }}
                                     </span>
 
                                     <h2
-                                        class="tp-about-2-title fs-md-40 fs-xs-30 tp-ff-dm fw-600">
+                                        class="tp-about-2-title fs-md-40 fs-xs-30 tp_text_invert invert-black-3 tp-ff-dm fw-600">
                                         {!! strip_tags($productIntro->title, '<br><b><strong><i><em><u><a><span>') !!}
                                     </h2>
 
@@ -120,54 +141,16 @@
                                         {!! $productIntro->description !!}
                                     </div>
 
-                                    @if($productIntro->qualities->isNotEmpty())
-                                    <div class="tp-portfolio-tag tp_fade_anim" data-delay=".7">
-                                        @foreach($productIntro->qualities as $quality)
-                                        <span>{{ $quality->quality }}</span>
-                                        @endforeach
-                                    </div>
-                                    @endif
-
-                                    <div class="tp-portfolio-pp-border mt-30 mb-60">
-                                        <span>
-                                            <svg viewBox="0 0 424 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M5 2.5L0 0.113249V5.88675L5 3.5V2.5ZM419 3.5L424 5.88675V0.113249L419 2.5V3.5ZM4.5 3.5H419.5V2.5H4.5V3.5Z"
-                                                    fill="#EEEEEE" />
-                                            </svg>
-                                        </span>
-                                    </div>
-
-                                    <div class="tp-rounded-btn-wrap tp-about-wd-btn tp_fade_anim" data-delay=".5"
-                                        data-fade-from="top" data-ease="bounce">
-
-                                        <div class="btn_wrapper d-inline-block">
-
-                                            <a href="#" class="tp-btn-rounded btn-item">
-                                                View All Products
-                                                <span class="d-block ml-15">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
-                                                        <path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM15.2803 6.05328C15.5732 5.76039 15.5732 5.28551 15.2803 4.99262L10.5074 0.219648C10.2145 -0.0732449 9.73959 -0.0732449 9.4467 0.219648C9.15381 0.512542 9.15381 0.987415 9.4467 1.28031L13.6893 5.52295L9.4467 9.76559C9.15381 10.0585 9.15381 10.5334 9.4467 10.8263C9.73959 11.1191 10.2145 11.1191 10.5074 10.8263L15.2803 6.05328ZM0.75 5.52295V6.27295H14.75V5.52295V4.77295H0.75V5.52295Z" fill="#fff"></path>
-                                                    </svg>
-                                                </span>
-                                                <i class="tp-btn-circle-dot"></i>
-
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-
                                 </div>
                             </div>
 
-                            <!-- Right Products -->
-                            <div class="col-lg-7">
-                                <div class="tp-portfolio-pp-item-wrap">
+                            <!-- Bento Product Grid -->
+                            <div class="col-12">
+                                <div class="tp-portfolio-pp-item-wrap tp-products-bento-grid">
 
                                     @forelse(($productHeaderCategories ?? collect()) as $product)
                                     <!-- Product {{ $loop->iteration }} -->
-                                    <div class="tp-portfolio-2-item mb-65 tp-panel-pin tp-bg-common-white">
+                                    <div class="tp-portfolio-2-item mb-65 tp-bg-common-white tp-product-bento-card{{ $loop->first ? ' tp-product-bento-card--hero' : '' }}">
                                         <div class="tp-portfolio-overlay"></div>
                                         <div class="not-hide-cursor" data-cursor="View Product">
                                             <a href="{{ $product->activeDetail ? route('frontend.product_category_details', $product->slug) : '#' }}" class="d-block tp-portfolio-2-thumb mb-20 cursor-hide">
@@ -365,28 +348,6 @@
                 @endif
                 <!-- About Area End -->
                 <!-- about area end -->
-
-
-
-                <!-- brand area start -->
-                @if($clients && $clients->photos->isNotEmpty())
-                <div class="dgm-brand-area fix">
-                    <div class="dgm-brand-wrapper cst-border-b">
-                        <div class="swiper-container dgm-brand-active">
-                            <div class="swiper-wrapper">
-                                @foreach($clients->photos as $photo)
-                                <div class="swiper-slide">
-                                    <div class="dgm-brand-item">
-                                        <img src="{{ asset('home/clients/' . $photo->photo) }}" alt="">
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                <!-- brand area end -->
 
 
                 <!-- tp-banner-area-start -->
@@ -651,18 +612,12 @@
 
                 <!-- tp-cta-area-start -->
                 @if($connection)
-                <div class="tp-cta-area bg-position p-relative pb-90 pt-90 tp-bg-common-white-2 fix">
-                    <div class="tp-cta-wd-shape">
-                        <svg viewBox="0 0 733 448" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path class="line-1" d="M31.5 466.5L259 55.5L456 222L772.5 34" stroke="white"
-                                stroke-width="71" />
-                        </svg>
-                    </div>
+                <div class="tp-cta-area tp-cta-compact bg-position p-relative pb-90 pt-90 tp-bg-common-white-2 fix">
 
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-xl-8">
-                                <div class="tp-cta-wd-content text-center p-relative mb-30">
+                                <div class="tp-cta-wd-content tp-cta-horizontal text-center p-relative mb-30">
 
                                     <span
                                         class="tp-footer-top-subtitle tp-text-common-white fw-500 fs-18 mb-10 d-inline-block tp_fade_anim"
@@ -671,7 +626,7 @@
                                     </span>
 
                                     <h2
-                                        class="tp-footer-top-title tp-text-common-white text-uppercase fw-600 mb-40 rotate-text-anim">
+                                        class="tp-footer-top-title tp-text-common-white text-uppercase fw-600 mb-40 tp-cta-horizontal-title">
                                         {!! strip_tags($connection->heading, '<br><b><strong><i><em><u><a><span>') !!}
                                     </h2>
 

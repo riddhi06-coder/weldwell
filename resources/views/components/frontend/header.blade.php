@@ -152,7 +152,7 @@ $menuIcons = ['bi-shield-check', 'bi-fire', 'bi-layers', 'bi-tools', 'bi-stars']
                 <div class="row align-items-center">
                     <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6">
                         <div class="tp-header-logo">
-                            <a href="{{ route('frontend.index') }}"><img data-width="240" src="{{ asset('frontend/assets/images/logo1.webp') }}" alt="logo"></a>
+                            <a href="{{ route('frontend.index') }}"><img data-width="240" src="{{ asset('frontend/assets/images/logo-Photoroom.png') }}" alt="Weldwell logo"></a>
                         </div>
                     </div>
                     <div class="col-xxl-7 col-xl-7 d-none d-xl-block">
